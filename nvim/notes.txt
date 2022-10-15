@@ -1,4 +1,4 @@
-buffers
+hbuffers
 te -- create new tab
 
 telescope(search files)
