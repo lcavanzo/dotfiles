@@ -3,7 +3,7 @@ local data = vim.fn.stdpath('data')
 vim.cmd("autocmd!")
 
 -- Leader
-vim.cmd('let mapleader=","')
+vim.cmd('let mapleader=";"')
 
 -- cmd
 vim.cmd("set termguicolors")
@@ -77,5 +77,7 @@ vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
 vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
 vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
 vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
+vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup,*.tf,*.tfvars set tabstop=2]])
+vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup,*.tf,*.tfvars set shiftwidth=2]])
 vim.cmd([[let g:terraform_fmt_on_save=1]])
 vim.cmd([[let g:terraform_align=1]])

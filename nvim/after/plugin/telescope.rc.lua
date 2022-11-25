@@ -47,10 +47,10 @@ vim.keymap.set('n', ';f',
     builtin.find_files({
       no_ignore = false,
       hidden = true,
-      initial_mode = "normal"
+      --initial_mode = "normal"
     })
   end)
-vim.keymap.set('n', ';r', function()
+vim.keymap.set('n', ';g', function()
   builtin.live_grep()
 end)
 vim.keymap.set('n', '\\\\', function()
@@ -59,7 +59,7 @@ end)
 vim.keymap.set('n', ';t', function()
   builtin.help_tags()
 end)
-vim.keymap.set('n', ';;', function()
+vim.keymap.set('n', ';r', function()
   builtin.resume()
 end)
 vim.keymap.set('n', ';e', function()
@@ -73,7 +73,7 @@ vim.keymap.set("n", "sf", function()
     hidden = true,
     grouped = true,
     previewer = false,
-    initial_mode = "normal",
+    --initial_mode = "normal",
     layout_config = { height = 40 }
   })
 end)

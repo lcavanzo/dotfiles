@@ -17,7 +17,6 @@ ts.setup {
     "php",
     "json",
     "yaml",
-    "swift",
     "python",
     "css",
     "html",

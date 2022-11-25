@@ -25,6 +25,13 @@ local on_attach = function(client, bufnr)
   --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 end
 
+-- Define `root_dir` when needed
+-- See: https://github.com/neovim/nvim-lspconfig/issues/320
+-- This is a workaround, maybe not work with some servers.
+local root_dir = function()
+  return vim.fn.getcwd()
+end
+
 protocol.CompletionItemKind = {
   '', -- Text
   '', -- Method
@@ -54,7 +61,7 @@ protocol.CompletionItemKind = {
 }
 
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
@@ -63,12 +70,12 @@ nvim_lsp.flow.setup {
   capabilities = capabilities
 }
 
---nvim_lsp.tsserver.setup {
---  on_attach = on_attach,
---  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
---  cmd = { "typescript-language-server", "--stdio" },
---  capabilities = capabilities
---}
+nvim_lsp.tsserver.setup {
+  on_attach = on_attach,
+  filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  cmd = { "typescript-language-server", "--stdio" },
+  capabilities = capabilities
+}
 
 nvim_lsp.sourcekit.setup {
   on_attach = on_attach,
@@ -93,11 +100,31 @@ nvim_lsp.sumneko_lua.setup {
 }
 
 
-nvim_lsp.tailwindcss.setup {}
+nvim_lsp.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 
---nvim_lsp.terraformls.setup {}
+nvim_lsp.terraformls.setup {
+    on_attach = on_attach,
+    root_dir = root_dir,
+    capabilities = capabilities,
+    flags = {
+      -- default in neovim 0.7+
+      debounce_text_changes = 150,
+    },
+    virtual_text = { spacing = 4},
+}
 
 --nvim_lsp.tflint.setup {}
+
+nvim_lsp.yamlls.setup{
+    settings = {
+        yaml = {
+           schemas = { kubernetes = "globPattern" },
+      },
+    }
+}
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -138,17 +165,11 @@ HTML/CSS/JSON -> vscode-html-languageserver
 JavaScript/TypeScript -> tsserver
 --]]
 
--- Define `root_dir` when needed
--- See: https://github.com/neovim/nvim-lspconfig/issues/320
--- This is a workaround, maybe not work with some servers.
-local root_dir = function()
-  return vim.fn.getcwd()
-end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches.
 -- Add your language server below:
-local servers = { 'bashls', 'pyright', 'clangd', 'html', 'cssls', 'tsserver', 'terraformls', 'tflint' }
+local servers = { 'bashls', 'html', 'pyright', 'clangd','cssls', 'tsserver', 'tflint', 'yamlls' }
 
 -- Call setup
 for _, lsp in ipairs(servers) do

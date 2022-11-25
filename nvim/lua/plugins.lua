@@ -49,6 +49,7 @@ packer.startup(function(use)
   use 'dinhhuy258/git.nvim' -- For git blame & browse
   use 'glepnir/dashboard-nvim' -- vim dashboard
   use 'kyazdani42/nvim-tree.lua' -- nvim-tree
+  use 'lukas-reineke/indent-blankline.nvim' -- for indentation line 
 
 
 
