@@ -50,6 +50,8 @@ packer.startup(function(use)
   use 'glepnir/dashboard-nvim' -- vim dashboard
   use 'kyazdani42/nvim-tree.lua' -- nvim-tree
   use 'lukas-reineke/indent-blankline.nvim' -- for indentation line 
+  use 'machakann/vim-sandwich' -- enclosing words
+  use 'ggandor/leap.nvim' -- jump 
 
 
 

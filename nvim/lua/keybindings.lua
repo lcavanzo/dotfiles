@@ -22,15 +22,15 @@ keymap('n', '<leader>q', ':quit<CR>', opts)
 keymap('n', '<leader>Q', ':qa!<CR>', opts)
 
 -- Buffers
-keymap('n', '<leader>m', ':bnext<CR>', opts)
-keymap('n', '<leader>n', ':bprevious<CR>', opts)
-keymap('n', '<leader>x', ':bdelete<CR>', opts)
+--keymap('n', '<leader>m', ':bnext<CR>', opts)
+--keymap('n', '<leader>n', ':bprevious<CR>', opts)
+--keymap('n', '<leader>x', ':bdelete<CR>', opts)
 
 -- Vim Tabs
 keymap('n', '<leader>t', ':tabnew<CR>', opts)
 keymap('n', '<leader>c', ':tabclose<CR>', opts)
-keymap('n', '<leader>r', ':tabnext<CR>', opts)
-keymap('n', '<leader>y', ':tabprevious<CR>', opts)
+keymap('n', '<leader>n', ':tabnext<CR>', opts)
+keymap('n', '<leader>m', ':tabprevious<CR>', opts)
 
 -- togle listchar display
 keymap('n', '<leader>d', ':setinvlist<CR>', opts)

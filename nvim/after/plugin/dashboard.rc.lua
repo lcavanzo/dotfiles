@@ -27,7 +27,6 @@ db.custom_center = {
         },
         {icon = '  ',
                 desc = 'KeyMaps',
-                --action =  'Telescope opened ~/.config/nvim/notes.txt',
                 action = 'edit ~/.config/nvim/notes.txt',
         },
         {icon = '  ',

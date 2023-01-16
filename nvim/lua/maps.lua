@@ -1,4 +1,5 @@
 local keymap = vim.keymap
+local opts = {noremap = true, silent = true}
 
 keymap.set('n', 'x', '"_x')
 
@@ -15,8 +16,10 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 -- Save with root permission (not working for now)
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
--- New tab
-keymap.set('n', 'te', ':tabedit<Return>', {silent = true})
+-- Buffers
+keymap.set('n', 'sm', ':bnext<CR>', opts)
+keymap.set('n', 'sn', ':bprevious<CR>', opts)
+keymap.set('n', 'sx', ':bdelete<CR>', opts)
 
 -- Split window
 keymap.set('n', 'sp', ':split<Return><C-w>w', {silent = true})
