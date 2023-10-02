@@ -103,6 +103,7 @@ alias vtodo='vim ~/git/TODO.md'
 alias pi='ssh -l pi 192.168.100.100'
 alias myip='curl ifconfig.me'
 alias tf='terraform'
+alias ll='ls -alF'
 
 # using ripgrep combined with preview
 # find-in-file - usage: fif <searchTerm>

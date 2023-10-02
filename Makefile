@@ -5,7 +5,7 @@ UNAME_S := $(shell uname -s)
 
 BREW_PACKAGES	:= \
 	awscli azure-cli bat fd fzf git go helm htop jq kitty kubectl kubelogin lazygit \
-	neofetch neovim nmap ripgrep starship stow terraform tmux tree tree wget yq zsh
+	neofetch neovim nmap ripgrep stow terraform tmux tree tree wget yq zsh
 
 ZSH_PLUGINS_PACKAGES	:= \
 	romkatv/powerlevel10k
@@ -18,7 +18,6 @@ link::
 
 unlink::
 	stow --verbose --no-folding --target=$$HOME --dir=$(DIR) --delete home
-
 
 install-brew-packages:
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
