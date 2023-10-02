@@ -1,63 +1,31 @@
 vim.g.mapleader = " "
 
-vim.keymap.set('i', 'jj', '<ESC>', opts)
+-- Insert mode: Use 'jj' to quickly exit insert mode
+vim.keymap.set('i', 'jj', '<ESC>', { desc = "Exit insert mode with 'jj'" })
 
--- Clear search highlight
-vim.keymap.set('n', '<leader>l', ':noh<return><esc>', opts)
+-- Normal mode: Clear search highlights when pressing '<leader>l'
+vim.keymap.set('n', '<leader>l', ':noh<return><esc>', { desc = "Clear search highlights with '<leader>l'" })
 
--- Quick save command
-vim.keymap.set('n', '<leader>s', ':write<CR>', opts)
+-- Normal mode: Save the current file with '<leader>s'
+vim.keymap.set('n', '<leader>s', ':write<CR>', { desc = "Save the current file with '<leader>s'" })
 
--- Quick refresh the currenlty file
-vim.keymap.set('n', '<leader>e', ':edit<CR>', opts)
+-- Normal mode: Refresh the currently open file with '<leader>e'
+vim.keymap.set('n', '<leader>e', ':edit<CR>', { desc = "Refresh the currently open file with '<leader>e'" })
 
--- Quick quit command
-vim.keymap.set('n', '<leader>q', ':quit<CR>', opts)
-vim.keymap.set('n', '<leader>Q', ':qa!<CR>', opts)
+-- Normal mode: Quit Vim with '<leader>q', or force quit with '<leader>Q'
+vim.keymap.set('n', '<leader>q', ':quit<CR>', { desc = "Quit Vim with '<leader>q', or force quit with '<leader>Q'" })
+vim.keymap.set('n', '<leader>Q', ':qa!<CR>', { desc = "Force quit Vim with '<leader>Q'" })
 
--- Buffers
---vim.keymap.set('n', '<leader>m', ':bnext<CR>', opts)
---vim.keymap.set('n', '<leader>n', ':bprevious<CR>', opts)
---vim.keymap.set('n', '<leader>x', ':bdelete<CR>', opts)
+-- Normal mode: Uncomment the following lines to navigate between buffers
+--vim.keymap.set('n', '<leader>m', ':bnext<CR>', { desc = "Switch to the next buffer with '<leader>m'" })
+--vim.keymap.set('n', '<leader>n', ':bprevious<CR>', { desc = "Switch to the previous buffer with '<leader>n'" })
+--vim.keymap.set('n', '<leader>x', ':bdelete<CR>', { desc = "Delete the current buffer with '<leader>x'" })
 
--- Vim Tabs
-vim.keymap.set('n', '<leader>t', ':tabnew<CR>', opts)
-vim.keymap.set('n', '<leader>c', ':tabclose<CR>', opts)
-vim.keymap.set('n', '<leader>n', ':tabnext<CR>', opts)
-vim.keymap.set('n', '<leader>m', ':tabprevious<CR>', opts)
+-- Normal mode: Manage Vim tabs
+vim.keymap.set('n', '<leader>t', ':tabnew<CR>', { desc = "Create a new tab with '<leader>t'" })
+vim.keymap.set('n', '<leader>c', ':tabclose<CR>', { desc = "Close the current tab with '<leader>c'" })
+vim.keymap.set('n', '<leader>n', ':tabnext<CR>', { desc = "Switch to the next tab with '<leader>n'" })
+vim.keymap.set('n', '<leader>m', ':tabprevious<CR>', { desc = "Switch to the previous tab with '<leader>m'" })
 
--- togle listchar display
-vim.keymap.set('n', '<leader>d', ':setinvlist<CR>', opts)
-
-
-
-
-vim.keymap.set('i', 'jj', '<ESC>', opts)
-
--- Clear search highlight
-vim.keymap.set('n', '<leader>l', ':noh<return><esc>', opts)
-
--- Quick save command
-vim.keymap.set('n', '<leader>s', ':write<CR>', opts)
-
--- Quick refresh the currenlty file
-vim.keymap.set('n', '<leader>e', ':edit<CR>', opts)
-
--- Quick quit command
-vim.keymap.set('n', '<leader>q', ':quit<CR>', opts)
-vim.keymap.set('n', '<leader>Q', ':qa!<CR>', opts)
-
--- Buffers
---vim.keymap.set('n', '<leader>m', ':bnext<CR>', opts)
---vim.keymap.set('n', '<leader>n', ':bprevious<CR>', opts)
---vim.keymap.set('n', '<leader>x', ':bdelete<CR>', opts)
-
--- Vim Tabs
-vim.keymap.set('n', '<leader>t', ':tabnew<CR>', opts)
-vim.keymap.set('n', '<leader>c', ':tabclose<CR>', opts)
-vim.keymap.set('n', '<leader>n', ':tabnext<CR>', opts)
-vim.keymap.set('n', '<leader>m', ':tabprevious<CR>', opts)
-
--- togle listchar display
-vim.keymap.set('n', '<leader>d', ':setinvlist<CR>', opts)
-
+-- Normal mode: Toggle 'listchar' display with '<leader>d'
+vim.keymap.set('n', '<leader>d', ':set invlist<CR>', { desc = "Toggle 'listchar' display with '<leader>d'" })
