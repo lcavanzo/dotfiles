@@ -1,0 +1,5 @@
+require("lcavanzo.packer")
+require("lcavanzo.base")
+require("lcavanzo.highlights")
+require("lcavanzo.keybindings")
+require("lcavanzo.maps")
