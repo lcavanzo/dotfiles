@@ -1,8 +1,4 @@
-# lcavanzo's Dotfiles
-my personal dotfiles configuration
+# dotfiles
+Personal dotfiles
 
-
-Steps
-
-1) Run `init.sh`
-2) Be happy
+wip :)

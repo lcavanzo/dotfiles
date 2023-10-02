@@ -1,0 +1,35 @@
+[core]
+    editor = nvim
+    pager = less
+    eol = lf
+
+[user]
+    name = test
+    email = test@gmail.com
+
+[github]
+    user = test
+
+[commit]
+    verbose = true
+
+[diff]
+    algorithm = patience
+
+[rebase]
+    stat = true
+    instructionFormat = %s [%an - %ar]
+    autoSquash = true
+
+[checkout]
+    defaultRemote = origin
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true
+
+[color]
+    ui = auto
+
