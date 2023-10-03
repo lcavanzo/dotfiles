@@ -68,8 +68,8 @@ api.nvim_create_autocmd(
 
 
 -- sync clipboards because I'm easily confused
-  vim.api.nvim_create_autocmd('TextYankPost', {
-    group    = 'bufcheck',
-    pattern  = '*',
-    callback = function() fn.setreg('+', fn.getreg('*'))
-  end })
+api.nvim_create_autocmd('TextYankPost', {
+  group    = bufcheck,
+  pattern  = '*',
+  callback = function() vim.fn.setreg('+', vim.fn.getreg('*'))
+end })

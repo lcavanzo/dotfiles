@@ -21,7 +21,7 @@ vim.opt.incsearch = true         -- Enable incremental searching
 vim.o.updatetime = 250           -- Decrease update and timeout intervals
 vim.o.timeoutlen = 300           -- Decrease update and timeout intervals
 vim.opt.termguicolors = true     -- Enable termguicolors
-opt.completeopt = 'menuone,noinsert,noselect'          -- Configure completion options
+vim.opt.completeopt = 'menuone,noinsert,noselect'          -- Configure completion options
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }    -- Specify backup files to skip
 vim.opt.listchars = { eol = '↵', tab = '>-'}           -- Configure list characters (eol = '↵', tab = '>-')
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Specify the undo directory
@@ -34,10 +34,10 @@ vim.opt.cmdheight = 1       -- Set the command line height
 vim.opt.laststatus = 2      -- Set the last status line to always show
 vim.opt.scrolloff = 10      -- Set scrolloff to 10 lines
 vim.opt.breakindent = true  -- Enable automatic indentation of wrapped lines
-opt.showmatch = true        -- Highlight matching parentheses
-opt.foldmethod = 'marker'   -- Enable folding using markers
-opt.splitright = true       -- Open vertical splits to the right
-opt.splitbelow = true       -- Open horizontal splits to the bottom
+vim.opt.showmatch = true        -- Highlight matching parentheses
+vim.opt.foldmethod = 'marker'   -- Enable folding using markers
+vim.opt.splitright = true       -- Open vertical splits to the right
+vim.opt.splitbelow = true       -- Open horizontal splits to the bottom
 
 -----------------------------------------------------------
 -- Tabs, indent
@@ -57,9 +57,8 @@ vim.opt.backspace = { 'start', 'eol', 'indent' } -- Define backspace behavior
 -----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------
-opt.hidden = true          -- Enable hidden buffers
-opt.history = 1000         -- Set the maximum number of lines in history
-opt.lazyredraw = true      -- Enable lazy redraw for faster scrolling
-opt.synmaxcol = 240        -- Set the maximum column for syntax highlighting
-opt.updatetime = 250       -- Set the wait time (in ms) to trigger an event
-vim.opt.colorcolumn = "80" -- Set color column to 80 characters
+vim.opt.hidden = true          -- Enable hidden buffers
+vim.opt.history = 1000         -- Set the maximum number of lines in history
+vim.opt.lazyredraw = true      -- Enable lazy redraw for faster scrolling
+vim.opt.synmaxcol = 240        -- Set the maximum column for syntax highlighting
+vim.opt.updatetime = 250       -- Set the wait time (in ms) to trigger an event

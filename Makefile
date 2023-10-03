@@ -4,8 +4,8 @@ UNAME_S := $(shell uname -s)
 
 
 BREW_PACKAGES	:= \
-	autojump awscli azure-cli bat fd fzf git go helm htop jq kitty kubectl kubelogin lazygit \
-	neofetch neovim nmap ripgrep stow terraform tmux tree tree wget yq zsh
+	autojump awscli azure-cli bat exa fd fzf git go helm htop jq kitty kubectl kubelogin lazygit \
+	neofetch neovim nmap ripgrep stow terraform tmux tree wget yq zsh
 
 ZSH_PLUGINS_PACKAGES	:= \
 	romkatv/powerlevel10k
