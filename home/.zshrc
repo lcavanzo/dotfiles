@@ -27,10 +27,9 @@ setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
 
 export HISTFILE=~/.zsh_history
-export HISTSIZE=1000000000
-export SAVEHIST=1000000000
+export HISTSIZE=100000
+export SAVEHIST=100000
 
-# export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 export WORDCHARS='~!#$%^&*(){}[]<>?.+;-'
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .bemol'
@@ -46,11 +45,10 @@ plugins=(
   git
   brew
   kubectl
-  # zsh-vi-mode
+  zsh-vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-history-substring-search
-  # command-time
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -73,6 +71,8 @@ function my_zvm_init() {
     bindkey '^P' history-beginning-search-backward
     bindkey '^N' history-beginning-search-forward
     bindkey '^ ' autosuggest-accept
+    [[ $- == *i* ]] && source /opt/homebrew/opt/fzf/shell/completion.zsh 2> /dev/null
+    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 }
 
 zvm_after_init_commands+=(my_zvm_init)
@@ -138,7 +138,7 @@ initsetup () {
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  sh /opt/homebrew/opt/fzf/install --all
 }
 
 if [ -f "$HOME/.zshrc.local" ]; then
