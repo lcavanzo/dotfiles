@@ -4,13 +4,13 @@ UNAME_S := $(shell uname -s)
 
 
 BREW_PACKAGES	:= \
-	autojump awscli azure-cli bat exa fd fzf git go helm htop jq kitty kubectl kubelogin lazygit \
-	neofetch neovim nmap ripgrep stow terraform tmux tree wget yq zsh
+	autojump awscli azure-cli bat exa fd fzf git go helm htop jq kitty kubectl Azure/kubelogin/kubelogin lazygit \
+	neofetch neovim nmap ripgrep stow terraform tmux tree unzip wget yq zsh
 
 ZSH_PLUGINS_PACKAGES	:= \
 	romkatv/powerlevel10k
 
-all:: install-brew-packages link install-terminfo install-fonts download-zsh-plugin update-zsh-plugins
+all:: install-brew-packages link install-terminfo install-fonts download-zsh-plugins update-zsh-plugins
 
 link::
 	stow --verbose --no-folding --target=$$HOME --dir=$(DIR) --restow home
@@ -20,8 +20,10 @@ unlink::
 	stow --verbose --no-folding --target=$$HOME --dir=$(DIR) --delete home
 
 install-brew-packages:
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	brew install $(BREW_PACKAGES)
+	if [ -z "$$(command -v brew)" ]; then \
+		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+	fi
+	/opt/homebrew/bin/brew install $(BREW_PACKAGES)
 
 install-terminfo:
 	curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz && gunzip terminfo.src.gz && \

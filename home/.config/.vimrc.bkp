@@ -1,0 +1,155 @@
+" Vim is better
+set nocompatible
+
+
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set autoindent
+set smartindent
+"set clipboard=unnamedplus
+"set clipboard=unnamed " <- for macOS
+set history=10000
+set incsearch
+set hidden 
+set fileformat=unix
+set textwidth=79
+set nowrap
+highlight ColorColumn ctermfg=133
+
+" Syntax highlighting
+syntax on
+
+" Abbreviations
+abbr _sh #!/bin/bash
+abbr _py #!/usr/sbin/python3
+
+" tab formatting
+set list
+
+" set listchars=tab:\|\<Space>
+set listchars=tab:>-,space:.,eol:$ " > is shown at the beginning, - throughout
+
+" Set <Leader> key
+let mapleader=","
+
+" refresh ctags (this need ctags packet installed) 
+nnoremap <f5> :!ctags -R<CR>
+
+" check spell 
+nnoremap <f6> :set spell<CR>
+
+" Quick save command
+" noremap <C-s> :update<CR>
+noremap <Leader>s :write<CR>
+
+" Quick refresh the currenlty file
+noremap <Leader>e :edit<CR>
+
+" Quick quit command
+noremap <Leader>q :quit<CR> " Quit current window
+noremap <Leader>Q :qa!<CR> " Quit all windows
+
+" Quick expands to the path of the active buffer
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" Splits
+noremap <Leader>2 :split<CR> " split horizontally
+noremap <Leader>3 :vsplit<CR> " split vertically
+
+" Buffers
+noremap <Leader>m :bnext<CR>
+noremap <Leader>. <c-^>
+noremap <Leader>n :bprevious<CR>
+noremap <Leader>x :bdelete<CR>
+
+" Vim tabs
+noremap <Leader>y :tabnew<CR>
+noremap <Leader>c :tabclose<CR>
+noremap <Leader>r :tabnext<CR>
+noremap <Leader>t :tabprevious<CR>
+
+" Mute Highlighting
+noremap <Leader>l :<c-u>nohlsearch<CR>
+
+" Count the matches of a search
+noremap <Leader>/ ::%s///gn<CR>
+
+" Bind Ctrl+<movement> keys to move around windows
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+ " Resize the height 
+map <c-DOWN> <c-w>+
+map <c-UP> <c-w>-
+ " Resize the width
+map <c-LEFT> <c-w><
+map <c-RIGHT> <c-w>>
+
+"toggle listchar display
+ noremap <leader>d :set invlist<CR>
+
+" Show ruler line at bottom of each buffer
+set ruler
+
+" Show line numbers
+set number
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+filetype off
+syntax enable
+
+" no temp or backup files
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Set explorer
+noremap <Leader>f :Explore<CR>
+
+" avoid Esc key
+imap jj <Esc>
+
+" Preserve undo history
+set undodir=~/.vim/undo
+set undofile
+
+" toggle nerdTree
+map <C-n> :NERDTreeToggle<CR>
+
+" powerline config
+set laststatus=2
+set t_Co=256
+
+" PEP8
+let g:syntastic_python_checkers = ['python3']
+augroup vimrc_autocmds
+  autocmd BufEnter *.py highlight OverLength ctermbg=darkgrey guibg=#592929
+  autocmd BufEnter *.py match OverLength /\%74v.*/
+  autocmd BufEnter *.py set nowrap
+augroup END
+
+set nocompatible
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
+Plugin 'tpope/vim-fugitive'
+Plugin 'morhetz/gruvbox'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'powerline/powerline'
+Plugin 'scrooloose/nerdtree'
+call vundle#end()
+set term=xterm-256color
+set background=dark
+colorscheme gruvbox
