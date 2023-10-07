@@ -5,7 +5,7 @@
 
 [user]
     name = lcavanzo
-    email = lcavanzo1996@gmail.com
+    email = cavanzo1996@gmail.com
 
 [github]
     user = test
@@ -33,3 +33,5 @@
 [color]
     ui = auto
 
+[credential]
+	helper = store
