@@ -5,7 +5,7 @@ UNAME_S := $(shell uname -s)
 
 BREW_PACKAGES	:= \
 	autojump awscli azure-cli bat exa fd fzf git go helm htop jq kitty kubectl Azure/kubelogin/kubelogin lazygit \
-	neofetch neovim nmap ripgrep stow terraform tmux tree unzip wget yq zsh
+	neofetch neovim node nmap ripgrep stow terraform tmux tree unzip wget yq zsh
 
 ZSH_PLUGINS_PACKAGES	:= \
 	romkatv/powerlevel10k
@@ -23,6 +23,7 @@ install-brew-packages:
 	if [ -z "$$(command -v brew)" ]; then \
 		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 	fi
+	export PATH="/opt/homebrew/bin:$PATH"
 	/opt/homebrew/bin/brew install $(BREW_PACKAGES)
 
 install-terminfo:
@@ -31,7 +32,7 @@ install-terminfo:
 
 install-fonts:
 	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -P /tmp && \
-	unzip /tmp/JetBrainsMono.zip -d ~/Library/Fonts/JetBrainsMono/  
+	unzip /tmp/JetBrainsMono.zip -d ~/Library/Fonts/JetBrainsMono/
 
 download-zsh-plugins:
 	rm -rf ~/.zsh && \
