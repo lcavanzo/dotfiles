@@ -1,4 +1,5 @@
 # dotfiles
+
 Personal dotfiles
 
-wip :)
+Just run `make` command and enjoy ;)
