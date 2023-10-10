@@ -32,6 +32,10 @@ if [ -d "/usr/local/go/bin" ]; then
     path+=/usr/local/go/bin
 fi
 
+if [ -d "/opt/homebrew/bin" ]; then
+    path+=/opt/homebrew/bin/python3
+fi
+
 if [ -d "$HOME/.local/bin" ]; then
     path+=$HOME/.local/bin
 fi
