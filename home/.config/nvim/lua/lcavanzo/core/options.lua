@@ -59,6 +59,6 @@ vim.opt.backspace = { "start", "eol", "indent" } -- Define backspace behavior
 -----------------------------------------------------------
 vim.opt.hidden = true -- Enable hidden buffers
 vim.opt.history = 1000 -- Set the maximum number of lines in history
-vim.opt.lazyredraw = true -- Enable lazy redraw for faster scrolling
+vim.opt.lazyredraw = false -- Enable lazy redraw for faster scrolling
 vim.opt.synmaxcol = 240 -- Set the maximum column for syntax highlighting
 vim.opt.updatetime = 250 -- Set the wait time (in ms) to trigger an event

@@ -6,6 +6,8 @@
   check the keymap in that file
 - nvim-treesitter(all of them)
   review all of the keymap
+- 2 markdown plugins
+  add keymaps
 
 ## keymap
 
