@@ -96,7 +96,7 @@ alias gs='git status'
 
 alias ff='/usr/local/bin/fd'
 alias pip='pip3'
-alias python='python3'
+alias py='python3'
 alias cat='bat'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias todo='cat ~/git/TODO.md'
