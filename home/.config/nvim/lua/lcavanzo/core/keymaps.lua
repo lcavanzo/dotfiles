@@ -33,6 +33,7 @@ vim.keymap.set("n", "<leader>w|", ":vsplit<Return><C-w>w", { silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
 -- TODO Fix this, is annoying to press twice control
+-- press only once control
 vim.keymap.set("", "<D-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 vim.keymap.set("", "<D-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
 vim.keymap.set("", "<D-k>", "<C-w>k", { desc = "Go to upper window", remap = true })

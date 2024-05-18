@@ -62,7 +62,7 @@ return {
 		})
 
 		telescope.load_extension("ui-select")
-		--telescope.load_extension("noice")
+		telescope.load_extension("noice")
 		telescope.load_extension("fzf")
 		telescope.load_extension("file_browser")
 		-- set keymaps
@@ -79,7 +79,7 @@ return {
 
 		vim.keymap.set("n", "<leader>fi", builtin.git_files, { desc = "Search [G]it [F]iles" })
 		vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "Search [G]it [S]tatus" })
-		vim.keymap.set("n", "<leader>fz", builtin.git_commits, { desc = "Search [G]it [L]og" })({})
+		vim.keymap.set("n", "<leader>fz", builtin.git_commits, { desc = "Search [G]it [L]og" })
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
