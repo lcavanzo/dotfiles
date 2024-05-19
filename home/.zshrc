@@ -153,5 +153,10 @@ source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-## SadServers
-alias sad='source ~/.sadServer.sh'
+##
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+
+# SadServer settings
+alias sad='LC_ALL=C.UTF-8 ssh'
+

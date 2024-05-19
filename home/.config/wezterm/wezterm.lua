@@ -1,6 +1,7 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 local act = wezterm.action
+--local fish_path = "/opt/homebrew/bin/fish"
 
 -- This will hold the configuration.
 local config = {}
@@ -11,6 +12,7 @@ end
 
 -- This is where you actually apply your config choices
 -- Settings
+--config.default_prog = { fish_path, "-l" }
 
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font_with_fallback({
@@ -56,10 +58,15 @@ config.keys = {
 	{ key = "l", mods = "SUPER", action = act.SendKey({ key = "l", mods = "CTRL" }) }, -- ctrl-l
 	{ key = "d", mods = "SUPER", action = act.SendKey({ key = "d", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "r", mods = "SUPER", action = act.SendKey({ key = "r", mods = "CTRL" }) }, -- ctrl-d
+	{ key = "w", mods = "SUPER", action = act.SendKey({ key = "w", mods = "CTRL" }) }, -- ctrl-d
 
 	-- Scroll Promtp
 	{ key = "p", mods = "SUPER", action = act.SendKey({ key = "p", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "n", mods = "SUPER", action = act.SendKey({ key = "n", mods = "CTRL" }) }, -- ctrl-d
+
+	-- increase/decrese font
+	{ key = "+", mods = "SUPER", action = act.IncreaseFontSize }, -- ctrl-d
+	{ key = "-", mods = "SUPER", action = act.DecreaseFontSize }, -- ctrl-d
 
 	{ key = "c", mods = "LEADER", action = act.ActivateCopyMode }, -- REVIEW
 
