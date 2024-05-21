@@ -97,13 +97,9 @@ config.keys = {
 	-- Key table for moving tabs around
 	{ key = "m", mods = "LEADER", action = act.ActivateKeyTable({ name = "move_tab", one_shot = false }) },
 
+	-- Scroll down 1 line
 	{ key = "k", mods = "SHIFT", action = act.ScrollByLine(-1) },
 	{ key = "j", mods = "SHIFT", action = act.ScrollByLine(1) },
-
-	-- Scroll down 1 line
-	{ key = "DownArrow", mods = "SHIFT", action = act.ScrollByLine(1) },
-	{ key = "Tab", mods = "ALT|SHIFT", action = act.ActivateTabRelative(-1) },
-	{ key = "Tab", mods = "ALT", action = act.ActivateTabRelative(1) },
 
 	-- Workspace -- REVIEW all the workspaces stuff
 	{ key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
