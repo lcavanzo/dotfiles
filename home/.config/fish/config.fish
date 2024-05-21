@@ -1,0 +1,13 @@
+fish_add_path -g ~/.cargo/bin ~/.local/bin ~/go/bin/ ~/bin /usr/local/bin
+
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+    # remove welcome message
+    set -g fish_greeting
+    # set TERM
+    set -g TERM wezterm
+    # Theme
+    fish_config theme choose "ayu Mirage"
+    # starship
+    starship init fish | source
+end
