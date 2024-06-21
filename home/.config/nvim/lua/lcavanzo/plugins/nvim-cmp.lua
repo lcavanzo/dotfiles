@@ -17,6 +17,10 @@ return {
 		local luasnip = require("luasnip")
 
 		local lspkind = require("lspkind")
+		local i = luasnip.insert_node
+		local s = luasnip.snippet
+		local t = luasnip.text_node
+		local f = luasnip.function_node
 
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()

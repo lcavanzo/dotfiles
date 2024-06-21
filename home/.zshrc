@@ -92,22 +92,28 @@ alias k='kubectl'
 
 alias checkPort='lsof -n -i'
 
+# git aliases
 alias lg='lazygit'
 alias gb='git branch'
 alias glo='git log --oneline'
 alias gs='git status'
 
-alias ff='/usr/local/bin/fd'
+# python aliases
 alias pip='pip3'
 alias py='python3'
+
+# personal aliases
 alias cat='bat'
 alias ssh='ssh -o ServerAliveInterval=60'
-alias todo='cat ~/git/TODO.md'
-alias vtodo='vim ~/git/TODO.md'
 alias pi='ssh -l pi 192.168.100.100'
 alias myip='curl ifconfig.me'
 alias tf='terraform'
 alias ll='ls -alF'
+alias wiki='cd ~/git/wiki/docs; vim bash.md'
+
+# SadServer settings
+alias sad='LC_ALL=C.UTF-8 ssh'
+
 
 # using ripgrep combined with preview
 # find-in-file - usage: fif <searchTerm>
@@ -155,11 +161,4 @@ source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-##
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-
-# SadServer settings
-alias sad='LC_ALL=C.UTF-8 ssh'
 

@@ -41,10 +41,10 @@ vim.keymap.set("", "<D-k>", "<C-w>k", { desc = "Go to upper window", remap = tru
 vim.keymap.set("", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
-vim.keymap.set("n", "<D-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-vim.keymap.set("n", "<D-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-vim.keymap.set("n", "<D-Left>", "<cmd>vertical resize +2<cr>", { desc = "Decrease window width" })
-vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize -2<cr>", { desc = "Increase window width" })
+vim.keymap.set("n", "<leader>wk", "<cmd>resize +5<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<leader>wj", "<cmd>resize -5<cr>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<leader>wl", "<cmd>vertical resize +5<cr>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<leader>wh", "<cmd>vertical resize -5<cr>", { desc = "Increase window width" })
 
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

@@ -14,6 +14,17 @@ return {
 	--     }
 	-- },
 	config = function()
+		-- Disable diagnostic messages for lspconfig
+		local function toggle_diagnostic_virtual_text()
+			local current_value = vim.diagnostic.config().virtual_text
+			vim.diagnostic.config({ virtual_text = not current_value })
+
+			if not current_value then
+				print("Diagnostic virtual text enabled")
+			else
+				print("Diagnostic virtual text disabled")
+			end
+		end
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
 
@@ -31,6 +42,12 @@ return {
 
 				--vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 			end
+			vim.keymap.set(
+				"n",
+				"<leader>nms",
+				toggle_diagnostic_virtual_text,
+				{ desc = "Toggle Diagnostic Virtual Text" }
+			)
 
 			nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 			nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
