@@ -7,10 +7,12 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"nvim-telescope/telescope-file-browser.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
+		"LukasPietzschmann/telescope-tabs",
 	},
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
+		local fb_actions = telescope.extensions.file_browser.actions
 
 		telescope.setup({
 
@@ -31,11 +33,33 @@ return {
 					i = {
 						["<C-y>"] = actions.select_default,
 						["<C-h>"] = actions.which_key,
+						["<leader>v"] = actions.select_vertical,
+						["<leader>h"] = actions.select_horizontal,
+						["<leader>t"] = actions.select_tab,
+						["<leader>z"] = function(prompt_bufnr)
+							require("telescope.actions").select_default(prompt_bufnr)
+							require("telescope.builtin").resume()
+						end,
+						["<leader>tr"] = function(prompt_bufnr)
+							require("telescope.actions").select_tab(prompt_bufnr)
+							require("telescope.builtin").resume()
+						end,
 					},
 					n = {
 						["<C-c>"] = actions.close,
 						["<C-y>"] = actions.select_default,
 						["<C-h>"] = actions.which_key,
+						["<leader>v"] = actions.select_vertical,
+						["<leader>h"] = actions.select_horizontal,
+						["<leader>t"] = actions.select_tab,
+						["<leader>z"] = function(prompt_bufnr)
+							require("telescope.actions").select_default(prompt_bufnr)
+							require("telescope.builtin").resume()
+						end,
+						["<leader>tr"] = function(prompt_bufnr)
+							require("telescope.actions").select_tab(prompt_bufnr)
+							require("telescope.builtin").resume()
+						end,
 					},
 				},
 				-- path_display = { "truncate " },
@@ -59,12 +83,31 @@ return {
 					follow = true,
 				},
 			},
+			extensions = {
+				file_browser = {
+					hidden = {
+						file_browser = true,
+						folder_browser = true,
+					},
+					hijack_netrw = true,
+					mappings = {
+						["n"] = {
+							["a"] = fb_actions.create,
+							["r"] = fb_actions.rename,
+							["d"] = fb_actions.remove,
+							["m"] = fb_actions.move,
+							["c"] = fb_actions.copy,
+						},
+					},
+				},
+			},
 		})
 
 		telescope.load_extension("ui-select")
 		telescope.load_extension("noice")
 		telescope.load_extension("fzf")
 		telescope.load_extension("file_browser")
+		telescope.load_extension("telescope-tabs")
 		-- set keymaps
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
