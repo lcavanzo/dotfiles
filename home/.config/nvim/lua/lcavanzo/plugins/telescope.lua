@@ -92,7 +92,7 @@ return {
 					hijack_netrw = true,
 					mappings = {
 						["n"] = {
-							["a"] = fb_actions.create,
+							["n"] = fb_actions.create,
 							["r"] = fb_actions.rename,
 							["d"] = fb_actions.remove,
 							["m"] = fb_actions.move,
@@ -108,6 +108,7 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("file_browser")
 		telescope.load_extension("telescope-tabs")
+		telescope.load_extension("neoclip")
 		-- set keymaps
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })

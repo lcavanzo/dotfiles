@@ -1,4 +1,7 @@
 vim.g.mapleader = " "
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
 -- Insert mode: Use 'jj' to quickly exit insert mode
 vim.keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with 'jj'" })
 
