@@ -1,12 +1,11 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
 -- Insert mode: Use 'jj' to quickly exit insert mode
 vim.keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with 'jj'" })
 
 -- Normal mode: Save the current file with '<leader>s'
 vim.keymap.set("n", "<leader>s", ":write<CR>", { desc = "Save the current file with '<leader>s'" })
+vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- Normal mode: Refresh the currently open file with '<leader>e'
 vim.keymap.set("n", "<leader>re", ":edit<CR>", { desc = "Refresh the currently open file with '<leader>e'" })
