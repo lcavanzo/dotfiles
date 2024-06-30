@@ -37,7 +37,7 @@ vim.opt.laststatus = 2 -- Set the last status line to always show
 vim.opt.scrolloff = 10 -- Set scrolloff to 10 lines
 vim.opt.breakindent = true -- Enable automatic indentation of wrapped lines
 vim.opt.showmatch = true -- Highlight matching parentheses
-vim.opt.foldmethod = "marker" -- Enable folding using markers
+vim.opt.foldmethod = "syntax" -- Enable folding using markers
 vim.opt.splitright = true -- Open vertical splits to the right
 vim.opt.splitbelow = true -- Open horizontal splits to the bottom
 
