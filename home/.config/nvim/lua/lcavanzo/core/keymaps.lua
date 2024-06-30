@@ -5,7 +5,6 @@ vim.keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with 'jj'" })
 
 -- Normal mode: Save the current file with '<leader>s'
 vim.keymap.set("n", "<leader>s", ":write<CR>", { desc = "Save the current file with '<leader>s'" })
-vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- Normal mode: Refresh the currently open file with '<leader>e'
 vim.keymap.set("n", "<leader>re", ":edit<CR>", { desc = "Refresh the currently open file with '<leader>e'" })
@@ -55,5 +54,8 @@ vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and 
 vim.keymap.set("i", ",", ",<c-g>u")
 vim.keymap.set("i", ".", ".<c-g>u")
 vim.keymap.set("i", ";", ";<c-g>u")
+
+vim.keymap.set("n", ";wf", ":noautocmd w<CR>", { desc = "Save without formatting" })
+vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 --- test keymap => :verbose nmap <D-Up>
