@@ -93,7 +93,7 @@ return {
 			dashboard.button("c", "  > Settings", "<cmd>edit ~/.config/nvim/init.lua| :cd %:p:h <CR>"),
 
 			--dashboard.button("SPC wr", "󰁯  > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
-			dashboard.button("l", "  > Projects", ":Telescope marks<CR>"),
+			dashboard.button("l", "  > Vim Marks", ":Telescope marks<CR>"),
 			dashboard.button("p", "󰂖  > Plugins", "<Cmd>Lazy<CR>"),
 			dashboard.button("t", "  > Install language tools", "<cmd>Mason<CR>"),
 			dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),

@@ -1,3 +1,0 @@
-return {
-	"zhimsel/vim-stay",
-}

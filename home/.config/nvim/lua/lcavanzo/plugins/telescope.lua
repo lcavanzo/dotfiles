@@ -129,6 +129,7 @@ return {
 		vim.keymap.set("n", "<leader>fh", builtin.command_history, { desc = "Neovim [H]istory" })
 		vim.keymap.set("n", "<leader>fbf", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
 		vim.keymap.set("n", "<leader>frr", builtin.resume, { desc = "[R]esume Telescope Search" })
+		vim.keymap.set("n", "<leader>fm", builtin.marks, { desc = "Telescope Marks" })
 		vim.keymap.set(
 			"n",
 			"<leader>ft",
