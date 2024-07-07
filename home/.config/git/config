@@ -1,7 +1,14 @@
 [core]
     editor = nvim
-    pager = less
+    pager = delta
     eol = lf
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    syde-by-syde=true
 
 [user]
     name = lcavanzo
@@ -14,6 +21,7 @@
     verbose = true
 
 [diff]
+    colorMoved = default
     algorithm = patience
 
 [rebase]
@@ -35,3 +43,6 @@
 
 [credential]
 	helper = store
+
+[merge]
+    conflictstyle = diff3

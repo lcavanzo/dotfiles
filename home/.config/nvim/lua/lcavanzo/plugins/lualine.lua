@@ -64,7 +64,7 @@ return {
 					{ "encoding" },
 					{ "fileformat" },
 					{ "filetype" },
-					{ "vim.loop.cwd()" }, -- #NOTE: temporary
+					-- { "vim.loop.cwd()" }, -- #NOTE: temporary
 				},
 			},
 		})
