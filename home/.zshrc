@@ -110,6 +110,8 @@ alias myip='curl ifconfig.me'
 alias tf='terraform'
 alias ll='ls -alF'
 alias wiki='cd ~/git/wiki/docs; vim bash.md'
+alias ndots='cd ~/.config/nvim/lua/lcavanzo/'
+alias dots='cd ~/.config'
 
 # SadServer settings
 alias sad='LC_ALL=C.UTF-8 ssh'

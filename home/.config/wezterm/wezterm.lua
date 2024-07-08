@@ -61,8 +61,8 @@ config.keys = {
 	{ key = "w", mods = "SUPER", action = act.SendKey({ key = "w", mods = "CTRL" }) }, -- ctrl-d
 
 	-- Scroll Promtp
-	{ key = "p", mods = "SUPER", action = act.SendKey({ key = "p", mods = "CTRL" }) }, -- ctrl-d
-	{ key = "n", mods = "SUPER", action = act.SendKey({ key = "n", mods = "CTRL" }) }, -- ctrl-d
+	{ key = "p", mods = "SUPER", action = act.SendKey({ key = "UpArrow" }) }, -- ctrl-d
+	{ key = "n", mods = "SUPER", action = act.SendKey({ key = "DownArrow" }) }, -- ctrl-d
 
 	-- increase/decrese font
 	{ key = "+", mods = "SUPER", action = act.IncreaseFontSize }, -- ctrl-d
