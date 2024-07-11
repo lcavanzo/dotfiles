@@ -58,4 +58,24 @@ vim.keymap.set("i", ";", ";<c-g>u")
 vim.keymap.set("n", ";wf", ":noautocmd w<CR>", { desc = "Save without formatting" })
 vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
+-- Jumplist Navigation
+-- vim.keymap.set("n", "<leader>j", "<C-O>", { noremap = true, silent = true }) -- Older jump
+-- vim.keymap.set("n", "<leader>i", "<C-I>", { noremap = true, silent = true }) -- Newer jump
+vim.keymap.set("n", "<leader>i", "``", { noremap = true, silent = true })
+
+-- mappings, to add normal j/k motions to the jumplist whenever I jump more that 2 lines
+vim.keymap.set(
+	"n",
+	"j",
+	[[v:count ? (v:count >= 3 ? "m'" . v:count : '') . 'j' : 'gj']],
+	{ noremap = true, expr = true }
+)
+
+vim.keymap.set(
+	"n",
+	"k",
+	[[v:count ? (v:count >= 3 ? "m'" . v:count : '') . 'k' : 'gk']],
+	{ noremap = true, expr = true }
+)
+
 --- test keymap => :verbose nmap <D-Up>
