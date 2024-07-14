@@ -1,6 +1,9 @@
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
+	dependencies = {
+		"echasnovski/mini.nvim",
+	},
 	init = function()
 		vim.o.timeout = true
 		vim.o.timeoutlen = 300
@@ -12,28 +15,5 @@ return {
 	},
 	config = function()
 		local wk = require("which-key")
-
-		wk.setup({
-			window = {
-				border = "single",
-				margin = { 1, 1, 1, 1 },
-			},
-			layout = {
-				width = { min = 20, max = 40 },
-			},
-		})
-
-		wk.register({
-			s = { name = "Search" },
-			d = { name = "Debug" },
-			u = { name = "Utils" },
-			g = { name = "Git" },
-			w = { name = "Wiki" },
-			h = { name = "Jump" },
-			l = {
-				name = "LSP",
-				w = { name = "Workspaces" },
-			},
-		}, { prefix = "<Leader>" })
 	end,
 }

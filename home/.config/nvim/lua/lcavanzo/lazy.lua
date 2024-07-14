@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
 	{ import = "lcavanzo.plugins" },
 	{ import = "lcavanzo.plugins.lsp" },
+	{ import = "lcavanzo.plugins.DAP" },
 }, {
 	checker = {
 		enabled = true,
