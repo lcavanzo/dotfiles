@@ -46,6 +46,8 @@ return {
 				"pylint", -- python linter
 				"ruff",
 				"pyright",
+				"debugpy",
+				"delve",
 				"eslint_d", -- js linter
 				"gofumpt",
 				"goimports",

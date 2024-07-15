@@ -2,6 +2,7 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		recommended = true,
+		event = "VeryLazy",
 		desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
 
 		dependencies = {
@@ -14,6 +15,38 @@ return {
 				opts = {},
 			},
 		},
+		config = function()
+			require("dap").adapters.python = {
+				type = "executable",
+				command = "python3",
+				args = { "-m", "debugpy.adapter" },
+			}
+			require("dap").configurations.python = {
+				{
+					type = "python",
+					request = "launch",
+					name = "Launch file",
+					program = "${file}",
+					pythonPath = function()
+						return "/usr/bin/python3"
+					end,
+				},
+				{
+					type = "python",
+					request = "launch",
+					name = "Launch file with arguments",
+					program = "${file}",
+					args = function()
+						local args_string = vim.fn.input("Arguments: ")
+						return vim.split(args_string, " +")
+					end,
+					console = "integratedTerminal",
+					pythonPath = function()
+						return "/usr/bin/python3"
+					end,
+				},
+			}
+		end,
 
           -- stylua: ignore
         keys = {
@@ -50,6 +83,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		event = "VeryLazy",
 		dependencies = { "nvim-neotest/nvim-nio" },
               -- stylua: ignore
               keys = {
@@ -93,27 +127,5 @@ return {
 				{ text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
 			)
 		end,
-	},
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-		cmd = { "DapInstall", "DapUninstall" },
-		opts = {
-			-- Makes a best effort to setup the various debuggers with
-			-- reasonable debug configurations
-			automatic_installation = true,
-
-			-- You can provide additional configuration to the handlers,
-			-- see mason-nvim-dap README for more information
-			handlers = {},
-
-			-- You'll need to check that you have the required things installed
-			-- online, please don't ask me how to install them :)
-			ensure_installed = {
-				-- Update this to ensure that you have the debuggers for the langs you want
-				"python",
-				"delve",
-			},
-		},
 	},
 }

@@ -101,6 +101,7 @@ alias gs='git status'
 # python aliases
 alias pip='pip3'
 alias py='python3'
+alias penv='source ~/.python-envs/automate-boring-stuff/bin/activate'
 
 # personal aliases
 alias cat='bat'
