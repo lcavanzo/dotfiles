@@ -16,6 +16,11 @@ return {
 			},
 		},
 		config = function()
+			require("dap").adapters.python = {
+				type = "executable",
+				command = "python3",
+				args = { "-m", "debugpy.adapter" },
+			}
 			require("dap").configurations.python = {
 				{
 					type = "python",
@@ -124,6 +129,7 @@ return {
 			)
 		end,
 	},
+	-- If the next block is deleted, the dap plugin fails :(
 	{
 		"jay-babu/mason-nvim-dap.nvim",
 		event = "VeryLazy",
