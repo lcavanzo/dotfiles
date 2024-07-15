@@ -16,11 +16,6 @@ return {
 			},
 		},
 		config = function()
-			require("dap").adapters.python = {
-				type = "executable",
-				command = "python3",
-				args = { "-m", "debugpy.adapter" },
-			}
 			require("dap").configurations.python = {
 				{
 					type = "python",
@@ -84,7 +79,8 @@ return {
 	{
 		"rcarriga/nvim-dap-ui",
 		event = "VeryLazy",
-		dependencies = { "nvim-neotest/nvim-nio" },
+		dependencies = { "nvim-neotest/nvim-nio", "mfussenegger/nvim-dap" },
+
               -- stylua: ignore
               keys = {
                 { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
@@ -127,5 +123,28 @@ return {
 				{ text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
 			)
 		end,
+	},
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		event = "VeryLazy",
+		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+		cmd = { "DapInstall", "DapUninstall" },
+		opts = {
+			-- Makes a best effort to setup the various debuggers with
+			-- reasonable debug configurations
+			automatic_installation = true,
+
+			-- You can provide additional configuration to the handlers,
+			-- see mason-nvim-dap README for more information
+			handlers = {},
+
+			-- You'll need to check that you have the required things installed
+			-- online, please don't ask me how to install them :)
+			ensure_installed = {
+				-- Update this to ensure that you have the debuggers for the langs you want
+				"python",
+				"delve",
+			},
+		},
 	},
 }
