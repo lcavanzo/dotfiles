@@ -24,6 +24,38 @@ return {
 
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()
+		-- Function to check if we're in a snippet
+		local function in_snippet()
+			local session = luasnip.session
+			if not session then
+				return false
+			end
+			return session.current_nodes[vim.api.nvim_get_current_buf()] ~= nil
+		end
+
+		vim.keymap.set({ "i" }, "<C-E>", function()
+			if luasnip.expandable() then
+				luasnip.expand()
+			end
+		end, { silent = true })
+
+		vim.keymap.set({ "i", "s" }, "<Tab>", function()
+			if in_snippet() and luasnip.jumpable(1) then
+				luasnip.jump(1)
+			else
+				-- If we're not in a snippet, or can't jump, use default Tab behavior
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+			end
+		end, { silent = true })
+
+		vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+			if in_snippet() and luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				-- If we're not in a snippet, or can't jump backwards, use default Shift-Tab behavior
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
+			end
+		end, { silent = true })
 
 		cmp.setup({
 			completion = {

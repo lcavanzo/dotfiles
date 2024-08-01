@@ -61,7 +61,7 @@ vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory
 -- Jumplist Navigation
 -- vim.keymap.set("n", "<leader>j", "<C-O>", { noremap = true, silent = true }) -- Older jump
 -- vim.keymap.set("n", "<leader>i", "<C-I>", { noremap = true, silent = true }) -- Newer jump
-vim.keymap.set("n", "<leader>i", "``", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>j", "``", { desc = "Jump back between Jumplist" })
 
 -- mappings, to add normal j/k motions to the jumplist whenever I jump more that 2 lines
 vim.keymap.set(

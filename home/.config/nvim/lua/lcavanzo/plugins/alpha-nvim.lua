@@ -6,11 +6,21 @@ return {
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
 		local function footer()
-			local plugins = #vim.tbl_keys(require("lazy").plugins())
+			-- local plugins = #vim.tbl_keys(require("lazy").plugins())
 			local v = vim.version()
 			local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
 			local platform = vim.fn.has("win32") == 1 and "" or ""
-			return string.format("󰂖 %d  %s %d.%d.%d  %s", plugins, platform, v.major, v.minor, v.patch, datetime)
+			local stats = require("lazy").stats()
+			return string.format(
+				"󰂖 %d/%d  %s %d.%d.%d  %s",
+				stats.loaded,
+				stats.count,
+				platform,
+				v.major,
+				v.minor,
+				v.patch,
+				datetime
+			)
 		end
 
 		-- Set header
