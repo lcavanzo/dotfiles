@@ -1,5 +1,5 @@
 {
-  "name": "example-snippets",
+  "name": "custom-snippets",
   "contributes": {
     "snippets": [
       {
