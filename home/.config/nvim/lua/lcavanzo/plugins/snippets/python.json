@@ -1,0 +1,26 @@
+{
+  "Python Logging Setup": {
+    "prefix": ["pylogsetup"],
+    "body": [
+      "import logging",
+      "",
+      "logging.basicConfig(",
+      "    filename=\"${1:logs.txt}\",",
+      "    level=logging.${2:DEBUG},",
+      "    format=\"%(asctime)s - %(levelname)s - %(message)s\",",
+      ")",
+      "",
+      "logging.disable(logging.${3:DEBUG})",
+      "",
+      "logging.debug(\"Start of program\")",
+      "logging.critical(\"TESTING CRITICAL\")",
+      "",
+      "def ${4:function_name}(${5:parameters}):",
+      "    ${6:pass}",
+      "    return ${7:result}",
+      "",
+      "logging.debug(\"End of program\")"
+    ],
+    "description": "Setup Python logging with file output and example usage"
+  }
+}

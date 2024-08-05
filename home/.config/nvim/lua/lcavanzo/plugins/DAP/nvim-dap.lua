@@ -27,9 +27,26 @@ return {
 					request = "launch",
 					name = "Launch file",
 					program = "${file}",
+					console = "integratedTerminal",
 					pythonPath = function()
 						return "/usr/bin/python3"
 					end,
+				},
+				{
+					type = "python",
+					request = "launch",
+					name = "Launch file (inputs)",
+					program = "${file}",
+					pythonPath = function()
+						return "/usr/bin/python3"
+					end,
+					cwd = "${workspaceFolder}",
+					console = "integratedTerminal",
+					justMyCode = true, -- Change this to true to focus on your code
+					env = {
+						PYTHONPATH = "${workspaceFolder}",
+					},
+					args = {},
 				},
 				{
 					type = "python",

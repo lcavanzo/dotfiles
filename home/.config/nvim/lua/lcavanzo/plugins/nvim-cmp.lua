@@ -24,6 +24,10 @@ return {
 
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_vscode").lazy_load({
+			paths = "~/.config/nvim/lua/lcavanzo/plugins/snippets",
+		})
+
 		-- Function to check if we're in a snippet
 		local function in_snippet()
 			local session = luasnip.session
