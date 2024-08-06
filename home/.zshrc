@@ -45,7 +45,6 @@ export MANPAGER='nvim +Man!'
 
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  autojump
   git
   brew
   kubectl
@@ -84,7 +83,6 @@ zvm_after_init_commands+=(my_zvm_init)
 
 # Directories
 # workplace is a dir with work code
-#alias gS="cd ~/Code"
 alias vim='nvim'
 
 alias kubesh='(){ kubectl run alpine-shell --rm -ti --image=alpine -n=$1 -- /bin/sh ;}'
@@ -111,8 +109,9 @@ alias myip='curl ifconfig.me'
 alias tf='terraform'
 alias ll='ls -alF'
 alias wiki='cd ~/git/wiki/docs; vim bash.md'
-alias ndots='cd ~/.config/nvim/lua/lcavanzo/'
-alias dots='cd ~/.config'
+# alias ndots='cd ~/.config/nvim/lua/lcavanzo/'
+# alias dots='cd ~/.config'
+alias cd='z'
 
 # SadServer settings
 alias sad='LC_ALL=C.UTF-8 ssh'
@@ -153,6 +152,9 @@ initsetup () {
   git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
   sh /opt/homebrew/opt/fzf/install --all
 }
+
+eval "$(zoxide init zsh)"
+
 
 if [ -f "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
