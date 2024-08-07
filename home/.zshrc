@@ -99,7 +99,6 @@ alias gs='git status'
 # python aliases
 alias pip='pip3'
 alias py='python3'
-alias penv='source ~/.python-envs/automate-boring-stuff/bin/activate'
 
 # personal aliases
 alias cat='bat'
@@ -139,6 +138,19 @@ fda() {
   local dir
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
+
+pyenv() {
+  local envs_dir="$HOME/.python-envs"
+  local selected_env=$(find "$envs_dir" -maxdepth 1 -mindepth 1 -type d | sed "s|$envs_dir/||" | fzf --prompt="Select Python environment: " --layout=reverse --pointer="➜")
+
+  if [[ -n "$selected_env" ]]; then
+    source "$envs_dir/$selected_env/bin/activate"
+    echo "Activated $selected_env environment"
+  else
+    echo "No environment selected"
+  fi
+}
+
 
 reloadzsh () {
    test -f ~/.zshrc && . ~/.zshrc
