@@ -22,5 +22,26 @@
       "logging.debug(\"End of program\")"
     ],
     "description": "Setup Python logging with file output and example usage"
+  },
+  "Python Function with Docstring": {
+    "prefix": ["pyfunc", "docfunc"],
+    "body": [
+      "def ${1:my_function}(${2:param1}, ${3:param2}) -> ${5:type}:",
+      "    \"\"\"",
+      "    ${6:Perform an operation on param1 and param2.}",
+      "",
+      "    Parameters:",
+      "    ${7:param1} (${8:type}): ${9:Description of param1.}",
+      "",
+      "    Returns:",
+      "    ${10:type}: ${11:Description of the return value.}",
+      "    \"\"\"",
+      "    # Local variable assignment",
+      "    ${12:result} = ${13:param1} ",
+      "",
+      "",
+      "    return ${14:result}"
+    ],
+    "description": "Create a Python function with docstring, parameters, and a basic implementation"
   }
 }

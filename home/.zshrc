@@ -124,21 +124,6 @@ fg() {
 }
 
 
-# fd - cd to selected directory
-fd() {
-
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-
-# fda - including hidden directories
-fda() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
-
 pyenv() {
   local envs_dir="$HOME/.python-envs"
   local selected_env=$(find "$envs_dir" -maxdepth 1 -mindepth 1 -type d | sed "s|$envs_dir/||" | fzf --prompt="Select Python environment: " --layout=reverse --pointer="➜")
