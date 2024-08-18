@@ -23,10 +23,12 @@ return {
 		local f = luasnip.function_node
 
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-		require("luasnip.loaders.from_vscode").lazy_load()
+		-- Clear existing snippets to avoid duplicates
 		require("luasnip.loaders.from_vscode").lazy_load({
 			paths = "~/.config/nvim/lua/lcavanzo/plugins/snippets",
+			priority = 1001,
 		})
+		require("luasnip.loaders.from_vscode").lazy_load({ priority = 999 })
 
 		-- Function to check if we're in a snippet
 		local function in_snippet()
