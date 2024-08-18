@@ -24,7 +24,7 @@
     "description": "Setup Python logging with file output and example usage"
   },
   "Python Function with Docstring": {
-    "prefix": ["pyfunc", "docfunc"],
+    "prefix": ["docfunc"],
     "body": [
       "def ${1:my_function}(${2:param1}, ${3:param2}) -> ${5:type}:",
       "    \"\"\"",
@@ -33,6 +33,7 @@
       "    Parameters:",
       "    ${7:param1} (${8:type}): ${9:Description of param1.}",
       "",
+      "    \"\"\"",
       "    Returns:",
       "    ${10:type}: ${11:Description of the return value.}",
       "    \"\"\"",
