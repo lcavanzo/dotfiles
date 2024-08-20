@@ -23,6 +23,7 @@ config.font_size = 13
 config.window_background_opacity = 0.9
 config.window_decorations = "RESIZE" -- REVIEW
 config.window_close_confirmation = "AlwaysPrompt"
+config.pane_focus_follows_mouse = true
 config.scrollback_lines = 20000
 config.default_workspace = "local"
 
@@ -49,6 +50,7 @@ config.keys = {
 	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
 	{ key = "o", mods = "LEADER", action = act.RotatePanes("Clockwise") },
 	{ key = "v", mods = "SUPER", action = act.PasteFrom("Clipboard") }, -- REVIEW
+	{ key = "[", mods = "LEADER", action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }) },
 
 	-- Debuging
 	{ key = "L", mods = "LEADER", action = act.ShowDebugOverlay },
@@ -75,11 +77,11 @@ config.keys = {
 
 	-- Tab keybindings
 	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") }, -- New tab
-	{ key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1) },
-	{ key = "]", mods = "LEADER", action = act.ActivateTabRelative(1) },
-	{ key = "n", mods = "LEADER", action = act.ShowTabNavigator },
+	{ key = "N", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+	{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
+	{ key = ".", mods = "LEADER", action = act.ShowTabNavigator },
 	{
-		key = "e",
+		key = ",",
 		mods = "LEADER",
 		action = act.PromptInputLine({
 			description = wezterm.format({
@@ -166,6 +168,8 @@ config.key_tables = {
 config.use_fancy_tab_bar = false
 config.status_update_interval = 1000
 config.tab_bar_at_bottom = false
+config.switch_to_last_active_tab_when_closing_tab = true
+config.tab_max_width = 18
 wezterm.on("update-status", function(window, pane)
 	-- Workspace name
 	local stat = window:active_workspace()
