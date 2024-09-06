@@ -79,3 +79,8 @@ vim.keymap.set(
 )
 
 --- test keymap => :verbose nmap <D-Up>
+
+-- double semicolon expands to the cwd when typing a command
+vim.keymap.set("c", ";;", function()
+	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or ";;"
+end, { expr = true })
