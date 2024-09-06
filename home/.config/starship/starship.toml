@@ -1,65 +1,96 @@
+format = """
+$os\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$cmd_duration\
+$python\
+$lua\
+$nodejs\
+$golang\
+$rust\
+$aws\
+$docker_context\
+$jobs\
+$sudo\
+$terraform\
+$localip\
+$time\
+$line_break\
+$character"""
+
+
 [aws]
 symbol = "  "
-
-[buf]
-symbol = " "
+format = " [aws](italic) [$symbol $profile $region]($style)"
 
 [c]
 symbol = " "
 
+[cmd_duration]
+min_time = 500
+style = 'fg:gray'
+format = "[◄ $duration ](italic white)"
+
 [conda]
 symbol = " "
 
-[crystal]
-symbol = " "
+[character]
+success_symbol = '[➜](bold green) '
+error_symbol = '[✗](bold red) '
+vimcmd_symbol = '[](bold fg:color_green)'
+vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
+vimcmd_replace_symbol = '[](bold fg:color_purple)'
+vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
-[dart]
-symbol = " "
 
 [directory]
+truncation_symbol = '…/'
+truncation_length = 0
 read_only = " 󰌾"
 
 [docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
+symbol = ' '
+style = 'fg:#06969A'
+format = '[$symbol]($style) $path'
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+detect_extensions = ['Dockerfile']
 
 [git_branch]
 symbol = " "
+format = '[on](white) [$symbol$branch ]($style)'
+
+[git_status]
+style = 'fg:red'
+format = '([$all_status$ahead_behind]($style) )'
 
 [golang]
 symbol = " "
 
-[guix_shell]
-symbol = " "
+[kubernetes]
+symbol = '☸ '
+disabled = true
+detect_files = ['Dockerfile']
+format = 'via [󱃾 $context\($namespace\)](bold purple) '
+
+[localip]
+ssh_only = true
+format = '@[$localipv4](bold red) '
+disabled = false
 
 [haskell]
 symbol = " "
 
-[haxe]
-symbol = " "
-
-[hg_branch]
-symbol = " "
-
 [hostname]
 ssh_symbol = " "
+ssh_only = true
+format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
+disabled = false
 
 [java]
 symbol = " "
-
-[julia]
-symbol = " "
 
 [kotlin]
 symbol = " "
@@ -70,95 +101,59 @@ symbol = " "
 [memory_usage]
 symbol = "󰍛 "
 
-[meson]
-symbol = "󰔷 "
-
-[nim]
-symbol = "󰆥 "
-
-[nix_shell]
-symbol = " "
-
 [nodejs]
 symbol = " "
 
-[ocaml]
-symbol = " "
+[sudo]
+style = 'bold green'
+symbol = '👩‍💻 '
+disabled = true
+
+[os]
+disabled = false
+style = "bg:color_orange fg:color_fg0"
+
 
 [os.symbols]
-Alpaquita = " "
 Alpine = " "
 AlmaLinux = " "
 Amazon = " "
 Android = " "
 Arch = " "
-Artix = " "
-CentOS = " "
 Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
 Fedora = " "
 FreeBSD = " "
-Garuda = "󰛓 "
 Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = "󰈸 "
 Kali = " "
 Linux = " "
-Mabox = " "
 Macos = " "
 Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = "󰈺 "
-openSUSE = " "
-OracleLinux = "󰌷 "
-Pop = " "
 Raspbian = " "
 Redhat = " "
 RedHatEnterprise = " "
 RockyLinux = " "
-Redox = "󰀘 "
-Solus = "󰠳 "
-SUSE = " "
 Ubuntu = " "
 Unknown = " "
-Void = " "
 Windows = "󰍲 "
 
 [package]
 symbol = "󰏗 "
 
-[perl]
-symbol = " "
-
 [php]
 symbol = " "
-
-[pijul_channel]
-symbol = " "
 
 [python]
 symbol = " "
 
-[rlang]
-symbol = "󰟔 "
-
-[ruby]
-symbol = " "
-
 [rust]
-symbol = " "
+symbol = "󱘗 "
 
-[scala]
-symbol = " "
+[terraform]
+format = '[🏎💨 $version$workspace]($style) '
 
-[swift]
-symbol = " "
-
-[zig]
-symbol = " "
+[time]
+disabled = false
+format = ' [\[ $time \]]($style) '
+time_format = "%R" # Hour:Minute Format
+utc_time_offset = '-6'
+time_range = '7:00:00-22:00:00'
