@@ -61,6 +61,10 @@ config.keys = {
 	{ key = "d", mods = "SUPER", action = act.SendKey({ key = "d", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "r", mods = "SUPER", action = act.SendKey({ key = "r", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "w", mods = "SUPER", action = act.SendKey({ key = "w", mods = "CTRL" }) }, -- ctrl-d
+	{ key = "h", mods = "SUPER", action = act.SendKey({ key = "h", mods = "CTRL" }) }, -- ctrl-d
+	{ key = "j", mods = "SUPER", action = act.SendKey({ key = "j", mods = "CTRL" }) }, -- ctrl-d
+	{ key = "k", mods = "SUPER", action = act.SendKey({ key = "k", mods = "CTRL" }) }, -- ctrl-d
+	{ key = "a", mods = "SUPER", action = act.SendKey({ key = "a", mods = "CTRL" }) }, -- ctrl-d
 
 	-- Scroll Promtp
 	{ key = "p", mods = "SUPER", action = act.SendKey({ key = "UpArrow" }) }, -- ctrl-d
@@ -100,8 +104,8 @@ config.keys = {
 	{ key = "m", mods = "LEADER", action = act.ActivateKeyTable({ name = "move_tab", one_shot = false }) },
 
 	-- Scroll down 1 line
-	{ key = "k", mods = "SUPER", action = act.ScrollByLine(-1) },
-	{ key = "j", mods = "SUPER", action = act.ScrollByLine(1) },
+	{ key = "J", mods = "SUPER", action = act.ScrollByLine(-1) },
+	{ key = "J", mods = "SUPER", action = act.ScrollByLine(1) },
 
 	-- Workspace -- REVIEW all the workspaces stuff
 	{ key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
@@ -234,16 +238,4 @@ wezterm.on("update-status", function(window, pane)
 		{ Text = "  " },
 	}))
 end)
--- [[ Appearance setting for when I need to take pretty screenshots - disable the previous
---  fancy view
--- config.enable_tab_bar = false
--- config.window_padding = {
--- 	left = "0.5cell",
--- 	right = "0.5cell",
--- 	top = "0.5cell",
--- 	bottom = "0cell",
--- }
--- ]])
-
--- and finally, return the configuration to wezterm
 return config

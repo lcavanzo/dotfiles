@@ -48,7 +48,7 @@ vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
 [directory]
 truncation_symbol = '…/'
-truncation_length = 0
+truncation_length = 3
 read_only = " 󰌾"
 
 [docker_context]

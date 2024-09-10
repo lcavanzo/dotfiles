@@ -8,6 +8,7 @@ return {
 		"nvim-telescope/telescope-file-browser.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 		"LukasPietzschmann/telescope-tabs",
+		"nvim-telescope/telescope-frecency.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -100,6 +101,27 @@ return {
 						},
 					},
 				},
+				frecency = {
+					show_scores = true, -- Default: false
+					-- If `true`, it shows confirmation dialog before any entries are removed from the DB
+					-- If you want not to be bothered with such things and to remove stale results silently
+					-- set db_safe_mode=false and auto_validate=true
+					--
+					-- This fixes an issue I had in which I couldn't close the floating
+					-- window because I couldn't focus it
+					db_safe_mode = false, -- Default: true
+					-- If `true`, it removes stale entries count over than db_validate_threshold
+					auto_validate = true, -- Default: true
+					-- It will remove entries when stale ones exist more than this count
+					db_validate_threshold = 10, -- Default: 10
+					-- Show the path of the active filter before file paths.
+					-- So if I'm in the `dotfiles-latest` directory it will show me that
+					-- before the name of the file
+					show_filter_column = false, -- Default: true
+					-- I declare a workspace which I will use when calling frecency if I
+					-- want to search for files in a specific path
+					workspaces = {},
+				},
 			},
 		})
 
@@ -109,10 +131,12 @@ return {
 		telescope.load_extension("file_browser")
 		telescope.load_extension("telescope-tabs")
 		telescope.load_extension("neoclip")
+		telescope.load_extension("frecency")
 		-- set keymaps
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-		vim.keymap.set("n", "<leader>fbb", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		-- vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+		-- vim.keymap.set("n", "<leader>fbf", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
+		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[ ] Find existing buffers" })
 		vim.keymap.set("n", "<leader>fu", function()
 			-- You can pass additional configuration to telescope to change theme, layout, etc.
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -127,7 +151,6 @@ return {
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 		vim.keymap.set("n", "<leader>fh", builtin.command_history, { desc = "Neovim [H]istory" })
-		vim.keymap.set("n", "<leader>fbf", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
 		vim.keymap.set("n", "<leader>frr", builtin.resume, { desc = "[R]esume Telescope Search" })
 		vim.keymap.set("n", "<leader>fm", builtin.marks, { desc = "Telescope Marks" })
 		vim.keymap.set(
@@ -135,6 +158,13 @@ return {
 			"<leader>ft",
 			builtin.treesitter,
 			{ desc = "Lists Function names, variables, from Treesitter!" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>fF",
+			':Telescope frecency path_display={"shorten"}<cr>',
+			{ noremap = true },
+			{ desc = "Find files" }
 		)
 
 		vim.keymap.set("n", "<leader>fre", ":Telescope registers<cr>", { noremap = true }, { desc = "Registers" })

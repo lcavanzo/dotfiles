@@ -26,8 +26,6 @@ vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" } -- Specify backup files to s
 vim.opt.listchars = { eol = "↵", tab = ">-" } -- Configure list characters (eol = '↵', tab = '>-')
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Specify the undo directory
 
-vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
