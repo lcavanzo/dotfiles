@@ -12,6 +12,7 @@ $nodejs\
 $golang\
 $rust\
 $aws\
+$kubernetes\
 $docker_context\
 $jobs\
 $sudo\
@@ -45,6 +46,8 @@ vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
 vimcmd_replace_symbol = '[](bold fg:color_purple)'
 vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
+[gcloud]
+format = 'on [$symbol$account(@$domain)(\($project\))]($style) '
 
 [directory]
 truncation_symbol = '…/'
@@ -71,8 +74,8 @@ symbol = " "
 
 [kubernetes]
 symbol = '☸ '
-disabled = true
-detect_files = ['Dockerfile']
+disabled = false
+detect_files = ['k8s']
 format = 'via [󱃾 $context\($namespace\)](bold purple) '
 
 [localip]

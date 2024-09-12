@@ -78,6 +78,8 @@ alias vim='nvim'
 
 alias kubesh='(){ kubectl run alpine-shell --rm -ti --image=alpine -n=$1 -- /bin/sh ;}'
 alias k='kubectl'
+alias kcl='kubectx'
+alias kns='kubens'
 
 alias checkPort='lsof -n -i'
 
