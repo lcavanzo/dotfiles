@@ -68,41 +68,63 @@ local function resize_window(direction, amount)
 	end
 end
 
--- Set up the resize mode
-vim.keymap.set("n", "<C-r>", function()
-	print("Resize mode: h/l - width, j/k - height, <Esc> to exit")
-	vim.api.nvim_create_autocmd("CursorMoved", {
-		group = "ResizeMode",
-		callback = function()
-			vim.api.nvim_clear_autocmds({ group = "ResizeMode" })
-			print("Exited resize mode")
-		end,
-		once = true,
-	})
+-- Function to exit resize mode
+local function exit_resize_mode()
+	vim.api.nvim_clear_autocmds({ group = "ResizeMode" })
+	for _, key in ipairs({ "h", "j", "k", "l", "<Esc>" }) do
+		pcall(vim.keymap.del, "n", key, { buffer = true })
+	end
+	print("Exited resize mode")
+end
 
-	-- Set up temporary keymaps for resize mode
-	local opts = { buffer = true, silent = true }
-	vim.keymap.set("n", "h", function()
-		resize_window("horizontal", -2)
-	end, opts)
-	vim.keymap.set("n", "l", function()
-		resize_window("horizontal", 2)
-	end, opts)
-	vim.keymap.set("n", "j", function()
-		resize_window("vertical", -2)
-	end, opts)
-	vim.keymap.set("n", "k", function()
-		resize_window("vertical", 2)
-	end, opts)
-	vim.keymap.set("n", "<Esc>", function()
-		vim.api.nvim_clear_autocmds({ group = "ResizeMode" })
-		vim.api.nvim_buf_del_keymap(0, "n", "h")
-		vim.api.nvim_buf_del_keymap(0, "n", "j")
-		vim.api.nvim_buf_del_keymap(0, "k", "k")
-		vim.api.nvim_buf_del_keymap(0, "l", "l")
-		print("Exited resize mode")
-	end, opts)
-end, { silent = true, desc = "Enter resize mode" })
+-- Variable to track if we're in resize mode
+local resize_mode_active = false
+
+-- Set up the resize mode
+vim.keymap.set("n", "<leader>r", function()
+	if resize_mode_active then
+		exit_resize_mode()
+		resize_mode_active = false
+	else
+		resize_mode_active = true
+		print("Resize mode: h/l - width, j/k - height, <Esc> to exit")
+
+		-- Set up autocmd to exit resize mode when cursor moves
+		vim.api.nvim_create_autocmd("CursorMoved", {
+			group = "ResizeMode",
+			callback = function()
+				exit_resize_mode()
+				resize_mode_active = false
+			end,
+			once = true,
+		})
+
+		-- Set up temporary keymaps for resize mode
+		local opts = { buffer = true, silent = true }
+		local resize_mappings = {
+			h = function()
+				resize_window("horizontal", -2)
+			end,
+			l = function()
+				resize_window("horizontal", 2)
+			end,
+			j = function()
+				resize_window("vertical", -2)
+			end,
+			k = function()
+				resize_window("vertical", 2)
+			end,
+			["<Esc>"] = function()
+				exit_resize_mode()
+				resize_mode_active = false
+			end,
+		}
+
+		for key, func in pairs(resize_mappings) do
+			vim.keymap.set("n", key, func, opts)
+		end
+	end
+end, { silent = true, desc = "Toggle resize mode" })
 
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

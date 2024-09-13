@@ -25,6 +25,7 @@ vim.opt.completeopt = "menuone,noinsert,noselect" -- Configure completion option
 vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" } -- Specify backup files to skip
 vim.opt.listchars = { eol = "↵", tab = ">-" } -- Configure list characters (eol = '↵', tab = '>-')
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Specify the undo directory
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -----------------------------------------------------------
 -- Neovim UI
