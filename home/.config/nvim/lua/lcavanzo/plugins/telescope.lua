@@ -121,6 +121,12 @@ return {
 					-- I declare a workspace which I will use when calling frecency if I
 					-- want to search for files in a specific path
 					workspaces = {},
+					path_display = {
+						shorten = {
+							len = 1,
+							exclude = { 1, -1 },
+						},
+					},
 				},
 			},
 		})
@@ -162,7 +168,7 @@ return {
 		vim.keymap.set(
 			"n",
 			"<leader>fF",
-			':Telescope frecency path_display={"shorten"}<cr>',
+			':Telescope frecency path_display={"truncate"}<cr>',
 			{ noremap = true },
 			{ desc = "Find files" }
 		)

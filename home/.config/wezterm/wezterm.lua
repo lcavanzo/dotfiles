@@ -65,6 +65,7 @@ config.keys = {
 	{ key = "j", mods = "SUPER", action = act.SendKey({ key = "j", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "k", mods = "SUPER", action = act.SendKey({ key = "k", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "a", mods = "SUPER", action = act.SendKey({ key = "a", mods = "CTRL" }) }, -- ctrl-d
+	{ key = "q", mods = "SUPER", action = act.SendKey({ key = "q", mods = "CTRL" }) }, -- ctrl-d
 
 	-- Scroll Promtp
 	{ key = "p", mods = "SUPER", action = act.SendKey({ key = "UpArrow" }) }, -- ctrl-d
