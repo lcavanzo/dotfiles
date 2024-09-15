@@ -1,0 +1,398 @@
+[[snippets]]
+  description = "Check what listenes on a port netstat"
+  command = "sudo netstat -pnltu | grep PORT?"
+  output = ""
+
+## encoded files for k8s ?
+[[snippets]]
+  description = "Get encoded csr in a proper format"
+  command = "cat <csr=myuser.csr> | base64 | tr -d \"\\n\""
+  tag = ["kubernetes", "kubectl"]
+  output = "Token ready to be pasted in the token field of Kubernetes dashboard for example."
+
+[[snippets]]
+  description = "Find zsh alias by name, first result usually list file where alias originates from"
+  command = "zsh -ixc : 2>&1 | rg <alias=alias> -B 5"
+  tag = ["linux,", "command line"]
+  output = "Top has files with possible aliases"
+
+[[snippets]]
+  description = "Copy path to a file to the clipboard"
+  command = "xsel <<(readlink -fn"
+  output = "Path to a file copied to clipboard"
+
+[[snippets]]
+  description = "Git show all changes commits to a file, helpful for tracking changes"
+  command = "git log --follow --stat -p -- "
+  tag = ["git,", "commit"]
+  output = ""
+
+[[snippets]]
+  description = "Check if branch is eligible for merge"
+  command = "git merge --no-commit --no-ff <branch> && echo $? && git merge --abort"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "Git list branches not merged with origin main"
+  command = "git branch --no-merged origin/main"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "Git list branches merged with origin main"
+  command = "git branch --merged origin/main"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "Paste content copied from clipboard to a file"
+  command = "xclip -o -sel clipboard >> "
+  output = ""
+
+[[snippets]]
+  description = "Git find deleted files and show their commits. Helpful when need to undelete a file."
+  command = "git log --diff-filter=D --summary | grep -E 'delete|^commit\\s+\\S+'"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "Paste yaml from clipboard and apply with kubectl"
+  command = "xclip -o -sel clipboard | kubectl apply -f -"
+  tag = ["kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "Search git commit history content"
+  command = "git log -p --all -G '"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "Link to SSH Cheat Sheet"
+  command = "xdg-open https://www.marcobehler.com/guides/ssh-cheat-sheet"
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "Git compare diff between main and current branch"
+  command = "git diff main...$(git branch | sed -n -e 's/^\\* \\(.*\\)/\\1/p')"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "Link to Vim fix for go files when folds are closed on save"
+  command = "xdg-open https://stackoverflow.com/a/55327996"
+  tag = ["link"]
+  output = ""
+
+
+[[snippets]]
+  description = "Link to At reminder times table, formats execution"
+  command = "xdg-open https://www.dummies.com/article/technology/computers/operating-systems/linux/how-to-schedule-jobs-in-linux-at-and-crontab-commands-255842/\\#:\\~:text\\=Formats%20for%20the%20at%20Command%20for%20the%20Time%20of%20Execution"
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "Link to bash conditional operators"
+  command = "https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html#:~:text=6.4%20bash%20conditional%20expressions"
+  tag = ["link", "nvim"]
+  output = ""
+
+## ? add parameters
+[[snippets]]
+  description = "SSH generate ecdsa key in the ssh folder"
+  command = "ssh-keygen -t ecdsa -f ~/.ssh/argo_infra_rsa"
+  output = ""
+
+[[snippets]]
+  description = "Fix sealed secret error cannot fetch certificate"
+  command = "kubectl -n kube-system patch svc sealed-secrets-controller --type='json' -p='[{\"op\": \"remove\", \"path\": \"/spec/ports/0/name\"}, {\"op\": \"replace\", \"path\": \"/spec/ports/0/targetPort\", \"value\":8080}]'"
+  tag = ["kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "Git copy file from source branch to current branch"
+  command = "git checkout ?SOURCE_BRANCH ?PATH_TO_FILE"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "Launch program on file change. In this case kubectl apply"
+  command = "/usr/bin/ls *.yaml | entr -s kubectl apply -f"
+  tag = ["kubectl", "linux"]
+  output = ""
+
+[[snippets]]
+  description = "Show colorized directory tree 1 level deep with less"
+  command = "tree -LC 2 --si --sort name | less"
+  tag = ["linux"]
+  output = ""
+
+[[snippets]]
+  description = "Generate simple git changelog"
+  command = "git log --pretty=\"- %s\" | grep -v Merge"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "git synchronize local fork origin with remote upstream"
+  command = "git merge upstream/master"
+  output = ""
+
+[[snippets]]
+  description = "Update managed resources deletion policy to orphan on an active cluster"
+  command = "kubectl patch $(kubectl get managed -o name) -p '{\"spec\": {\"deletionPolicy\":\"Orphan\"}}' --type=merge"
+  tag = ["kubectl,", "crossplane"]
+  output = ""
+
+[[snippets]]
+  description = "Link to resolving issue when the gcloud user does not have access to service account ..."
+  command = "xdg-open https://stackoverflow.com/questions/40367866/gcloud-the-user-does-not-have-access-to-service-account-default"
+  tag = ["gcloud", "gcp", "link"]
+  output = ""
+
+[[snippets]]
+  description = "cleanup journalctl old logs"
+  command = "sudo journalctl --vacuum-size=10M"
+  output = ""
+
+[[snippets]]
+  description = "Link to bash pitfalls"
+  command = "xdg-open http://mywiki.wooledge.org/BashPitfalls"
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "copy your public key to your server"
+  command = "ssh-copy-id remote_username@server_ip_address"
+  tag = ["linux,", "ssh"]
+  output = ""
+
+[[snippets]]
+  description = "Concatenate various files including file name"
+  command = "tail -n +1 file1 file2"
+  output = ""
+
+[[snippets]]
+  description = "Compare diff files listing ls between two folders"
+  command = "diff -rq folder1 folder2 | grep -E 'Only in|differ'"
+  output = ""
+
+[[snippets]]
+  description = "List all registered zle commands zsh shell"
+  command = "zle -al"
+  output = ""
+
+[[snippets]]
+  description = "Extract kubeconfig from secret"
+  command = "KUBECONFIG=$(kubectl get secret <secret=3d82d95e-a985-4a2c-81a6-4b5bb2b2571f-aks> -n upbound-system -o jsonpath='{.data.kubeconfig}' | base64 --decode)"
+  tag = ["kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "Git find commit where branch was created from main"
+  command = "git merge-base main HEAD"
+  output = ""
+
+[[snippets]]
+  description = "Show charecter codes for each key press"
+  command = "xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf \"%-3s %s\\n\", $5, $8 }'"
+  output = ""
+
+[[snippets]]
+  description = "crossplane functions remove development annotation from selected function"
+  command = "yq eval -i 'select(.kind == \"Function\" and .metadata.name == \"<function-name=function-auto-ready>\").metadata.annotations |= del(.[\"render.crossplane.io/runtime\"])' <function-file=functions.yaml>"
+  output = ""
+
+[[snippets]]
+  description = "crossplane funcions add development annotation to a funcion"
+  command = "yq eval -i '(select(.kind == \"Function\" and .metadata.name == \"<function-name=function-auto-ready>\").metadata.annotations.\"render.crossplane.io/runtime\") = \"Development\"' <function-file=functions.yaml>"
+  output = ""
+
+[[snippets]]
+  description = "Link to P&T as a Function Gdoc"
+  command = "xdg-open \"https://github.com/crossplane/crossplane/blob/863ff6c2f53af47424dab941dbef83ca12e7d74f/design/design-doc-composition-functions.md#patch-and-transform-as-a-function\""
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "Link to Writing Crossplane Composition Function"
+  command = "xdg-open \"https://youtu.be/otwg-bO757A\""
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "Link to Write Go Function"
+  command = "xdg-open \"https://docs.crossplane.io/knowledge-base/guides/write-a-composition-function-in-go/\""
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "kubectl get all latest events sorted by timestamp and with custom columns"
+  command = "kubectl get events --all-namespaces --field-selector type=Warning -o custom-columns=TIME:.lastTimestamp,NAMESPACE:.metadata.namespace,NAME:.involvedObject.name,KIND:.involvedObject.kind,NODE:.source.host,REASON:.reason,MESSAGE:.message | { read -r header; echo \"$header\"; sort -t ',' -k1,1 }"
+  tag = ["kubernetes", "kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "kubectl get top nodes sorted by cpu utilization"
+  command = "kubectl top nodes | { read -r header; echo \"$header\"; sort -k3,3nr; }"
+  tag = ["kubernetes", "kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "Show all non running pods kubectl kubernetes"
+  command = "kubectl get pods --all-namespaces --field-selector 'status.phase!=Running' | grep -vi completed"
+  tag = ["kubernetes", "kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "kubectl top usabe by cpu per pod per container kubernetes"
+  command = "kubectl top pod --sort-by cpu --containers -A L"
+  tag = ["kubernetes", "kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "docker build image with buildx and load to local images from cache"
+  command = "docker build . --progress=plain --tag <tag=runtime> --load"
+  tag = ["docker", "buildx"]
+  output = ""
+
+# ? open stuff
+[[snippets]]
+  description = "Link to client-go-examples for kubectl"
+  command = "xdg-open \"https://github.com/iximiuz/client-go-examples\""
+  tag = ["web", "link"]
+  output = ""
+
+[[snippets]]
+  description = "Check what's listening on specific port and kill it"
+  command = "sudo netstat -tulnp | fzf --height 40% --layout=reverse --prompt=\"Select a port: \" | awk '{print $7}' | cut -d'/' -f1 | xargs -r sudo kill"
+  output = ""
+
+[[snippets]]
+  description = "list all images loaded on a kubernetes cluster"
+  command = "kubectl get pods -A -o jsonpath=\"{..image}\" | tr -s '[[:space:]]' '\\n' | sort | uniq -c"
+  output = ""
+
+[[snippets]]
+  description = "run debug container and attach to a pod's container"
+  command = "kubectl -n <namespace=upbound-system> debug -it <pod> --image=ghcr.io/superbrothers/debug --target=<container>"
+  tag = ["kubernetes,", "kubectl,", "debug"]
+  output = ""
+
+[[snippets]]
+  description = "get kubectl connection to MCP by number"
+  command = "kubectl get secret kubeconfig-ctp<ctp_num=1> -n default -o jsonpath='{.data.kubeconfig}' | base64 -d > /tmp/ctp<ctp_num=1>.yaml"
+  tag = ["linux", "kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "Display fancy kubectl kubernetes status"
+  command = "{ clear && echo -e \"\\n=== Kubernetes Status ===\\n\" && kubectl get --raw '/healthz?verbose' && kubectl version && kubectl get nodes && kubectl cluster-info; } | grep -z 'Ready\\| ok\\|passed\\|running'"
+  output = ""
+
+[[snippets]]
+  description = "Link to Resolve Git Merge Conflicts with Neovim and Fugitive!"
+  command = "xdg-open \"https://www.youtube.com/watch?v=vpwJ7fqD1CE\""
+  tag = ["web", "link"]
+  output = ""
+
+[[snippets]]
+  description = "Select header row and regular expression for data rows with awk"
+  command = " | awk 'NR == 1 || /REGEX/'"
+  output = ""
+
+[[snippets]]
+  description = "Install latest crossplane CLI"
+  command = "curl -sL \"https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh\" | sh"
+  output = ""
+
+[[snippets]]
+  description = "Build statically linked crossplane-cli for killercoda scenario"
+  command = "CGO_ENABLED=0 go build -a -installsuffix cgo -o crossplane-cli ."
+  tag = ["go,", "crossplane"]
+  output = ""
+
+[[snippets]]
+  description = "Show my public IP address"
+  command = "curl ifconfig.me"
+  tag = ["IP,", "linux,", "curl"]
+  output = ""
+
+[[snippets]]
+  description = "List all kubernetes object of an mcp mxe mxp control plane"
+  command = "kubectl get object -l crossplane.io/composite=$MCPID -o 'custom-columns=NAME:.metadata.name,FOR:.metadata.annotations.crossplane\\.io/composition-resource-name,SYNCED:.status.conditions[?(@.type==\"Synced\")].status,READY:.status.conditions[?(@.type==\"Ready\")].status'"
+  output = ""
+
+[[snippets]]
+  description = "List all helm releases of an mcp mxe mxp control plane"
+  command = "kubectl get release -l crossplane.io/composite=$MCPID -o 'custom-columns=NAME:.metadata.name,FOR:.metadata.annotations.crossplane\\.io/composition-resource-name,SYNCED:.status.conditions[?(@.type==\"Synced\")].status,READY:.status.conditions[?(@.type==\"Ready\")].status'"
+  output = ""
+
+[[snippets]]
+  description = "List system info neofetch uname lscpu df"
+  command = "{ printf \"===Neofetch Info===\"; neofetch --stdout; echo \"\\n===Kernel Information===\"; uname -a; echo \"\\n===CPU Information===\"; lscpu; echo \"\\n===Memory Information===\"; free -m; echo \"\\n===Disk Usage Information===\"; df -h; echo \"\\n===PCI Devices===\"; lspci; echo \"\\n===USB Devices===\"; lsusb; } W"
+  output = ""
+
+[[snippets]]
+  description = "launch helm dashboard on 8080"
+  command = "helm dashboard"
+  tag = ["helm,", "dashboard"]
+  output = ""
+
+[[snippets]]
+  description = "Link to Certificates tracing tool"
+  command = "xdg-open \"https://crt.sh/\""
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "Link to helm charts repository artifacthub"
+  command = "xdg-open \"https://artifacthub.io/\""
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "nslookup and dig records for my site"
+  command = "nslookup -type=<record=ns> <subdomain=app.>cloudrumble.net; dig <record=ns> <subdomain=app.>cloudrumble.net"
+  output = "DNS records"
+
+[[snippets]]
+  description = "Link to local development certificates anchor"
+  command = "xdg-open \"https://anchor.dev/\""
+  tag = ["link"]
+  output = ""
+
+[[snippets]]
+  description = "Decrypt archive into new archive of the same name"
+  command = "gpg -d \\<file>.tar.gz.gpg > \\<file>.tar.gz"
+  output = ""
+
+[[snippets]]
+  description = "run internet speed test from command line"
+  command = "speedtest-cli"
+  tag = ["cli"]
+  output = ""
+
+[[snippets]]
+  description = "copy file name with extension to clipboard use alt F to find"
+  command = "xsel --clipboard --input < <(basename "
+  output = ""
+
+[[snippets]]
+  description = "Link to zsh-tips-tricks"
+  command = "xdg-open \"https://strcat.de/zsh/#tipps\""
+  tag = ["web", "link"]
+  output = ""
+
+[[snippets]]
+  description = "Link to Really cool blog valuable dev"
+  command = "xdg-open \"https://thevaluable.dev/post/\""
+  tag = ["web", "link"]
+  output = ""
+
+[[snippets]]
+  description = "show ip interfaces with names and ip addresses"
+  command = "ip -br -c a"
+  output = ""

@@ -62,11 +62,12 @@ function zvm_vi_yank() {
 function my_zvm_init() {
     [ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ] && source $XDG_CONFIG_HOME/fzf/fzf.zsh
 
+    [[ $- == *i* ]] && source /opt/homebrew/opt/fzf/shell/completion.zsh 2> /dev/null
+    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
     bindkey '^P' history-beginning-search-backward
     bindkey '^N' history-beginning-search-forward
     bindkey '^ ' autosuggest-accept
-    [[ $- == *i* ]] && source /opt/homebrew/opt/fzf/shell/completion.zsh 2> /dev/null
-    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+    bindkey '^r' atuin-search
 }
 
 zvm_after_init_commands+=(my_zvm_init)
@@ -141,7 +142,6 @@ initsetup () {
   sh /opt/homebrew/opt/fzf/install --all
 }
 
-eval "$(zoxide init zsh)"
 
 
 if [ -f "$HOME/.zshrc.local" ]; then
@@ -149,4 +149,54 @@ if [ -f "$HOME/.zshrc.local" ]; then
 fi
 
 set rtp+=/opt/homebrew/opt/fzf
+
+#### antuin configuration ##########
+if [ -f "$HOME/.atuin/bin/env" ]; then
+    source "$HOME/.atuin/bin/env"
+fi
+
+if command -v atuin &>/dev/null; then
+    eval "$(atuin init zsh --disable-up-arrow)"
+
+else
+    echo "Atuin not found. Please check installation and PATH."
+fi
+# source "$HOME/.atuin/bin/env"
+# if command -v atuin &>/dev/null; then
+#
+#     else
+#         echo "Atuin not found. Please check installation and PATH."
+# fi
+# # Variable to store the time of the last Tab press
+# last_tab_press=0
+#
+# # Function to handle Tab key press
+# handle_tab() {
+#     local current_time=$(date +%s)
+#     local time_diff=$((current_time - last_tab_press))
+#
+#     if [[ $time_diff -le 1 ]]; then # 1 second threshold for double-tap
+#         zle _atuin_search_widget
+#     else
+#         zle expand-or-complete
+#     fi
+#
+#     last_tab_press=$current_time
+# }
+#
+# # Create a new widget from our function
+# zle -N handle_tab
+#
+# # Bind the Tab key to our new widget
+# bindkey '^I' handle_tab
+####################################
+
+#### pet configuration ##########
+pets(){
+    print -z $(pet search $*)
+}
+####################################
+
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+

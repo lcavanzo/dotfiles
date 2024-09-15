@@ -4,7 +4,7 @@ UNAME_S := $(shell uname -s)
 
 
 BREW_PACKAGES	:= \
-	awscli azure-cli bat exa fish fd fzf git git-delta go helm htop jq kubectl Azure/kubelogin/kubelogin lazygit \
+	atuin awscli azure-cli bat exa fish fd fzf git git-delta go helm htop jq knqyf263/pet/pet kubectl Azure/kubelogin/kubelogin lazygit \
 	neofetch neovim node nmap ripgrep starship stow terraform tree unzip vlc wget wezterm yq zoxide zsh
 
 ZSH_PLUGINS_PACKAGES	:= \
