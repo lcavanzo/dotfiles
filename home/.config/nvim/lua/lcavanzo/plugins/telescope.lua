@@ -63,13 +63,17 @@ return {
 						end,
 					},
 				},
-				-- path_display = { "truncate " },
 				path_display = {
 					shorten = {
 						len = 1,
 						exclude = { 1, -1 },
 					},
 				},
+				-- path_display = {
+				-- 	filename_first = {
+				-- 		reverse_directories = true,
+				-- 	},
+				-- },
 				sorting_strategy = "ascending",
 				file_ignore_patterns = { "node_modules", "^./.git/" },
 			},
@@ -102,31 +106,34 @@ return {
 					},
 				},
 				frecency = {
-					show_scores = true, -- Default: false
+					show_scores = false, -- Default: false
+
 					-- If `true`, it shows confirmation dialog before any entries are removed from the DB
 					-- If you want not to be bothered with such things and to remove stale results silently
 					-- set db_safe_mode=false and auto_validate=true
-					--
 					-- This fixes an issue I had in which I couldn't close the floating
 					-- window because I couldn't focus it
 					db_safe_mode = false, -- Default: true
+
 					-- If `true`, it removes stale entries count over than db_validate_threshold
 					auto_validate = true, -- Default: true
+
 					-- It will remove entries when stale ones exist more than this count
 					db_validate_threshold = 10, -- Default: 10
+
 					-- Show the path of the active filter before file paths.
 					-- So if I'm in the `dotfiles-latest` directory it will show me that
 					-- before the name of the file
 					show_filter_column = false, -- Default: true
+
 					-- I declare a workspace which I will use when calling frecency if I
 					-- want to search for files in a specific path
 					workspaces = {},
-					path_display = {
-						shorten = {
-							len = 1,
-							exclude = { 1, -1 },
-						},
-					},
+					path_display = function(opts, path)
+						local tail = require("telescope.utils").path_tail(path)
+						local parent = path:match("(.*/)")
+						return string.format("%s ", tail)
+					end,
 				},
 			},
 		})
@@ -161,17 +168,11 @@ return {
 		vim.keymap.set("n", "<leader>fm", builtin.marks, { desc = "Telescope Marks" })
 		vim.keymap.set(
 			"n",
-			"<leader>ft",
+			"<leader>ftl",
 			builtin.treesitter,
 			{ desc = "Lists Function names, variables, from Treesitter!" }
 		)
-		vim.keymap.set(
-			"n",
-			"<leader>fF",
-			':Telescope frecency path_display={"truncate"}<cr>',
-			{ noremap = true },
-			{ desc = "Find files" }
-		)
+		vim.keymap.set("n", "<leader>fF", ":Telescope frecency<cr>", { noremap = true }, { desc = "Find files" })
 
 		vim.keymap.set("n", "<leader>fre", ":Telescope registers<cr>", { noremap = true }, { desc = "Registers" })
 
