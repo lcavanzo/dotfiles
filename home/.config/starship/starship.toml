@@ -12,6 +12,8 @@ $nodejs\
 $golang\
 $rust\
 $aws\
+$gcloud\
+$azure\
 $kubernetes\
 $docker_context\
 $jobs\
@@ -24,8 +26,12 @@ $character"""
 
 
 [aws]
-symbol = "  "
+symbol = "󰸏"
 format = " [aws](italic) [$symbol $profile $region]($style)"
+
+[azure]
+symbol= ''
+format = 'on [$symbol]($style) '
 
 [c]
 symbol = " "
@@ -47,7 +53,8 @@ vimcmd_replace_symbol = '[](bold fg:color_purple)'
 vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
 [gcloud]
-format = 'on [$symbol$account(@$domain)(\($project\))]($style) '
+symbol= ''
+format = 'on [$symbol]($style) '
 
 [directory]
 truncation_symbol = '…/'
@@ -155,7 +162,7 @@ symbol = "󱘗 "
 format = '[🏎💨 $version$workspace]($style) '
 
 [time]
-disabled = false
+disabled = true
 format = ' [\[ $time \]]($style) '
 time_format = "%R" # Hour:Minute Format
 utc_time_offset = '-6'
