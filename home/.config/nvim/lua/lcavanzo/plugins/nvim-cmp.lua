@@ -93,8 +93,8 @@ return {
 				end, { "i", "s" }),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				["<C-Space>"] = cmp.mapping.complete(),
-				["<C-k>"] = cmp.mapping.scroll_docs(-4),
-				["<C-j>"] = cmp.mapping.scroll_docs(4),
+				-- ["<C-k>"] = cmp.mapping.scroll_docs(-4),
+				-- ["<C-j>"] = cmp.mapping.scroll_docs(4),
 				["<C-e>"] = cmp.mapping.abort(), -- close completion window
 			}),
 			-- sources for autocompletion
