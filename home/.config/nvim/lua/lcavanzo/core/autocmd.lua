@@ -91,3 +91,18 @@ api.nvim_create_autocmd({ "BufWritePre" }, {
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
+
+api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client and client.server_capabilities.diagnosticProvider then
+			vim.api.nvim_create_autocmd("DiagnosticChanged", {
+				callback = function()
+					vim.diagnostic.setqflist({ open = false })
+				end,
+			})
+		end
+	end,
+})
+vim.keymap.set("n", "zn", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "zp", "<cmd>cprev<CR>zz")
