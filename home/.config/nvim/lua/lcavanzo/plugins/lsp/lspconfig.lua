@@ -44,7 +44,7 @@ return {
 			end
 			vim.keymap.set(
 				"n",
-				"<leader>tvt",
+				"<leader>tw",
 				toggle_diagnostic_virtual_text,
 				{ desc = "Toggle Diagnostic Virtual Text" }
 			)
