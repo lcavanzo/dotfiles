@@ -193,3 +193,31 @@ vim.keymap.set(
 	[[:%s/\<<C-r><C-w>\>/<C-r>=tolower(expand('<cword>'))<CR>/gI<Left><Left><Left>]],
 	{ desc = "[P]GLOBALLY replace word I'm on with lowercase" }
 )
+
+-- greatest remap ever
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- moves the selected lines down/up one line.
+-- Then it reselects the moved text.
+-- It re-indents the text to maintain proper indentation.
+-- Finally, it selects the text again, allowing for repeated presses.
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- The first keeps the cursor position stable when joining lines.
+vim.keymap.set("n", "J", "mzJ`z")
+
+-- center the view and open folds when moving between search results.
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- copies) the selected text or object to the system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+-- yanks the whole line to the system clipboard.
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+-- sends the deleted text to the "black hole" register
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+
+-- quick way to perform global search and replace operations.
+vim.keymap.set("n", "<leader>%", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
