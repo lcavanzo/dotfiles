@@ -104,5 +104,3 @@ api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-vim.keymap.set("n", "zn", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "zp", "<cmd>cprev<CR>zz")

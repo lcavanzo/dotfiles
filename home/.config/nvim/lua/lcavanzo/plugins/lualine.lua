@@ -55,6 +55,14 @@ return {
 				theme = my_lualine_theme,
 			},
 			sections = {
+				lualine_a = {
+					{
+						"mode",
+						fmt = function(str)
+							return str .. " (" .. #vim.fn.getbufinfo({ buflisted = 1 }) .. ")"
+						end,
+					},
+				},
 				lualine_x = {
 					{
 						lazy_status.updates,

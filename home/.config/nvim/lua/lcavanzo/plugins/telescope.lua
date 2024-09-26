@@ -50,6 +50,7 @@ return {
 						["<C-c>"] = actions.close,
 						["<C-y>"] = actions.select_default,
 						["<C-h>"] = actions.which_key,
+						["d"] = require("telescope.actions").delete_buffer,
 						["<leader>v"] = actions.select_vertical,
 						["<leader>h"] = actions.select_horizontal,
 						["<leader>t"] = actions.select_tab,
@@ -149,7 +150,16 @@ return {
 		local builtin = require("telescope.builtin")
 		-- vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
 		-- vim.keymap.set("n", "<leader>fbf", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
-		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		-- vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		vim.keymap.set(
+			"n",
+			"<S-b>",
+			-- Notice that I start it in normal mode to navigate similarly to bufexplorer,
+			-- the ivy theme is also similar to bufexplorer and tmux sessions
+			"<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal theme=ivy<cr>",
+			{ desc = "[P]Open telescope buffers" }
+		)
+
 		vim.keymap.set("n", "<leader>fu", function()
 			-- You can pass additional configuration to telescope to change theme, layout, etc.
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({

@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
--- Insert mode: Use 'jj' to quickly exit insert mode
-vim.keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with 'jj'" })
+-- Insert mode: Use 'jk' to quickly exit insert mode
+vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with 'jj'" })
 
 -- Normal mode: Save the current file with '<leader>s'
 vim.keymap.set("n", "<leader>s", ":write<CR>", { desc = "Save the current file with '<leader>s'" })
@@ -11,8 +11,8 @@ vim.keymap.set("n", "<leader>re", ":edit<CR>", { desc = "Refresh the currently o
 vim.keymap.set("n", "<leader>e", ":edit", { desc = "open file with '<leader>e'" })
 
 -- Normal mode: Quit Vim with '<leader>q', or force quit with '<leader>Q'
-vim.keymap.set("n", "<leader>qq", ":quit<CR>", { desc = "Quit Vim with '<leader>q', or force quit with '<leader>Q'" })
-vim.keymap.set("n", "<leader>QQ", ":qa!<CR>", { desc = "Force quit Vim with '<leader>Q'" })
+vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit Vim with '<leader>q', or force quit with '<leader>Q'" })
+vim.keymap.set("n", "<leader>qq", ":qa!<CR>", { desc = "Force quit Vim with '<leader>Q'" })
 
 -- DON'T USE TABS, USE Buffers instead
 -- Normal mode: Manage Vim tabs
@@ -26,17 +26,17 @@ vim.keymap.set("n", "<leader>QQ", ":qa!<CR>", { desc = "Force quit Vim with '<le
 vim.keymap.set({ "n", "v" }, "gh", "^", { desc = "[P]Go to the beginning line" })
 vim.keymap.set({ "n", "v" }, "gl", "$", { desc = "[P]go to the end of the line" })
 
+-- In visual mode, after going to the end of the line, come back 1 character
+vim.keymap.set("v", "gl", "$h", { desc = "[P]Go to the end of the line" })
+
 -- Normal mode: Uncomment the following lines to navigate between buffers
-vim.keymap.set("n", "<C-m>", ":bnext<CR>", { noremap = true, silent = true, desc = "Switch to the next buffer" })
+vim.keymap.set("n", "<S-l>", ":bnext<CR>", { noremap = true, silent = true, desc = "Switch to the next buffer" })
 vim.keymap.set(
 	"n",
-	"<C-b>",
+	"<S-h>",
 	":bprevious<CR>",
 	{ noremap = true, silent = true, desc = "Switch to the previous buffer" }
 )
--- vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Switch to the next buffer with '<leader>['" })
--- vim.keymap.set("n", "<leader>bm", ":bprevious<CR>", { desc = "Switch to the previous buffer with '<leader>]'" })
-vim.keymap.set("n", "<leader>bx", ":bdelete<CR>", { desc = "Delete the current buffer with '<leader>x'" })
 
 -- Normal mode: Toggle 'listchar' display with '<leader>d'
 vim.keymap.set("n", "<leader>i", ":set invlist<CR>", { desc = "Toggle 'listchar' display with '<leader>d'" })
@@ -232,3 +232,6 @@ vim.keymap.set("n", "<leader>%", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set("n", "zd", "<C-d>zz", { noremap = true, desc = "Scroll down half-page and center" })
 vim.keymap.set("n", "zu", "<C-u>zz", { noremap = true, desc = "Scroll up half-page and center" })
+
+vim.keymap.set("n", "zn", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "zp", "<cmd>cprev<CR>zz")
