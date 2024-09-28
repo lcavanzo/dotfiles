@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 -- Insert mode: Use 'jk' to quickly exit insert mode
-vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with 'jj'" })
+vim.keymap.set("i", "kj", "<ESC>", { desc = "Exit insert mode with 'jj'" })
 
 -- Normal mode: Save the current file with '<leader>s'
 vim.keymap.set("n", "<leader>s", ":write<CR>", { desc = "Save the current file with '<leader>s'" })
