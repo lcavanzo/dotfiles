@@ -36,7 +36,7 @@ config.inactive_pane_hsb = {
 -- Disabling keys, workign only with personal stuff
 config.disable_default_key_bindings = true
 -- Keys
-config.leader = { key = "a", mods = "SUPER", timeout_milliseconds = 1000 }
+config.leader = { key = "a", mods = "CMD", timeout_milliseconds = 1005 }
 config.keys = {
 
 	-- Pane keybindings
@@ -57,7 +57,7 @@ config.keys = {
 
 	-- Set behavior as a linux terminal
 	{ key = "c", mods = "SUPER", action = act.SendKey({ key = "c", mods = "CTRL" }) }, -- ctrl-c
-	{ key = "l", mods = "SUPER", action = act.SendKey({ key = "l", mods = "CTRL" }) }, -- ctrl-l
+	{ key = "l", mods = "CMD", action = act.SendKey({ key = "l", mods = "CTRL" }) }, -- ctrl-l
 	{ key = "d", mods = "SUPER", action = act.SendKey({ key = "d", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "r", mods = "SUPER", action = act.SendKey({ key = "r", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "w", mods = "SUPER", action = act.SendKey({ key = "w", mods = "CTRL" }) }, -- ctrl-d

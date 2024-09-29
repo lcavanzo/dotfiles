@@ -12,7 +12,8 @@ vim.keymap.set("n", "<leader>e", ":edit", { desc = "open file with '<leader>e'" 
 
 -- Normal mode: Quit Vim with '<leader>q', or force quit with '<leader>Q'
 vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit Vim with '<leader>q', or force quit with '<leader>Q'" })
-vim.keymap.set("n", "<leader>qq", ":qa!<CR>", { desc = "Force quit Vim with '<leader>Q'" })
+vim.keymap.set("n", "QQ", ":qa!<CR>", { desc = "Force quit Vim with 'QQ'" })
+vim.keymap.set("n", "WW", ":w!<enter>", { desc = "Save file" })
 
 -- DON'T USE TABS, USE Buffers instead
 -- Normal mode: Manage Vim tabs
@@ -42,8 +43,8 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>i", ":set invlist<CR>", { desc = "Toggle 'listchar' display with '<leader>d'" })
 
 -- Split window
-vim.keymap.set("n", "<leader>w-", ":split<Return><C-w>w", { silent = true })
-vim.keymap.set("n", "<leader>w|", ":vsplit<Return><C-w>w", { silent = true })
+vim.keymap.set("n", "w-", ":split<Return><C-w>w", { silent = true })
+vim.keymap.set("n", "w|", ":vsplit<Return><C-w>w", { silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", silent = true })
