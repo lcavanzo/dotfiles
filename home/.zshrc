@@ -39,7 +39,7 @@ plugins=(
   git
   brew
   kubectl
-  zsh-vi-mode
+  # zsh-vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-history-substring-search

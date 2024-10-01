@@ -46,11 +46,11 @@ vim.keymap.set("n", "<leader>i", ":set invlist<CR>", { desc = "Toggle 'listchar'
 vim.keymap.set("n", "w-", ":split<Return><C-w>w", { silent = true })
 vim.keymap.set("n", "w|", ":vsplit<Return><C-w>w", { silent = true })
 
--- Move to window using the <ctrl> hjkl keys
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", silent = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", silent = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", silent = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window", silent = true })
+-- -- Move to window using the <ctrl> hjkl keys
+-- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", silent = true })
+-- vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", silent = true })
+-- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", silent = true })
+-- vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window", silent = true })
 
 -- vim.keymap.set("n", "<C-h>", function()
 -- 	print("Ctrl+h pressed")
