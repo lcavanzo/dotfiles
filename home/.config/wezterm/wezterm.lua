@@ -49,7 +49,7 @@ config.keys = {
 	-- { key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 	-- { key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
 	-- { key = "o", mods = "LEADER", action = act.RotatePanes("Clockwise") },
-	-- { key = "v", mods = "SUPER", action = act.PasteFrom("Clipboard") }, -- REVIEW
+	{ key = "v", mods = "SUPER", action = act.PasteFrom("Clipboard") }, -- REVIEW
 	-- { key = "[", mods = "LEADER", action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }) },
 
 	-- -- Debuging
@@ -69,7 +69,7 @@ config.keys = {
 	{ key = "m", mods = "SUPER", action = act.SendKey({ key = "m", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "n", mods = "SUPER", action = act.SendKey({ key = "n", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "b", mods = "SUPER", action = act.SendKey({ key = "b", mods = "CTRL" }) }, -- ctrl-d
-	{ key = "v", mods = "SUPER", action = act.SendKey({ key = "v", mods = "CTRL" }) }, -- ctrl-d
+	-- { key = "v", mods = "SUPER", action = act.SendKey({ key = "v", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "p", mods = "SUPER", action = act.SendKey({ key = "p", mods = "CTRL" }) }, -- ctrl-d
 
 	-- -- Scroll Promtp
