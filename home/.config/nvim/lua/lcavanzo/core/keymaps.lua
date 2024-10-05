@@ -15,13 +15,6 @@ vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit Vim with '<leader>q
 vim.keymap.set("n", "QQ", ":qa!<CR>", { desc = "Force quit Vim with 'QQ'" })
 vim.keymap.set("n", "WW", ":w!<enter>", { desc = "Save file" })
 
--- DON'T USE TABS, USE Buffers instead
--- Normal mode: Manage Vim tabs
--- vim.keymap.set("n", "<leader>tt", ":tabnew<CR>", { desc = "Create a new tab with '<leader>t'" })
--- vim.keymap.set("n", "<leader>tq", ":tabclose<CR>", { desc = "Close the current tab with '<leader>c'" })
--- vim.keymap.set("n", "<leader>tn", ":tabnext<CR>", { desc = "Switch to the next tab with '<leader>n'" })
--- vim.keymap.set("n", "<leader>tm", ":tabprevious<CR>", { desc = "Switch to the previous tab with '<leader>m'" })
-
 -- use gh to move to the beginning of the line in normal mode
 -- use gl to move to the end of the line in normal mode
 vim.keymap.set({ "n", "v" }, "gh", "^", { desc = "[P]Go to the beginning line" })
@@ -31,10 +24,18 @@ vim.keymap.set({ "n", "v" }, "gl", "$", { desc = "[P]go to the end of the line" 
 vim.keymap.set("v", "gl", "$h", { desc = "[P]Go to the end of the line" })
 
 -- Normal mode: Uncomment the following lines to navigate between buffers
-vim.keymap.set("n", "<S-l>", ":bnext<CR>", { noremap = true, silent = true, desc = "Switch to the next buffer" })
+-- vim.keymap.set("n", "<S-l>", ":bnext<CR>", { noremap = true, silent = true, desc = "Switch to the next buffer" })
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<S-H>>",
+-- 	":bprevious<CR>",
+-- 	{ noremap = true, silent = true, desc = "Switch to the previous buffer" }
+-- )" tab and shift-tab keys to navigate buffers back and forth
+-- opt-tab and shift-opt-tab keys to navigate tab pages
+vim.keymap.set("n", "<TAB>", ":bnext<CR>", { noremap = true, silent = true, desc = "Switch to the next buffer" })
 vim.keymap.set(
 	"n",
-	"<S-h>",
+	"<S-TAB>",
 	":bprevious<CR>",
 	{ noremap = true, silent = true, desc = "Switch to the previous buffer" }
 )
@@ -236,3 +237,10 @@ vim.keymap.set("n", "zu", "<C-u>zz", { noremap = true, desc = "Scroll up half-pa
 
 vim.keymap.set("n", "zn", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "zp", "<cmd>cprev<CR>zz")
+
+-- Set up a keymap to refresh the current buffer
+vim.keymap.set("n", "<leader>B", function()
+	-- Reloads the file to reflect the changes
+	vim.cmd("edit!")
+	print("Buffer reloaded")
+end, { desc = "[P]Reload current buffer" })
