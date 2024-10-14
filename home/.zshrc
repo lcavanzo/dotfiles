@@ -76,6 +76,7 @@ zvm_after_init_commands+=(my_zvm_init)
 # Directories
 # workplace is a dir with work code
 alias vim='nvim'
+alias tm="tmux attach || tmux new"
 
 alias kubesh='(){ kubectl run alpine-shell --rm -ti --image=alpine -n=$1 -- /bin/sh ;}'
 alias k='kubectl'
@@ -142,6 +143,15 @@ initsetup () {
   sh /opt/homebrew/opt/fzf/install --all
 }
 
+### yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 
 if [ -f "$HOME/.zshrc.local" ]; then

@@ -5,7 +5,7 @@ UNAME_S := $(shell uname -s)
 
 BREW_PACKAGES	:= \
 	atuin awscli azure-cli bat exa fish fd fzf git git-delta go helm htop jq knqyf263/pet/pet kubectl Azure/kubelogin/kubelogin lazygit \
-	neofetch neovim node nmap ripgrep starship stow terraform tree unzip vlc wget wezterm yq zoxide zsh
+	neofetch neovim node nmap poppler rar ripgrep starship stow terraform tree unzip vlc wget wezterm yazi yq xclip zoxide zsh
 
 ZSH_PLUGINS_PACKAGES	:= \
 	romkatv/powerlevel10k
