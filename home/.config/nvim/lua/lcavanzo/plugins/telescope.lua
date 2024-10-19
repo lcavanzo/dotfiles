@@ -203,7 +203,7 @@ return {
 		vim.keymap.set("n", "<leader>fld", builtin.lsp_definitions, { desc = "[G]o to lsp_definitions" })
 		-- Git commands
 		vim.keymap.set("n", "<leader>fi", builtin.git_files, { desc = "Search [G]it [F]iles" })
-		vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "Search [G]it [S]tatus" })
+		vim.keymap.set("n", "<leader>fG", builtin.git_status, { desc = "Search [G]it [S]tatus" })
 		vim.keymap.set("n", "<leader>fz", builtin.git_commits, { desc = "Search [G]it [L]og" })
 		vim.keymap.set("n", "<leader>fc", builtin.git_branches, { desc = "[G]it Branches" })
 	end,
