@@ -14,6 +14,53 @@ end
 -- Settings
 --config.default_prog = { fish_path, "-l" }
 
+------------------------------------------------------------
+-- -- BEFORE you can set the term to wezterm, you need to install a copy of the
+-- -- wezterm TERM definition
+-- -- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=term
+-- --
+-- -- If you're using tmux, set your tmux.conf file to:
+-- -- set -g default-terminal "${TERM}"
+-- -- So that it picks up the wezterm TERM we're defining here
+-- --
+-- -- NOTE: When inside neovim, run a `checkhealth` and under `tmux` you will see that
+-- -- the term is set to `wezterm`. If the term is set to something else:
+-- -- - Reload your tmux configuration,
+-- -- - Then close all your tmux sessions, one at a time and quit wezterm
+-- -- - re-open wezterm
+-- term = "wezterm",
+-- term = "xterm-256color",
+
+-- When using the wezterm terminfo file, I had issues with images in neovim, images
+-- were shown like split in half, and some part of the image always stayed on the
+-- screen until I quit neovim
+--
+-- Images are working wonderfully in kitty, so decided to try the kitty.terminfo file
+-- https://github.com/kovidgoyal/kitty/blob/master/terminfo/kitty.terminfo
+--
+-- NOTE: I added a modified version of this in my zshrc file, so if the kitty terminfo
+-- file is not present it will be downloaded and installed automatically
+--
+-- But if you want to manually download and install the kitty terminfo file
+-- run the command below on your terminal:
+-- tempfile=$(mktemp) && curl -o "$tempfile" https://raw.githubusercontent.com/kovidgoyal/kitty/master/terminfo/kitty.terminfo && tic -x -o ~/.terminfo "$tempfile" && rm "$tempfile"
+--
+-- NOTE: When inside neovim, run a `checkhealth` and under `tmux` you will see that
+-- the term is set to `xterm-kitty`. If the term is set to something else:
+-- - Reload your tmux configuration,
+-- - Then close all your tmux sessions, one at a time and quit wezterm
+-- - re-open wezterm
+--
+-- Then you'll be able to set your terminal to `xterm-kitty` as seen below
+config.term = "xterm-kitty"
+
+-- To enable kitty graphics
+-- https://github.com/wez/wezterm/issues/986
+-- It seems that kitty graphics is not enabled by default according to this
+-- Not sure, so I'm enabling it just in case
+-- https://github.com/wez/wezterm/issues/1406#issuecomment-996253377
+config.enable_kitty_graphics = true
+------------------------------------------------------------
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font_with_fallback({
 	{ family = "JetBrains Mono", scale = 1.2, weight = "Bold" },
