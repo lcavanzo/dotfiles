@@ -7,7 +7,7 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"nvim-telescope/telescope-file-browser.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
-		"LukasPietzschmann/telescope-tabs",
+		-- "LukasPietzschmann/telescope-tabs",
 		"nvim-telescope/telescope-frecency.nvim",
 	},
 	config = function()
@@ -51,14 +51,13 @@ return {
 						["<C-y>"] = actions.select_default,
 						["<C-h>"] = actions.which_key,
 						["d"] = require("telescope.actions").delete_buffer,
-						["<leader>v"] = actions.select_vertical,
-						["<leader>h"] = actions.select_horizontal,
-						["<leader>t"] = actions.select_tab,
-						["<leader>z"] = function(prompt_bufnr)
+						["v"] = actions.select_vertical,
+						["h"] = actions.select_horizontal,
+						["z"] = function(prompt_bufnr)
 							require("telescope.actions").select_default(prompt_bufnr)
 							require("telescope.builtin").resume()
 						end,
-						["<leader>tr"] = function(prompt_bufnr)
+						["t"] = function(prompt_bufnr)
 							require("telescope.actions").select_tab(prompt_bufnr)
 							require("telescope.builtin").resume()
 						end,
@@ -143,14 +142,13 @@ return {
 		telescope.load_extension("noice")
 		telescope.load_extension("fzf")
 		telescope.load_extension("file_browser")
-		telescope.load_extension("telescope-tabs")
+		-- telescope.load_extension("telescope-tabs")
 		telescope.load_extension("neoclip")
 		telescope.load_extension("frecency")
 		-- set keymaps
 		local builtin = require("telescope.builtin")
-		-- vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-		-- vim.keymap.set("n", "<leader>fbf", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
-		-- vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
+		vim.keymap.set("n", "<leader>fbb", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
 		vim.keymap.set(
 			"n",
 			"<leader>b",
@@ -168,7 +166,7 @@ return {
 			}))
 		end, { desc = "[S]earch  in [C]urrent buffer" })
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<leader>fht", builtin.help_tags, { desc = "[S]earch [H]elp" })
+		vim.keymap.set("n", "<leader>fH", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })

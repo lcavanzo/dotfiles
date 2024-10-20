@@ -63,3 +63,9 @@ vim.opt.history = 1000 -- Set the maximum number of lines in history
 vim.opt.lazyredraw = false -- Enable lazy redraw for faster scrolling
 vim.opt.synmaxcol = 240 -- Set the maximum column for syntax highlighting
 vim.opt.updatetime = 250 -- Set the wait time (in ms) to trigger an event
+
+-----------------------------------------------------------
+-- Nvim plugins
+-----------------------------------------------------------
+-- obsidian
+vim.opt.conceallevel = 2
