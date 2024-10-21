@@ -62,8 +62,8 @@ return {
 			},
 		})
 
-		-- vim.keymap.set("n", "<leader>o", function()
-		-- 	require("telescope").extensions.neoclip.default()
-		-- end, { desc = "Telescope Neoclip" })
+		vim.keymap.set("n", "<leader>p", function()
+			require("telescope").extensions.neoclip.default()
+		end, { desc = "Telescope Neoclip" })
 	end,
 }
