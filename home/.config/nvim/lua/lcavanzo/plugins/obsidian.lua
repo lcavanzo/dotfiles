@@ -23,7 +23,7 @@ return {
 			img_folder = "99_Assets/attachments",
 		},
 		daily_notes = {
-			template = "notes",
+			template = "note",
 		},
 		mappings = {
 			-- "Obsidian follow"
@@ -73,7 +73,8 @@ return {
 			return title
 		end,
 		note_frontmatter_func = function(note)
-			local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+			local date_str = os.date("%Y-%m-%d")
+			local out = { id = note.id, aliases = note.aliases, tags = note.tags, date = date_str }
 
 			if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
 				for k, v in pairs(note.metadata) do
