@@ -91,7 +91,8 @@ return {
 						fallback()
 					end
 				end, { "i", "s" }),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
+                ["<CR>"] = cmp.config.disable,
+				["<TAB>"] = cmp.mapping.confirm({ select = true }),
 				["<C-Space>"] = cmp.mapping.complete(),
 				-- ["<C-k>"] = cmp.mapping.scroll_docs(-4),
 				-- ["<C-j>"] = cmp.mapping.scroll_docs(4),

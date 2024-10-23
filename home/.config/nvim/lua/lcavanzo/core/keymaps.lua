@@ -245,6 +245,8 @@ vim.keymap.set("n", "<leader>B", function()
 	print("Buffer reloaded")
 end, { desc = "[P]Reload current buffer" })
 
+vim.keymap.set("n", "<leader><leader>", "<cmd>e #<CR>", {noremap = true, desc="Switch between current and latest buffer"})
+
 -- ############################################################################
 --                             Image section
 -- ############################################################################
