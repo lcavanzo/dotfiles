@@ -129,11 +129,6 @@ return {
 			on_attach = on_attach,
 		})
 
-		lspconfig["cfn-lint"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-
 		-- lspconfig["jdtls"].setup({
 		--     capabilities = capabilities,
 		--     on_attach = on_attach,
