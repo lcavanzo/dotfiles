@@ -119,6 +119,7 @@ config.keys = {
 	{ key = "x", mods = "SUPER", action = act.SendKey({ key = "x", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "t", mods = "SUPER", action = act.SendKey({ key = "t", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "g", mods = "SUPER", action = act.SendKey({ key = "g", mods = "CTRL" }) }, -- ctrl-d
+	{ key = "u", mods = "SUPER", action = act.SendKey({ key = "u", mods = "CTRL" }) }, -- ctrl-d
 	-- { key = "v", mods = "SUPER", action = act.SendKey({ key = "v", mods = "CTRL" }) }, -- ctrl-d
 	{ key = "p", mods = "SUPER", action = act.SendKey({ key = "p", mods = "CTRL" }) }, -- ctrl-d
 

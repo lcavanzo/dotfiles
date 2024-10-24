@@ -148,10 +148,10 @@ return {
 		-- set keymaps
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>f?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
-		vim.keymap.set("n", "<leader>fbb", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
+		-- vim.keymap.set("n", "<leader>fb", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
 		vim.keymap.set(
 			"n",
-			"<leader>b",
+			";;",
 			-- Notice that I start it in normal mode to navigate similarly to bufexplorer,
 			-- the ivy theme is also similar to bufexplorer and tmux sessions
 			"<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal theme=ivy<cr>",
