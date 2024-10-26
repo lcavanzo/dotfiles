@@ -472,3 +472,7 @@ vim.keymap.set("n", "<leader>ic", function()
 	-- vim.cmd([[lua require("image").clear()]])
 	print("Images cleared")
 end, { desc = "[P]Clear images" })
+
+-- ############################################################################
+-- TMP for adding double ticks
+vim.keymap.set("n", "<leader>'", "i``<Esc>i", { desc = "Add double backticks and place cursor between" })
