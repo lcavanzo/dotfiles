@@ -32,13 +32,13 @@ vim.keymap.set("v", "gl", "$h", { desc = "[P]Go to the end of the line" })
 -- 	{ noremap = true, silent = true, desc = "Switch to the previous buffer" }
 -- )" tab and shift-tab keys to navigate buffers back and forth
 -- opt-tab and shift-opt-tab keys to navigate tab pages
-vim.keymap.set("n", "<TAB>", ":bnext<CR>", { noremap = true, silent = true, desc = "Switch to the next buffer" })
-vim.keymap.set(
-	"n",
-	"<S-TAB>",
-	":bprevious<CR>",
-	{ noremap = true, silent = true, desc = "Switch to the previous buffer" }
-)
+-- vim.keymap.set("n", "<TAB>", ":bnext<CR>", { noremap = true, silent = true, desc = "Switch to the next buffer" })
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<S-TAB>",
+-- 	":bprevious<CR>",
+-- 	{ noremap = true, silent = true, desc = "Switch to the previous buffer" }
+-- )
 
 -- Normal mode: Toggle 'listchar' display with '<leader>d'
 vim.keymap.set("n", "<leader>i", ":set invlist<CR>", { desc = "Toggle 'listchar' display with '<leader>d'" })
@@ -245,7 +245,7 @@ vim.keymap.set("n", "<leader>B", function()
 	print("Buffer reloaded")
 end, { desc = "[P]Reload current buffer" })
 
-vim.keymap.set("n", "<leader><leader>", "<cmd>e #<CR>", {noremap = true, desc="Switch between current and latest buffer"})
+vim.keymap.set("n", "<TAB>", "<cmd>e #<CR>", { noremap = true, desc = "Switch between current and latest buffer" })
 
 -- ############################################################################
 --                             Image section
