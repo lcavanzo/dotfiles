@@ -278,6 +278,12 @@ end, { desc = "[P]BASH, execute file" })
 -- Toggle spelling
 vim.keymap.set("n", "<leader>ns", ":set spell!<CR>")
 
+-- Next misspelled word
+vim.keymap.set("n", "z[", "]s", { noremap = true, desc = "Next misspelled word" })
+
+-- Previous misspelled word
+vim.keymap.set("n", "z]", "[s", { noremap = true, desc = "Previous misspelled word" })
+
 -- ############################################################################
 --                             Image section
 -- ############################################################################
