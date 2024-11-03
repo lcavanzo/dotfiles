@@ -169,7 +169,7 @@ vim.keymap.set(
 --- test keymap => :verbose nmap <D-Up>
 
 -- double semicolon expands to the cwd when typing a command
-vim.keymap.set("c", ";", function()
+vim.keymap.set("c", ";;", function()
 	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or ";;"
 end, { expr = true })
 
@@ -246,6 +246,37 @@ vim.keymap.set("n", "<leader>B", function()
 end, { desc = "[P]Reload current buffer" })
 
 vim.keymap.set("n", "<TAB>", "<cmd>e #<CR>", { noremap = true, desc = "Switch between current and latest buffer" })
+
+-- Make the file you run the command on, executable, so you don't have to go out to the command line
+-- Had to include quotes around "%" because there are some apple dirs that contain spaces, like iCloud
+vim.keymap.set("n", "<leader>fx", '<cmd>!chmod +x "%"<CR>', { silent = true, desc = "Make file executable" })
+vim.keymap.set("n", "<leader>fX", '<cmd>!chmod -x "%"<CR>', { silent = true, desc = "Remove executable flag" })
+
+-- If this is a bash script, make it executable, and execute it in a tmux pane on the right
+-- Using a tmux pane allows me to easily select text
+-- Had to include quotes around "%" because there are some apple dirs that contain spaces, like iCloud
+vim.keymap.set("n", "<leader>cb", function()
+	local file = vim.fn.expand("%") -- Get the current file name
+	local first_line = vim.fn.getline(1) -- Get the first line of the file
+	if string.match(first_line, "^#!/") then -- If first line contains shebang
+		local escaped_file = vim.fn.shellescape(file) -- Properly escape the file name for shell commands
+
+		-- Execute the script on a tmux pane on the right. On my mac I use zsh, so
+		-- running this script with bash to not execute my zshrc file after
+		-- vim.cmd("silent !tmux split-window -h -l 60 'bash -c \"" .. escaped_file .. "; exec bash\"'")
+		-- `-l 60` specifies the size of the tmux pane, in this case 60 columns
+		vim.cmd(
+			"silent !tmux split-window -h -l 60 'bash -c \""
+				.. escaped_file
+				.. "; echo; echo Press any key to exit...; read -n 1; exit\"'"
+		)
+	else
+		vim.cmd("echo 'Not a script. Shebang line not found.'")
+	end
+end, { desc = "[P]BASH, execute file" })
+
+-- Toggle spelling
+vim.keymap.set("n", "<leader>ns", ":set spell!<CR>")
 
 -- ############################################################################
 --                             Image section

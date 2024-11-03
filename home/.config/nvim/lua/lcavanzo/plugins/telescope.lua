@@ -151,7 +151,7 @@ return {
 		-- vim.keymap.set("n", "<leader>fb", builtin.current_buffer_fuzzy_find, { desc = "[S]earch [G]rep in Buffer" })
 		vim.keymap.set(
 			"n",
-			";;",
+			";",
 			-- Notice that I start it in normal mode to navigate similarly to bufexplorer,
 			-- the ivy theme is also similar to bufexplorer and tmux sessions
 			"<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal theme=ivy<cr>",

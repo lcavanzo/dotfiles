@@ -26,6 +26,8 @@ vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" } -- Specify backup files to s
 vim.opt.listchars = { eol = "↵", tab = ">-" } -- Configure list characters (eol = '↵', tab = '>-')
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Specify the undo directory
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
 
 -----------------------------------------------------------
 -- Neovim UI
