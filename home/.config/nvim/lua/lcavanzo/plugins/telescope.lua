@@ -48,6 +48,7 @@ return {
 					},
 					n = {
 						["<C-c>"] = actions.close,
+						[";"] = actions.close,
 						["<C-y>"] = actions.select_default,
 						["<C-h>"] = actions.which_key,
 						["d"] = require("telescope.actions").delete_buffer,

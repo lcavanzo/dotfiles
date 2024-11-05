@@ -284,6 +284,8 @@ vim.keymap.set("n", "z[", "]s", { noremap = true, desc = "Next misspelled word" 
 -- Previous misspelled word
 vim.keymap.set("n", "z]", "[s", { noremap = true, desc = "Previous misspelled word" })
 
+-- Execute normal mode mapping from insert mode and return to insert
+vim.keymap.set("i", "<C-o>", "<C-o><C-\\><C-n>", { noremap = true })
 -- ############################################################################
 --                             Image section
 -- ############################################################################
@@ -512,4 +514,4 @@ end, { desc = "[P]Clear images" })
 
 -- ############################################################################
 -- TMP for adding double ticks
-vim.keymap.set("n", "<leader>'", "i``<Esc>i", { desc = "Add double backticks and place cursor between" })
+vim.keymap.set("n", "<leader>'", "i`` <Esc>i", { desc = "Add double backticks and place cursor between" })

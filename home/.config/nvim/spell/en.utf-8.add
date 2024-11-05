@@ -304,3 +304,8 @@ Lamba
 Cloudwatch
 EventBridge
 AWS
+logGroup
+ARN
+KMS
+EFS
+VPC
