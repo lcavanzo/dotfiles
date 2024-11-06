@@ -309,3 +309,7 @@ ARN
 KMS
 EFS
 VPC
+dns
+ipv4
+EC2
+mountpoint
