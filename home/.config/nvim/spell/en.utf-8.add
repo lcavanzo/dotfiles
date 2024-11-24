@@ -313,3 +313,8 @@ dns
 ipv4
 EC2
 mountpoint
+CloudFront
+SNS
+aws
+SQS
+MINIPROJECT
