@@ -318,3 +318,13 @@ SNS
 aws
 SQS
 MINIPROJECT
+SSM
+IAM
+STS
+nameservers
+databases
+database
+CNAME
+TXT
+MX
+AAAA
