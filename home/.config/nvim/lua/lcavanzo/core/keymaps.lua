@@ -514,4 +514,7 @@ end, { desc = "[P]Clear images" })
 
 -- ############################################################################
 -- TMP for adding double ticks
-vim.keymap.set("n", "<leader>'", "i`` <Esc>i", { desc = "Add double backticks and place cursor between" })
+vim.keymap.set("n", "<leader>''", "i`` <Esc>i", { desc = "Add double backticks and place cursor between" })
+
+-- add backticks from cursor to end of line:
+vim.keymap.set("n", "<leader>'", "i`<Esc>A`<Esc>", { noremap = true, desc = "Add backticks around text to EOL" })

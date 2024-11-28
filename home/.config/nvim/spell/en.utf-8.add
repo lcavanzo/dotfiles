@@ -328,3 +328,11 @@ CNAME
 TXT
 MX
 AAAA
+ipv6
+R53
+cloudfront
+www
+domainName
+Multivalue
+multivalue
+Geoproximity
