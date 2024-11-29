@@ -336,3 +336,9 @@ domainName
 Multivalue
 multivalue
 Geoproximity
+CodePipeline
+CodeBuild
+CodeDeploy
+ECS
+serverless
+lifecycle

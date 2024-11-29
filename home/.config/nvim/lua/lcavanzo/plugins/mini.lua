@@ -67,80 +67,301 @@ return {
 	config = function(_, opts)
 		require("mini.files").setup(opts)
 
-		local show_dotfiles = true
-		local filter_show = function(fs_entry)
-			return true
-		end
-		local filter_hide = function(fs_entry)
-			return not vim.startswith(fs_entry.name, ".")
-		end
+		-- Create an autocmd to set buffer-local mappings when a `mini.files` buffer is opened
+		-- I use this to open the highlighted directory in a tmux pane on the right
+		-- I call the `tmux_pane_functiontmux_pane_function` I defined in my
+		-- keympaps.lua file
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "minifiles",
+			callback = function()
+				-- Import 'mini.files' module
+				local mini_files = require("mini.files")
 
-		local toggle_dotfiles = function()
-			show_dotfiles = not show_dotfiles
-			local new_filter = show_dotfiles and filter_show or filter_hide
-			require("mini.files").refresh({ content = { filter = new_filter } })
-		end
+				-- Set buffer-local mapping for ',' in normal mode
+				vim.keymap.set("n", ",", function()
+					-- Get the current entry using 'get_fs_entry()'
+					local curr_entry = mini_files.get_fs_entry()
+					if curr_entry and curr_entry.fs_type == "directory" then
+						-- Call tmux pane function with the directory path
+						require("config.keymaps").tmux_pane_function(curr_entry.path)
+					else
+						-- Notify if not a directory or no entry is selected
+						vim.notify("Not a directory or no entry selected", vim.log.levels.WARN)
+					end
+				end, { buffer = true, noremap = true, silent = true })
 
-		local map_split = function(buf_id, lhs, direction, close_on_file)
-			local rhs = function()
-				local new_target_window
-				local cur_target_window = require("mini.files").get_target_window()
-				if cur_target_window ~= nil then
-					vim.api.nvim_win_call(cur_target_window, function()
-						vim.cmd("belowright " .. direction .. " split")
-						new_target_window = vim.api.nvim_get_current_win()
-					end)
+				-- Copy the current file or directory to the lamw25wmal system clipboard
+				-- NOTE: This works only on macOS
+				vim.keymap.set("n", "yc", function()
+					-- Get the current entry (file or directory)
+					local curr_entry = mini_files.get_fs_entry()
+					if curr_entry then
+						local path = curr_entry.path
+						-- Escape the path for shell command
+						local escaped_path = vim.fn.fnameescape(path)
+						-- Build the osascript command to copy the file or directory to the clipboard
+						local cmd =
+							string.format([[osascript -e 'set the clipboard to POSIX file "%s"' ]], escaped_path)
+						local result = vim.fn.system(cmd)
+						if vim.v.shell_error ~= 0 then
+							vim.notify("Copy failed: " .. result, vim.log.levels.ERROR)
+						else
+							vim.notify(path, vim.log.levels.INFO)
+							vim.notify("Copied to system clipboard", vim.log.levels.INFO)
+						end
+					else
+						vim.notify("No file or directory selected", vim.log.levels.WARN)
+					end
+				end, { buffer = true, noremap = true, silent = true, desc = "Copy file/directory to clipboard" })
 
-					require("mini.files").set_target_window(new_target_window)
-					require("mini.files").go_in({ close_on_file = close_on_file })
-				end
-			end
+				vim.keymap.set("n", "yz", function()
+					local curr_entry = require("mini.files").get_fs_entry()
+					if curr_entry then
+						local path = curr_entry.path
+						local name = vim.fn.fnamemodify(path, ":t") -- Extract the file or directory name
+						local parent_dir = vim.fn.fnamemodify(path, ":h") -- Get the parent directory
+						local timestamp = os.date("%y%m%d%H%M%S") -- Append timestamp to avoid duplicates
+						local zip_path = string.format("/tmp/%s_%s.zip", name, timestamp) -- Path in macOS's tmp directory
+						-- Create the zip file
+						local zip_cmd = string.format(
+							"cd %s && zip -r %s %s",
+							vim.fn.shellescape(parent_dir),
+							vim.fn.shellescape(zip_path),
+							vim.fn.shellescape(name)
+						)
+						local result = vim.fn.system(zip_cmd)
+						if vim.v.shell_error ~= 0 then
+							vim.notify("Failed to create zip file: " .. result, vim.log.levels.ERROR)
+							return
+						end
+						-- Copy the zip file to the system clipboard
+						local copy_cmd = string.format(
+							[[osascript -e 'set the clipboard to POSIX file "%s"' ]],
+							vim.fn.fnameescape(zip_path)
+						)
+						local copy_result = vim.fn.system(copy_cmd)
+						if vim.v.shell_error ~= 0 then
+							vim.notify("Failed to copy zip file to clipboard: " .. copy_result, vim.log.levels.ERROR)
+							return
+						end
+						vim.notify(zip_path, vim.log.levels.INFO)
+						vim.notify("Zipped and copied to clipboard: ", vim.log.levels.INFO)
+					else
+						vim.notify("No file or directory selected", vim.log.levels.WARN)
+					end
+				end, { buffer = true, noremap = true, silent = true, desc = "Zip and copy to clipboard" })
 
-			local desc = "Open in " .. direction .. " split"
-			if close_on_file then
-				desc = desc .. " and close"
-			end
-			vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
-		end
+				-- Paste the current file or directory from the system clipboard into the current directory in mini.files
+				-- NOTE: This works only on macOS
+				vim.keymap.set("n", "P", function()
+					vim.notify("Starting the paste operation...", vim.log.levels.INFO)
+					if not mini_files then
+						vim.notify("mini.files module not loaded.", vim.log.levels.ERROR)
+						return
+					end
+					local curr_entry = mini_files.get_fs_entry() -- Get the current file system entry
+					if not curr_entry then
+						vim.notify("Failed to retrieve current entry in mini.files.", vim.log.levels.ERROR)
+						return
+					end
+					local curr_dir = curr_entry.fs_type == "directory" and curr_entry.path
+						or vim.fn.fnamemodify(curr_entry.path, ":h") -- Use parent directory if entry is a file
+					vim.notify("Current directory: " .. curr_dir, vim.log.levels.INFO)
+					local script = [[
+            tell application "System Events"
+              try
+                set theFile to the clipboard as alias
+                set posixPath to POSIX path of theFile
+                return posixPath
+              on error
+                return "error"
+              end try
+            end tell
+          ]]
+					local output = vim.fn.system("osascript -e " .. vim.fn.shellescape(script)) -- Execute AppleScript command
+					if vim.v.shell_error ~= 0 or output:find("error") then
+						vim.notify("Clipboard does not contain a valid file or directory.", vim.log.levels.WARN)
+						return
+					end
+					local source_path = output:gsub("%s+$", "") -- Trim whitespace from clipboard output
+					if source_path == "" then
+						vim.notify("Clipboard is empty or invalid.", vim.log.levels.WARN)
+						return
+					end
+					local dest_path = curr_dir .. "/" .. vim.fn.fnamemodify(source_path, ":t") -- Destination path in current directory
+					local copy_cmd = vim.fn.isdirectory(source_path) == 1 and { "cp", "-R", source_path, dest_path }
+						or { "cp", source_path, dest_path } -- Construct copy command
+					local result = vim.fn.system(copy_cmd) -- Execute the copy command
+					if vim.v.shell_error ~= 0 then
+						vim.notify("Paste operation failed: " .. result, vim.log.levels.ERROR)
+						return
+					end
+					vim.notify("Pasted " .. source_path .. " to " .. dest_path, vim.log.levels.INFO)
+					mini_files.synchronize() -- Refresh mini.files to show updated directory content
+					vim.notify("Paste operation completed successfully.", vim.log.levels.INFO)
+				end, { buffer = true, noremap = true, silent = true, desc = "Paste from clipboard" })
 
-		local files_set_cwd = function()
-			local cur_entry_path = MiniFiles.get_fs_entry().path
-			local cur_directory = vim.fs.dirname(cur_entry_path)
-			if cur_directory ~= nil then
-				vim.fn.chdir(cur_directory)
-			end
-		end
+				-- Define <M-c> to copy the current file or directory path (relative to home) to clipboard
+				vim.keymap.set("n", "<M-c>", function()
+					-- Get the current entry (file or directory)
+					local curr_entry = mini_files.get_fs_entry()
+					if curr_entry then
+						-- Convert path to be relative to home directory
+						local home_dir = vim.fn.expand("~")
+						local relative_path = curr_entry.path:gsub("^" .. home_dir, "~")
+						vim.fn.setreg("+", relative_path) -- Copy the relative path to the clipboard register
+						vim.notify(relative_path, vim.log.levels.INFO)
+						vim.notify("Path copied to clipboard: ", vim.log.levels.INFO)
+					else
+						vim.notify("No file or directory selected", vim.log.levels.WARN)
+					end
+				end, { buffer = true, noremap = true, silent = true, desc = "Copy relative path to clipboard" })
 
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "MiniFilesBufferCreate",
-			callback = function(args)
-				local buf_id = args.data.buf_id
+				-- Preview the selected image in a popup window
+				vim.keymap.set("n", "i", function()
+					-- Clear any existing images before rendering the new one
+					require("image").clear()
+					local curr_entry = mini_files.get_fs_entry()
+					if curr_entry and curr_entry.fs_type == "file" then
+						local ext = vim.fn.fnamemodify(curr_entry.path, ":e"):lower()
+						local supported_image_exts = { "png", "jpg", "jpeg", "gif", "bmp", "webp", "avif" }
+						-- Check if the file has a supported image extension
+						if vim.tbl_contains(supported_image_exts, ext) then
+							-- Save mini.files state (current path and focused entry)
+							local current_dir = vim.fn.fnamemodify(curr_entry.path, ":h")
+							local focused_entry = vim.fn.fnamemodify(curr_entry.path, ":t") -- Extract filename
+							-- Create a floating window for the image preview
+							local popup_width = math.floor(vim.o.columns * 0.6)
+							local popup_height = math.floor(vim.o.lines * 0.6)
+							local col = math.floor((vim.o.columns - popup_width) / 2)
+							local row = math.floor((vim.o.lines - popup_height) / 2)
+							local buf = vim.api.nvim_create_buf(false, true) -- Create a scratch buffer
+							local win = vim.api.nvim_open_win(buf, true, {
+								relative = "editor",
+								row = row,
+								col = col,
+								width = popup_width,
+								height = popup_height,
+								style = "minimal",
+								border = "rounded",
+							})
+							-- Declare img_width and img_height at the top
+							local img_width, img_height
+							-- Get image dimensions using ImageMagick's identify command
+							local dimensions = vim.fn.systemlist(
+								string.format("identify -format '%%w %%h' %s", vim.fn.shellescape(curr_entry.path))
+							)
+							if #dimensions > 0 then
+								img_width, img_height = dimensions[1]:match("(%d+) (%d+)")
+								img_width = tonumber(img_width)
+								img_height = tonumber(img_height)
+							end
+							-- Calculate image display size while maintaining aspect ratio
+							local display_width = popup_width
+							local display_height = popup_height
+							if img_width and img_height then
+								local aspect_ratio = img_width / img_height
+								if aspect_ratio > (popup_width / popup_height) then
+									-- Image is wider than the popup window
+									display_height = math.floor(popup_width / aspect_ratio)
+								else
+									-- Image is taller than the popup window
+									display_width = math.floor(popup_height * aspect_ratio)
+								end
+							end
+							-- Center the image within the popup window
+							local image_x = math.floor((popup_width - display_width) / 2)
+							local image_y = math.floor((popup_height - display_height) / 2)
+							-- Use image.nvim to render the image
+							local img = require("image").from_file(curr_entry.path, {
+								id = curr_entry.path, -- Unique ID
+								window = win, -- Bind the image to the popup window
+								buffer = buf, -- Bind the image to the popup buffer
+								x = image_x,
+								y = image_y,
+								width = display_width,
+								height = display_height,
+								with_virtual_padding = true,
+							})
+							-- Render the image
+							if img ~= nil then
+								img:render()
+							end
+							-- Use `stat` or `ls` to get the file size in bytes
+							local file_size_bytes = ""
+							if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
+								-- For macOS or Linux systems
+								local handle = io.popen(
+									"stat -f%z "
+										.. vim.fn.shellescape(curr_entry.path)
+										.. " || ls -l "
+										.. vim.fn.shellescape(curr_entry.path)
+										.. " | awk '{print $5}'"
+								)
+								if handle then
+									file_size_bytes = handle:read("*a"):gsub("%s+$", "") -- Trim trailing whitespace
+									handle:close()
+								end
+							else
+								-- Fallback message if the command isn't available
+								file_size_bytes = "0"
+							end
+							-- Convert the size to MB (if valid)
+							local file_size_mb = tonumber(file_size_bytes) and tonumber(file_size_bytes) / (1024 * 1024)
+								or 0
+							local file_size_mb_str = string.format("%.2f", file_size_mb) -- Format to 2 decimal places as a string
+							-- Add image information (filename, size, resolution)
+							local image_info = {}
+							table.insert(image_info, "Image File: " .. focused_entry) -- Add only the filename
+							if tonumber(file_size_bytes) > 0 then
+								table.insert(image_info, "Size: " .. file_size_mb_str .. " MB") -- Use the formatted string
+							else
+								table.insert(image_info, "Size: Unable to detect") -- Fallback if size isn't found
+							end
+							if img_width and img_height then
+								table.insert(image_info, "Resolution: " .. img_width .. " x " .. img_height)
+							else
+								table.insert(image_info, "Resolution: Unable to detect")
+							end
+							-- Append the image information after the image
+							local line_count = vim.api.nvim_buf_line_count(buf)
+							vim.api.nvim_buf_set_lines(buf, line_count, -1, false, { "", "", "" }) -- Add 3 empty lines
+							vim.api.nvim_buf_set_lines(buf, -1, -1, false, image_info)
+							-- Keymap for closing the popup and reopening mini.files
+							local function reopen_mini_files()
+								if img ~= nil then
+									img:clear()
+								end
+								vim.api.nvim_win_close(win, true)
+								-- Reopen mini.files in the same directory
+								require("mini.files").open(current_dir, true)
+								vim.defer_fn(function()
+									-- Simulate navigation to the file by searching for the line matching the file
+									local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false) -- Get all lines in the buffer
+									for i, line in ipairs(lines) do
+										if line:match(focused_entry) then
+											vim.api.nvim_win_set_cursor(0, { i, 0 }) -- Move cursor to the matching line
+											break
+										end
+									end
+								end, 50) -- Small delay to ensure mini.files is initialized
+							end
+							vim.keymap.set(
+								"n",
+								"<esc>",
+								reopen_mini_files,
+								{ buffer = buf, noremap = true, silent = true }
+							)
+							vim.keymap.set("n", "q", reopen_mini_files, { buffer = buf, noremap = true, silent = true })
+						else
+							vim.notify("Not an image file.", vim.log.levels.WARN)
+						end
+					else
+						vim.notify("No file selected or not a file.", vim.log.levels.WARN)
+					end
+				end, { buffer = true, noremap = true, silent = true, desc = "Preview image in popup" })
 
-				vim.keymap.set(
-					"n",
-					opts.mappings and opts.mappings.toggle_hidden or "g.",
-					toggle_dotfiles,
-					{ buffer = buf_id, desc = "Toggle hidden files" }
-				)
-
-				vim.keymap.set(
-					"n",
-					opts.mappings and opts.mappings.change_cwd or "gc",
-					files_set_cwd,
-					{ buffer = args.data.buf_id, desc = "Set cwd" }
-				)
-
-				map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal or "<C-w>s", "horizontal", false)
-				map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical or "<C-w>v", "vertical", false)
-				map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal_plus or "<C-w>S", "horizontal", true)
-				map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical_plus or "<C-w>V", "vertical", true)
-			end,
-		})
-
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "MiniFilesActionRename",
-			callback = function(event)
-				LazyVim.lsp.on_rename(event.data.from, event.data.to)
+				-- End of keymaps
 			end,
 		})
 
@@ -159,9 +380,17 @@ return {
 		local gitStatusCache = {}
 		local cacheTimeout = 2000 -- Cache timeout in milliseconds
 
-		local function mapSymbols(status)
+		local function isSymlink(path)
+			local stat = vim.loop.fs_lstat(path)
+			return stat and stat.type == "link"
+		end
+
+		---@type table<string, {symbol: string, hlGroup: string}>
+		---@param status string
+		---@return string symbol, string hlGroup
+		local function mapSymbols(status, is_symlink)
 			local statusMap = {
-        -- stylua: ignore start
+    -- stylua: ignore start
         [" M"] = { symbol = "✹", hlGroup  = "MiniDiffSignChange"}, -- Modified in the working directory
         ["M "] = { symbol = "•", hlGroup  = "MiniDiffSignChange"}, -- modified in index
         ["MM"] = { symbol = "≠", hlGroup  = "MiniDiffSignChange"}, -- modified in both working tree and index
@@ -180,11 +409,22 @@ return {
 			}
 
 			local result = statusMap[status] or { symbol = "?", hlGroup = "NonText" }
-			return result.symbol, result.hlGroup
+			local gitSymbol = result.symbol
+			local gitHlGroup = result.hlGroup
+
+			local symlinkSymbol = is_symlink and "↩" or ""
+
+			-- Combine symlink symbol with Git status if both exist
+			local combinedSymbol = (symlinkSymbol .. gitSymbol):gsub("^%s+", ""):gsub("%s+$", "")
+			-- Change the color of the symlink icon from "MiniDiffSignDelete" to something else
+			local combinedHlGroup = is_symlink and "MiniDiffSignDelete" or gitHlGroup
+
+			return combinedSymbol, combinedHlGroup
 		end
 
 		---@param cwd string
 		---@param callback function
+		---@return nil
 		local function fetchGitStatus(cwd, callback)
 			local function on_exit(content)
 				if content.code == 0 then
@@ -195,14 +435,22 @@ return {
 			vim.system({ "git", "status", "--ignored", "--porcelain" }, { text = true, cwd = cwd }, on_exit)
 		end
 
+		---@param str string|nil
+		---@return string
 		local function escapePattern(str)
-			return str:gsub("([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
+			if not str then
+				return ""
+			end
+			return (str:gsub("([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1"))
 		end
 
+		---@param buf_id integer
+		---@param gitStatusMap table
+		---@return nil
 		local function updateMiniWithGit(buf_id, gitStatusMap)
 			vim.schedule(function()
 				local nlines = vim.api.nvim_buf_line_count(buf_id)
-				local cwd = vim.fn.getcwd() --  vim.fn.expand("%:p:h")
+				local cwd = vim.fs.root(buf_id, ".git")
 				local escapedcwd = escapePattern(cwd)
 				if vim.fn.has("win32") == 1 then
 					escapedcwd = escapedcwd:gsub("\\", "/")
@@ -217,7 +465,8 @@ return {
 					local status = gitStatusMap[relativePath]
 
 					if status then
-						local symbol, hlGroup = mapSymbols(status)
+						local is_symlink = isSymlink(entry.path)
+						local symbol, hlGroup = mapSymbols(status, is_symlink)
 						vim.api.nvim_buf_set_extmark(buf_id, nsMiniFiles, i - 1, 0, {
 							-- NOTE: if you want the signs on the right uncomment those and comment
 							-- the 3 lines after
@@ -233,14 +482,9 @@ return {
 			end)
 		end
 
-		local function is_valid_git_repo()
-			if vim.fn.isdirectory(".git") == 0 then
-				return false
-			end
-			return true
-		end
-
 		-- Thanks for the idea of gettings https://github.com/refractalize/oil-git-status.nvim signs for dirs
+		---@param content string
+		---@return table
 		local function parseGitStatus(content)
 			local gitStatusMap = {}
 			-- lua match is faster than vim.split (in my experience )
@@ -274,11 +518,14 @@ return {
 			return gitStatusMap
 		end
 
+		---@param buf_id integer
+		---@return nil
 		local function updateGitStatus(buf_id)
-			if not is_valid_git_repo() then
+			local cwd = vim.uv.cwd()
+			if not cwd or not vim.fs.root(cwd, ".git") then
 				return
 			end
-			local cwd = vim.fn.expand("%:p:h")
+
 			local currentTime = os.time()
 			if gitStatusCache[cwd] and currentTime - gitStatusCache[cwd].time < cacheTimeout then
 				updateMiniWithGit(buf_id, gitStatusCache[cwd].statusMap)
@@ -294,6 +541,7 @@ return {
 			end
 		end
 
+		---@return nil
 		local function clearCache()
 			gitStatusCache = {}
 		end
