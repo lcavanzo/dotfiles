@@ -512,9 +512,18 @@ vim.keymap.set("n", "<leader>ic", function()
 	print("Images cleared")
 end, { desc = "[P]Clear images" })
 
--- ############################################################################
--- TMP for adding double ticks
+-- adding double ticks
 vim.keymap.set("n", "<leader>''", "i`` <Esc>i", { desc = "Add double backticks and place cursor between" })
 
 -- add backticks from cursor to end of line:
 vim.keymap.set("n", "<leader>'", "i`<Esc>A`<Esc>", { noremap = true, desc = "Add backticks around text to EOL" })
+-- ################################# TESTING ##########################################
+
+-- Duplicate a line and comment out the first line
+vim.keymap.set("n", "yc", "yy<cmd>normal gcc<CR>p")
+
+-- Delete current word
+vim.keymap.set("n", "<C-c>", "ciw")
+
+-- move between braces
+vim.keymap.set({ "n", "v" }, "mm", "%", { desc = "match next (){}[] in line" })
