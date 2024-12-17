@@ -142,7 +142,8 @@ initsetup () {
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
   sh /opt/homebrew/opt/fzf/install --all
-}
+} 
+
 
 ### yazi
 function y() {

@@ -52,7 +52,7 @@ end
 -- - re-open wezterm
 --
 -- Then you'll be able to set your terminal to `xterm-kitty` as seen below
-config.term = "xterm-kitty"
+config.term = "xterm-256color"
 
 -- To enable kitty graphics
 -- https://github.com/wez/wezterm/issues/986
