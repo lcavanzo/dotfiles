@@ -9,6 +9,7 @@ return {
 		config = function()
 			-- load the colorscheme here
 			vim.cmd([[colorscheme catppuccin-mocha]])
+			transparent = vim.g.transparent_enabled
 		end,
 	},
 }
