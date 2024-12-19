@@ -89,5 +89,23 @@
     "prefix": "lam",
     "body": ["lamw25wmal"],
     "description": "markdown workflow 25"
+  },
+
+  "link in new tab": {
+    "prefix": "linkt",
+    "body": ["[$1]($2){:target=\"_blank\"}"],
+    "description": "Open a link in a new tab (chirpy theme)"
+  },
+
+  "todo item": {
+    "prefix": "todo",
+    "body": ["<!-- TODO: $1 -->"],
+    "description": "Create a todo item"
+  },
+
+  "Paste clipboard as md link": {
+    "prefix": "linkclip",
+    "body": "[$1]($CLIPBOARD)",
+    "description": "Paste clipboard as .md link"
   }
 }
