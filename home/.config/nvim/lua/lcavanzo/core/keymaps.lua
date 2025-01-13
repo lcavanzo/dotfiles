@@ -294,33 +294,33 @@ vim.keymap.set("i", "<C-o>", "<C-o><C-\\><C-n>", { noremap = true })
 -- I use a Ctrl keymap so that I can paste images in insert mode
 -- I tried using <C-v> but duh, that's used for visual block mode
 -- so don't do it
-vim.keymap.set({ "n", "v", "i" }, "<C-a>", function()
-	-- Call the paste_image function from the Lua API
-	-- Using the plugin's Lua API (require("img-clip").paste_image()) instead of the
-	-- PasteImage command because the Lua API returns a boolean value indicating
-	-- whether an image was pasted successfully or not.
-	-- The PasteImage command does not
-	-- https://github.com/HakonHarnes/img-clip.nvim/blob/main/README.md#api
-	local pasted_image = require("img-clip").paste_image()
-	if pasted_image then
-		-- "Update" saves only if the buffer has been modified since the last save
-		vim.cmd("update")
-		print("Image pasted and file saved")
-		-- Only if updated I'll refresh the images by clearing them first
-		-- I'm using [[ ]] to escape the special characters in a command
-		require("image").clear()
-		-- vim.cmd([[lua require("image").clear()]])
-		-- Reloads the file to reflect the changes
-		vim.cmd("edit!")
-		-- Switch to the line below
-		vim.cmd("normal! o")
-		-- Switch back to command mode or normal mode
-		vim.cmd("startinsert")
-		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("- ", true, false, true), "i", true)
-	else
-		print("No image pasted. File not updated.")
-	end
-end, { desc = "[P]Paste image from system clipboard" })
+-- vim.keymap.set({ "n", "v", "i" }, "<C-a>", function()
+-- 	-- Call the paste_image function from the Lua API
+-- 	-- Using the plugin's Lua API (require("img-clip").paste_image()) instead of the
+-- 	-- PasteImage command because the Lua API returns a boolean value indicating
+-- 	-- whether an image was pasted successfully or not.
+-- 	-- The PasteImage command does not
+-- 	-- https://github.com/HakonHarnes/img-clip.nvim/blob/main/README.md#api
+-- 	local pasted_image = require("img-clip").paste_image()
+-- 	if pasted_image then
+-- 		-- "Update" saves only if the buffer has been modified since the last save
+-- 		vim.cmd("update")
+-- 		print("Image pasted and file saved")
+-- 		-- Only if updated I'll refresh the images by clearing them first
+-- 		-- I'm using [[ ]] to escape the special characters in a command
+-- 		require("image").clear()
+-- 		-- vim.cmd([[lua require("image").clear()]])
+-- 		-- Reloads the file to reflect the changes
+-- 		vim.cmd("edit!")
+-- 		-- Switch to the line below
+-- 		vim.cmd("normal! o")
+-- 		-- Switch back to command mode or normal mode
+-- 		vim.cmd("startinsert")
+-- 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("- ", true, false, true), "i", true)
+-- 	else
+-- 		print("No image pasted. File not updated.")
+-- 	end
+-- end, { desc = "[P]Paste image from system clipboard" })
 
 -- ############################################################################
 
