@@ -1,0 +1,73 @@
+# To get the default values
+# ghostty +show-config --default --docs > ~/github/dotfiles-latest/ghostty/config-default
+
+keybind=clear
+
+# Fonts options
+font-size = 17
+font-family = "JetBrainsMono Nerd Font Mono"
+font-family-italic = "JetBrainsMono NFM Italic"
+font-family-bold-italic = "JetBrainsMono NFM Bold Italic"
+font-thicken = true
+bold-is-bright = true
+
+# Theme for ghostty terminal
+theme = catppuccin-mocha
+
+# Copy options
+copy-on-select = true
+
+# Cleaning keybindings for custom use
+keybind =super+c=unbind
+keybind =super+d=unbind
+keybind =super+p=unbind
+keybind =super+l=unbind
+keybind =super+n=unbind
+keybind =super+w=unbind
+keybind =super+t=unbind
+keybind =super+[=unbind
+keybind =super+a=unbind
+
+# Close options
+confirm-close-surface = true
+
+# Custom keybindings(cleaned keybinding)
+keybind = super+minus=decrease_font_size:1
+keybind = super+plus=increase_font_size:1
+
+# Terminal control keybindings (CMD/Super to Ctrl mapping)
+keybind = super+c=text:\x03
+keybind = super+l=text:\x0C
+keybind = super+d=text:\x04
+keybind = super+r=text:\x12
+keybind = super+w=text:\x17
+keybind = super+h=text:\x08
+keybind = super+j=text:\x0A
+keybind = super+k=text:\x0B
+keybind = super+a=text:\x01
+keybind = super+q=text:\x11
+keybind = super+m=text:\x0D
+keybind = super+n=text:\x0E
+keybind = super+b=text:\x02
+keybind = super+x=text:\x18
+keybind = super+t=text:\x14
+keybind = super+g=text:\x07
+keybind = super+u=text:\x15
+keybind = super+p=text:\x10
+
+keybind = super+o=inspector:toggle
+keybind = super+shift+r=reload_config
+keybind = super+[=toggle_quick_terminal
+
+background-opacity = 0.85
+background-blur-radius = 20
+
+window-decoration = false
+
+cursor-style = block
+cursor-style-blink = true
+
+shell-integration-features = no-cursor
+
+command = /bin/zsh
+
