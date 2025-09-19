@@ -5,7 +5,7 @@ ZSH_CUSTOM ?= ~/.oh-my-zsh/custom
 
 
 BREW_PACKAGES	:= \
-	atuin awscli azure-cli bat bruno btop cleanshot fish fd fzf git git-delta git-credential-manager go imagemagick helm ghostty btop jq karabiner-elements knqyf263/pet/pet kubectl Azure/kubelogin/kubelogin lazygit \
+	atuin awscli azure-cli ast-grep bat bruno btop cleanshot fish fd fzf git git-delta git-credential-manager go imagemagick helm ghostty btop jq karabiner-elements knqyf263/pet/pet kubectl Azure/kubelogin/kubelogin lazygit \
 	kubectx fastfetch obsidian neovim node nmap pkgconfig pngpaste poppler rar rectangle-pro ripgrep starship sesh stow terraform tree tmux unzip vlc watch wget wezterm trash yazi yq xclip zoxide zsh
 
 all:: install-brew-packages link install-terminfo install-fonts configure-tmux
