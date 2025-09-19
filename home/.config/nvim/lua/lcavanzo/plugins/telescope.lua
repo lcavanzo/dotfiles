@@ -85,7 +85,7 @@ return {
 					},
 				},
 				find_files = {
-					hidden = true,
+					hidden = false,
 					follow = true,
 				},
 			},

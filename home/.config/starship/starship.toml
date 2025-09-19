@@ -28,7 +28,8 @@ $terraform\
 $localip\
 $time\
 $line_break\
-$character"""
+$character
+"""
 
 
 [aws]
@@ -88,7 +89,6 @@ symbol = " "
 [kubernetes]
 symbol = '☸ '
 disabled = false
-detect_files = ['k8s']
 format = 'via [󱃾 $context\($namespace\)](bold purple) '
 
 [localip]

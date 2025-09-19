@@ -109,6 +109,9 @@ alias cd='z'
 # SadServer settings
 alias sad='LC_ALL=C.UTF-8 ssh'
 
+# iximiuz
+export PATH=$PATH:/Users/lcavanzo/.iximiuz/labctl/bin
+
 
 # using ripgrep combined with preview
 # find-in-file - usage: fif <searchTerm>
@@ -142,7 +145,7 @@ initsetup () {
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
   git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
   sh /opt/homebrew/opt/fzf/install --all
-} 
+}
 
 
 ### yazi
@@ -212,3 +215,12 @@ sp(){
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/lcavanzo/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/lcavanzo/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

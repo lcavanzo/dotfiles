@@ -39,6 +39,8 @@ return {
 					"gitignore",
 					"python",
 					"go",
+					"hcl",
+					"terraform",
 				},
 				incremental_selection = {
 					enable = true,

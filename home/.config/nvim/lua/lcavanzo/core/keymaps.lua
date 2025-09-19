@@ -6,6 +6,9 @@ vim.keymap.set("i", "kj", "<ESC>", { desc = "Exit insert mode with 'jj'" })
 -- Normal mode: Save the current file with '<leader>s'
 vim.keymap.set("n", "<leader>s", ":write<CR>", { desc = "Save the current file with '<leader>s'" })
 
+-- Normal mode: Save the current file without formatting '<leader>s'
+vim.keymap.set("n", "<leader>ww", ":noautocmd w<CR>", { desc = "Save without formatting" })
+
 -- Normal mode: Refresh the currently open file with '<leader>e'
 vim.keymap.set("n", "<leader>re", ":edit<CR>", { desc = "Refresh the currently open file with '<leader>e'" })
 vim.keymap.set("n", "<leader>e", ":edit", { desc = "open file with '<leader>e'" })
@@ -143,8 +146,6 @@ vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and 
 vim.keymap.set("i", ",", ",<c-g>u")
 vim.keymap.set("i", ".", ".<c-g>u")
 vim.keymap.set("i", ";", ";<c-g>u")
-
-vim.keymap.set("n", ";wf", ":noautocmd w<CR>", { desc = "Save without formatting" })
 
 -- Jumplist Navigation
 -- vim.keymap.set("n", "<leader>j", "<C-O>", { noremap = true, silent = true }) -- Older jump
