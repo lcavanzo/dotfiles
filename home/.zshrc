@@ -40,7 +40,7 @@ plugins=(
   git
   brew
   kubectl
-  # zsh-vi-mode
+  zsh-vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-history-substring-search
@@ -224,3 +224,9 @@ compinit
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/lcavanzo/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# ~/.zshrc
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
