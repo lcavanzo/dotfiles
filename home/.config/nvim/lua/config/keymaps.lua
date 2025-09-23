@@ -10,6 +10,7 @@ vim.g.lazyvim_keymaps_disabled = {
   ["<leader>fT"] = true,
   ["<leader>ft"] = true,
   ["<c-_>"] = true,
+  ["<leader>?"] = true,
 }
 
 vim.g.mapleader = " "
@@ -29,10 +30,10 @@ vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit Vim with  or force 
 vim.keymap.set("n", "<leader>Q", ":qa!<CR>", { desc = "Force quit Vim with 'Q'" })
 
 -- Move Lines
-vim.keymap.set("n", "<c-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Mode Down" })
-vim.keymap.set("n", "<c-k>", "<cmd>execute 'move .-' . (v:count1 +1)<cr>==", { desc = "Mode Up" })
-vim.keymap.set("i", "<c-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Mode Down" })
-vim.keymap.set("i", "<c-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Mode Up" })
+-- vim.keymap.set("n", "<c-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Mode Down" })
+-- vim.keymap.set("n", "<c-k>", "<cmd>execute 'move .-' . (v:count1 +1)<cr>==", { desc = "Mode Up" })
+-- vim.keymap.set("i", "<c-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Mode Down" })
+-- vim.keymap.set("i", "<c-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Mode Up" })
 vim.keymap.set("v", "<c-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Mode Down" })
 vim.keymap.set("v", "<c-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Mode Up" })
 
