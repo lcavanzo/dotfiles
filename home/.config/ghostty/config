@@ -12,7 +12,7 @@ font-thicken = true
 bold-is-bright = true
 
 # Theme for ghostty terminal
-theme = Catppuccin Mocha
+theme = Catppuccin Macchiato
 
 # Copy options
 copy-on-select = true
