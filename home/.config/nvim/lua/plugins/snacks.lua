@@ -187,6 +187,7 @@ return {
       ------------------------------------------------------------
     },
     opts = {
+      scroll = { enabled = true },
       scope = { enabled = true },
       indent = { enabled = true },
       dashboard = {
