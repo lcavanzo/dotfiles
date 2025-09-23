@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 
 -- Disable default keymaps(this is not working, just keep it to remember some available keymaps XD)
+--vim.keymap.del("n", "<leader>L")
 vim.g.lazyvim_keymaps_disabled = {
   ["<C-s>"] = true,
   ["<leader>qq"] = true,

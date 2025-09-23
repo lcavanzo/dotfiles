@@ -19,6 +19,20 @@ return {
         desc = "jump to bottom edge of scope",
       },
       ------------------------------------------------------------
+      {
+        "<leader>sf",
+        function()
+          Snacks.picker.lsp_symbols({})
+        end,
+        desc = "LSP Symbosls",
+      },
+      {
+        "<leader>fs",
+        function()
+          Snacks.picker.spelling({})
+        end,
+        desc = "Spelling",
+      },
       -- snacks.picker keymaps-----------------------------------
       -- I use this keymap with mini.files, but snacks explorer was taking over
       -- https://github.com/folke/snacks.nvim/discussions/949
