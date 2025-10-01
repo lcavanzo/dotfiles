@@ -385,3 +385,11 @@ vim.keymap.set("n", "<leader>ic", function()
   -- vim.cmd([[lua require("image").clear()]])
   print("Images cleared")
 end, { desc = "[P]Clear images" })
+
+vim.keymap.set("i", "<c-k>", function()
+  -- Request Signature Help manually when in Insert Mode
+  if vim.lsp.get_clients() then
+    vim.lsp.buf.signature_help()
+  end
+  return true
+end, { desc = "Manual Signature Help" })
