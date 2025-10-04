@@ -393,3 +393,6 @@ vim.keymap.set("i", "<c-k>", function()
   end
   return true
 end, { desc = "Manual Signature Help" })
+
+vim.keymap.set("n", "<Leader>ah", "<Cmd>:SidewaysLeft<CR>")
+vim.keymap.set("n", "<Leader>al", "<Cmd>:SidewaysRight<CR>")
