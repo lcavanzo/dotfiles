@@ -11,7 +11,7 @@ BREW_PACKAGES	:= \
 all:: install-brew-packages link install-terminfo install-fonts configure-tmux
 
 link::
-	/opt/homebrew/bin/stow --verbose --no-folding --target=$$HOME --dir=$(DIR) --restow home
+	/opt/homebrew/bin/stow --adopt --verbose --no-folding --target=$$HOME --dir=$(DIR) --restow home
 
 unlink::
 	/opt/homebrew/bin/stow --verbose --no-folding --target=$$HOME --dir=$(DIR) --delete home
