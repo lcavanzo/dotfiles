@@ -210,7 +210,7 @@ return {
             return LazyVim.pick(cmd, opts)()
           end,
           header = [[
-      	          ▀████▀▄▄              ▄█
+         	          ▀████▀▄▄              ▄█
 		            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█
 		    ▄        █          ▀▀▀▀▄  ▄▀
 		   ▄▀ ▀▄      ▀▄              ▀▄▀
