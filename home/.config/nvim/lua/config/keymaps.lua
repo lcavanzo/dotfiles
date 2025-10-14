@@ -394,5 +394,29 @@ vim.keymap.set("i", "<c-k>", function()
   return true
 end, { desc = "Manual Signature Help" })
 
+-- Sideways plugin(swap arguments)
 vim.keymap.set("n", "<Leader>ah", "<Cmd>:SidewaysLeft<CR>")
 vim.keymap.set("n", "<Leader>al", "<Cmd>:SidewaysRight<CR>")
+
+-- noneckpain plugin
+vim.keymap.set("n", "<leader>N", "<Cmd>:NoNeckPain<CR>")
+
+vim.keymap.set("n", "<leader>s-", function()
+  -- 1. Get the last search pattern from the search register (@/)
+  local pattern = vim.fn.getreg("/")
+
+  if pattern == "" then
+    vim.notify("No previous search pattern found.", vim.log.levels.WARN)
+    return
+  end
+
+  -- 2. Build the vimgrep command: vimgrep /pattern/g **/*
+  local vimgrep_cmd = string.format("vimgrep /%s/g **/*", pattern:gsub("/", "\\/"))
+
+  -- The :silent! runs the command without outputting noise
+  -- The | copen opens the quickfix window
+  vim.cmd("silent! " .. vimgrep_cmd)
+  vim.cmd("copen")
+
+  vim.notify("Search results sent to Quickfix List.", vim.log.levels.INFO)
+end, { desc = "Quickfix: Send Last / Search" })

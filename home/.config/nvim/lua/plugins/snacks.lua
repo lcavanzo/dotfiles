@@ -33,6 +33,20 @@ return {
         end,
         desc = "Spelling",
       },
+      {
+        "<leader>ff",
+        function()
+          Snacks.picker.files({ cwd = vim.fn.getcwd() })
+        end,
+        desc = "Find Files (CWD Only)",
+      },
+      {
+        "<leader>fF",
+        function()
+          Snacks.picker.files({ cwd = LazyVim.root() })
+        end,
+        desc = "Find Files (Root Dir)",
+      },
       -- snacks.picker keymaps-----------------------------------
       -- I use this keymap with mini.files, but snacks explorer was taking over
       -- https://github.com/folke/snacks.nvim/discussions/949
