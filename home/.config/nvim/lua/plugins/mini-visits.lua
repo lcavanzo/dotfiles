@@ -19,7 +19,6 @@ return {
       -- 1. Keymaps for Path Selection (Recency/Frequency)
       ---------------------------------------------------------------------------
 
-      -- Helper function to generate the selection function based on parameters
       local make_select_path = function(select_global, recency_weight)
         local sort = visits.gen_sort.default({ recency_weight = recency_weight })
         local select_opts = { sort = sort }
@@ -37,12 +36,12 @@ return {
       end
 
       -- Define Select Keymaps:
-      map_select("<Leader>vr", "Select recent (all)", true, 1)
-      map_select("<Leader>vR", "Select recent (cwd)", false, 1)
-      map_select("<Leader>vy", "Select frecent (all)", true, 0.5)
-      map_select("<Leader>vY", "Select frecent (cwd)", false, 0.5)
-      map_select("<Leader>vf", "Select frequent (all)", true, 0)
-      map_select("<Leader>vF", "Select frequent (cwd)", false, 0)
+      map_select("<Leader>vR", "Select recent (all)", true, 1)
+      map_select("<Leader>vr", "Select recent (cwd)", false, 1)
+      map_select("<Leader>vY", "Select frecent (all)", true, 0.5)
+      map_select("<Leader>vy", "Select frecent (cwd)", false, 0.5)
+      map_select("<Leader>vF", "Select frequent (all)", true, 0)
+      map_select("<Leader>vf", "Select frequent (cwd)", false, 0)
 
       ---------------------------------------------------------------------------
       -- 2. Keymaps for Label Management (Your New Code)
@@ -69,8 +68,8 @@ return {
       -- Define Label Keymaps (using the method name and arguments):
       map_vis("va", "add_label", "Add label") -- Method is 'add_label', no args
       map_vis("vA", "remove_label", "Remove label") -- Method is 'remove_label', no args
-      map_vis("vl", "select_label", "Select label (all)", { "", "" }) -- Method is 'select_label', args are { "", "" }
-      map_vis("vL", "select_label", "Select label (cwd)") -- Method is 'select_label', no args
+      map_vis("vL", "select_label", "Select label (all)", { "", "" }) -- Method is 'select_label', args are { "", "" }
+      map_vis("vl", "select_label", "Select label (cwd)") -- Method is 'select_label', no args
     end,
   },
 }
