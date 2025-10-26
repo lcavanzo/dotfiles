@@ -99,7 +99,7 @@ alias python='python3'
 
 # personal aliases
 alias cat='bat'
-alias catt='bat --style=header-filename'
+alias catp='bat --style=header-filename'
 alias ssh='ssh -o ServerAliveInterval=60'
 alias pi='ssh -l pi 192.168.100.100'
 alias myip='curl ifconfig.me'
