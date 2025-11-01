@@ -1,0 +1,56 @@
+{
+    "snip2": {
+        "prefix": "all2",
+        "body": [
+            "multi $1",
+            "line $2",
+            "snippet$0"
+        ]
+    },
+    "ArgoCD ApplicationSet": {
+        "prefix": "appset",
+        "description": "A friendly snippet for an ArgoCD ApplicationSet.",
+        "body": [
+            "apiVersion: argoproj.io/v1alpha1",
+            "kind: ApplicationSet",
+            "metadata:",
+            "  name: ${1:name}",
+            "  namespace: ${2:argocd}",
+            "spec:",
+            "  generators:",
+            "    - clusters:",
+            "        selector:",
+            "          matchLabels:",
+            "            env: ${3:dev}",
+            "        values:",
+            "          branch: main",
+            "  template:",
+            "    metadata:",
+            "      name: \"{{name}}-\"",
+            "      annotations:",
+            "        argocd.argoproj.io/manifest-generate-paths: \".;..\"",
+            "    spec:",
+            "      project: ${4:default}",
+            "      sources:",
+            "        - repoURL: ${5:git@github.com:your-org/your-values-repo.git}",
+            "          targetRevision: main",
+            "          ref: valuesRepo",
+            "        - repoURL: ${6:git@github.com:your-org/your-umbrella-repo.git}",
+            "          targetRevision: \"{{values.branch}}\"",
+            "          path: \"${7:path/to/your/ingress-nginx-chart}\"",
+            "          helm:",
+            "            releaseName: \"${8:name}\"",
+            "            valueFiles:",
+            "              - \"values.yaml\"",
+            "      destination:",
+            "        name: \"{{name}}\"",
+            "        namespace: \"${2:}\"",
+            "      syncPolicy:",
+            "        automated:",
+            "          prune: false",
+            "          selfHeal: true",
+            "        syncOptions:",
+            "          - CreateNamespace=true"
+        ]
+    }
+}
