@@ -8,6 +8,15 @@
         ],
         "description": "Print statement using an f-string for variable interpolation"
     },
+    "Simple Docstring": {
+        "prefix": [
+            "doc"
+        ],
+        "body": [
+            "\"\"\"\n$1\n\"\"\""
+        ],
+        "description": "Print statement using an f-string for variable interpolation"
+    },
     "Python Logging Setup": {
         "prefix": [
             "pylogsetup"
