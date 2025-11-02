@@ -13,10 +13,10 @@ return {
         path = "/Users/lcavanzo/git/obsidian-vault",
       },
     },
-    completion = {
-      nvim_cmp = true,
-      min_chars = 2,
-    },
+    -- completion = {
+    --   nvim_cmp = true,
+    --   min_chars = 2,
+    -- },
     notes_subdir = "limbo",
     new_notes_location = "limbo",
     attachments = {
