@@ -114,7 +114,7 @@ return {
           Snacks.picker.grep({
             prompt = " ",
             -- pass your desired search as a static pattern
-            search = "^\\s*- \\[x\\] `done:",
+            search = "^\\s*- \\[x\\]",
             -- we enable regex so the pattern is interpreted as a regex
             regex = true,
             -- no “live grep” needed here since we have a fixed pattern

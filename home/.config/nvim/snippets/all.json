@@ -5,12 +5,13 @@
             "expands? jumps? $1 $2 !"
         ]
     },
-    "snip2": {
-        "prefix": "all2",
+    "checkbox": {
+        "prefix": [
+            "box"
+        ],
         "body": [
-            "multi $1",
-            "line $2",
-            "snippet$0"
-        ]
+            "- [ ] - $1"
+        ],
+        "description": "Create a [ ] box for notes"
     }
 }

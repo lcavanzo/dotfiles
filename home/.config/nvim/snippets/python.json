@@ -8,14 +8,23 @@
         ],
         "description": "Print statement using an f-string for variable interpolation"
     },
+    "string Print": {
+        "prefix": [
+            "prin"
+        ],
+        "body": [
+            "print(\"$1\")"
+        ],
+        "description": "Print statement using an f-string for variable interpolation"
+    },
     "Simple Docstring": {
         "prefix": [
             "doc"
         ],
         "body": [
-            "\"\"\"\n$1\n\"\"\""
+            "\"\"\"\n$1\n\"\"\"\n$2"
         ],
-        "description": "Print statement using an f-string for variable interpolation"
+        "description": "Add a simple docstring, triple quotes"
     },
     "Python Logging Setup": {
         "prefix": [
