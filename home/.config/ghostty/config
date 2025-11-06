@@ -2,6 +2,7 @@
 # ghostty +show-config --default --docs > ~/github/dotfiles-latest/ghostty/config-default
 
 keybind=clear
+macos-option-as-alt = left
 
 # Fonts options
 font-size = 17
@@ -27,6 +28,7 @@ keybind =super+w=unbind
 keybind =super+t=unbind
 keybind =super+[=unbind
 keybind =super+a=unbind
+keybind =super+v=unbind
 
 
 # Close options
