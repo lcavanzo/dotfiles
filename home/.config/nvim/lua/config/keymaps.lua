@@ -420,3 +420,11 @@ vim.keymap.set("n", "<leader>s-", function()
 
   vim.notify("Search results sent to Quickfix List.", vim.log.levels.INFO)
 end, { desc = "Quickfix: Send Last / Search" })
+
+vim.keymap.set("n", "<leader>yp", ":let @+=expand('%:.')<cr>", { desc = "Copy relative path" })
+
+vim.keymap.set("n", "<leader>yP", ":let @+=@%<cr>", { desc = "Copy absolute path" })
+
+-- vim.keymap.set("i", "(", "()<Left>", { desc = "Force auto-close parentheses" })
+-- vim.keymap.set("i", "[", "[]<Left>", { desc = "Force auto-close square brackets" })
+-- vim.keymap.set("i", "{", "{}<Left>", { desc = "Force auto-close curly braces" })

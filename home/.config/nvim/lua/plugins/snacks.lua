@@ -26,13 +26,13 @@ return {
         end,
         desc = "LSP Symbosls",
       },
-      {
-        "<leader>fs",
-        function()
-          Snacks.picker.spelling({})
-        end,
-        desc = "Spelling",
-      },
+      -- {
+      --   "<leader>fs",
+      --   function()
+      --     Snacks.picker.spelling({})
+      --   end,
+      --   desc = "Spelling",
+      -- },
       {
         "<leader>ff",
         function()
@@ -52,7 +52,7 @@ return {
       -- https://github.com/folke/snacks.nvim/discussions/949
       { "<leader>e", false },
       {
-        "<leader>sg",
+        "<leader>fg",
         function()
           Snacks.picker.grep({
             -- Exclude results from grep picker

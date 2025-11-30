@@ -94,8 +94,8 @@ alias gs='git status'
 
 # python aliases
 alias pip='pip3'
-alias py='python3'
-alias python='python3'
+alias py='python3.14'
+alias python='python3.14'
 
 # personal aliases
 alias cat='bat'
