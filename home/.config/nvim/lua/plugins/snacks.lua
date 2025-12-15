@@ -24,14 +24,14 @@ return {
         function()
           Snacks.picker.lsp_symbols({})
         end,
-        desc = "LSP Symbosls",
+        desc = "LSP Symbols",
       },
       -- {
-      --   "<leader>fs",
+      --   "<leader>sl",
       --   function()
-      --     Snacks.picker.spelling({})
+      --     Snacks.picker.lsp_symbols({ layout = { preset = "vscode", preview = "main" } })
       --   end,
-      --   desc = "Spelling",
+      --   desc = "Symbols",
       -- },
       {
         "<leader>ff",

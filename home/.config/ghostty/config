@@ -63,7 +63,7 @@ keybind = alt+j=text:\x1B\x6A
 keybind = alt+k=text:\x1B\x6B
 keybind = alt+l=text:\x1B\x6C
 
-keybind = super+o=inspector:toggle
+keybind = super+i=inspector:toggle
 keybind = super+shift+r=reload_config
 keybind = super+[=toggle_quick_terminal
 
