@@ -215,7 +215,34 @@ return {
       ------------------------------------------------------------
     },
     opts = {
-      scroll = { enabled = true },
+      zen = {
+        win = {
+          width = 120, -- Width of your focused window (adjust this to your liking)
+          backdrop = { transparent = false, blend = 90 }, -- Optional: dim the sides darker
+        },
+
+        -- "toggles" handles what gets hidden when you enter Zen mode
+        toggles = {
+          dim = true, -- Dim the content that is not in the active scope
+          git_signs = false, -- Turn off git signs
+          diagnostics = true, -- Turn off diagnostics if you want pure text
+          mini_diff_signs = false,
+          inlay_hints = false,
+        },
+        show = {
+          statusline = false, -- Hide statusline
+          tabline = false, -- Hide tabline
+        },
+      },
+      scroll = {
+        enabled = true,
+        animate = {
+          duration = { step = 15, total = 150 }, -- "step" is per-line, "total" is max time
+          -- Lower "total" to 150 or 100 to make 'gg' feel instant
+        },
+        -- If you still feel lag, you can tweak the easing:
+        -- easing = "linear",
+      },
       scope = { enabled = true },
       indent = { enabled = true },
       dashboard = {

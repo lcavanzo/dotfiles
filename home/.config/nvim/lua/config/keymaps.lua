@@ -428,3 +428,20 @@ vim.keymap.set("n", "<leader>yP", ":let @+=@%<cr>", { desc = "Copy absolute path
 -- vim.keymap.set("i", "(", "()<Left>", { desc = "Force auto-close parentheses" })
 -- vim.keymap.set("i", "[", "[]<Left>", { desc = "Force auto-close square brackets" })
 -- vim.keymap.set("i", "{", "{}<Left>", { desc = "Force auto-close curly braces" })
+
+-- Helper function to disable scroll animation temporarily
+local function instant_scroll(cmd)
+  vim.b.snacks_scroll = false -- 1. Disable smooth scroll for this buffer
+  vim.cmd("normal! " .. cmd) -- 2. Execute the motion immediately
+  vim.schedule(function()
+    vim.b.snacks_scroll = nil -- 3. Reset to default (re-enable)
+  end)
+end
+
+-- Map gg and G to use the instant scroll helper
+vim.keymap.set("n", "gg", function()
+  instant_scroll("gg")
+end, { desc = "Instant Top" })
+vim.keymap.set("n", "G", function()
+  instant_scroll("G")
+end, { desc = "Instant Bottom" })
