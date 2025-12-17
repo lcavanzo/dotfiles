@@ -223,7 +223,7 @@ return {
 
         -- "toggles" handles what gets hidden when you enter Zen mode
         toggles = {
-          dim = true, -- Dim the content that is not in the active scope
+          dim = false, -- Dim the content that is not in the active scope
           git_signs = false, -- Turn off git signs
           diagnostics = true, -- Turn off diagnostics if you want pure text
           mini_diff_signs = false,

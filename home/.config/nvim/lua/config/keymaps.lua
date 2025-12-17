@@ -399,7 +399,7 @@ vim.keymap.set("n", "<Leader>ah", "<Cmd>:SidewaysLeft<CR>")
 vim.keymap.set("n", "<Leader>al", "<Cmd>:SidewaysRight<CR>")
 
 -- noneckpain plugin
-vim.keymap.set("n", "<leader>N", "<Cmd>:NoNeckPain<CR>")
+--vim.keymap.set("n", "<leader>N", "<Cmd>:NoNeckPain<CR>")
 
 vim.keymap.set("n", "<leader>s-", function()
   -- 1. Get the last search pattern from the search register (@/)
