@@ -425,6 +425,8 @@ vim.keymap.set("n", "<leader>yp", ":let @+=expand('%:.')<cr>", { desc = "Copy re
 
 vim.keymap.set("n", "<leader>yP", ":let @+=@%<cr>", { desc = "Copy absolute path" })
 
+vim.keymap.set("n", "gV", "`[v`]", { desc = "select last paste area " })
+
 -- vim.keymap.set("i", "(", "()<Left>", { desc = "Force auto-close parentheses" })
 -- vim.keymap.set("i", "[", "[]<Left>", { desc = "Force auto-close square brackets" })
 -- vim.keymap.set("i", "{", "{}<Left>", { desc = "Force auto-close curly braces" })
@@ -445,3 +447,14 @@ end, { desc = "Instant Top" })
 vim.keymap.set("n", "G", function()
   instant_scroll("G")
 end, { desc = "Instant Bottom" })
+
+vim.keymap.set("i", "<M-o>", function()
+  vim.cmd("normal! O")
+end, { desc = "Add new line above (Stay in Normal Mode)" })
+
+vim.keymap.set(
+  "i",
+  "<leader>ZZ",
+  "<c-g>u<Esc>[s1z=\\]a<c-g>u",
+  { noremap = true, desc = "Fix last spelling mistake in insert mode" }
+)
