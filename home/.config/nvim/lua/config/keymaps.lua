@@ -454,7 +454,7 @@ end, { desc = "Add new line above (Stay in Normal Mode)" })
 
 vim.keymap.set(
   "i",
-  "<leader>ZZ",
+  "ZZ",
   "<c-g>u<Esc>[s1z=\\]a<c-g>u",
   { noremap = true, desc = "Fix last spelling mistake in insert mode" }
 )
