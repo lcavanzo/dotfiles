@@ -96,5 +96,30 @@
             "\t\tself.$4 = $4$0"
         ],
         "description": "Class definition template"
+    },
+    "Read File Generator": {
+        "prefix": "readfile",
+        "body": [
+            "def read_file(${1:filepath}):",
+            "    \"\"\"",
+            "    Reads a file line by line and yields each line.",
+            "",
+            "    Args:",
+            "        ${1:filepath} (str): The path to the log file",
+            "",
+            "    Yields:",
+            "        str: Each line from the file",
+            "    \"\"\"",
+            "    try:",
+            "        with open(${1:filepath}, \"r\") as f:",
+            "            for line in f:",
+            "                yield line.strip()",
+            "    except FileNotFoundError:",
+            "        print(f\"Error: File '{${1:filepath}}' not found.\")",
+            "    except PermissionError:",
+            "        print(f\"Error: Permission denied for '{${1:filepath}}'.\")",
+            ""
+        ],
+        "description": "Safe generator to read files line-by-line"
     }
 }

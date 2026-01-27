@@ -11,8 +11,26 @@
 -- Automatically remove trailing whitespace from lines in a file just before you save it.
 local TrimWhiteSpaceGrp = vim.api.nvim_create_augroup("TrimWhiteSpaceGrp", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
-  command = [[:%s/\s\+$//e]],
   group = TrimWhiteSpaceGrp,
+  pattern = "*",
+  callback = function(ev)
+    -- 1. Filter: Don't strip on markdown or text files
+    local ignore_filetypes = { ["markdown"] = true, ["text"] = true }
+    if ignore_filetypes[vim.bo[ev.buf].filetype] then
+      return
+    end
+
+    -- 2. Save Cursor: Don't let the cursor jump
+    local save_cursor = vim.fn.getpos(".")
+
+    -- 3. Strip: remove trailing whitespace
+    pcall(function()
+      vim.cmd([[%s/\s\+$//e]])
+    end)
+
+    -- 4. Restore Cursor: Put it back where it was
+    vim.fn.setpos(".", save_cursor)
+  end,
 })
 
 -- Don't auto comment new line
