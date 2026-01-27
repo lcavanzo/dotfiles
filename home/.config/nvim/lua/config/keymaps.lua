@@ -102,6 +102,9 @@ vim.keymap.set(
 vim.keymap.set("n", "zn", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "zp", "<cmd>cprev<CR>zz")
 
+-- Toggle between the current and last buffer
+vim.keymap.set("n", "<tab>", "<C-6>", { desc = "Switch to Last Buffer" })
+
 -- Set up a keymap to refresh the current buffer
 vim.keymap.set("n", "<leader>bB", function()
   -- Reloads the file to reflect the changes
