@@ -150,6 +150,7 @@ end, { desc = "BASH, execute file" })
 
 -- Execute normal mode mapping from insert mode and return to insert
 vim.keymap.set("i", "<C-o>", "<C-o><C-\\><C-n>", { noremap = true })
+vim.keymap.set("i", "<C-BS>", "<C-w>", { desc = "Delete word backward" })
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
@@ -461,3 +462,20 @@ vim.keymap.set(
   "<c-g>u<Esc>[s1z=\\]a<c-g>u",
   { noremap = true, desc = "Fix last spelling mistake in insert mode" }
 )
+
+-- Execute current file in the Tmux pane BELOW
+vim.keymap.set("n", "<leader>cp", function()
+  vim.cmd("write")
+
+  -- local file = vim.fn.expand("%:p")
+  local file = vim.fn.expand("%:t")
+
+  -- "-t bottom" tells tmux to send keys to the pane directly below the current one
+  -- "C-m" is the equivalent of pressing Enter
+  -- Sends: Ctrl+c (kill), Ctrl+l (clear screen), then python command
+  local cmd = string.format("tmux send-keys -t bottom C-c C-l 'py %s' C-m", file)
+
+  vim.fn.system(cmd)
+
+  vim.notify("Sent to Tmux pane below!", vim.log.levels.INFO)
+end, { desc = "Run python file in Tmux pane below" })

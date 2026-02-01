@@ -57,6 +57,7 @@ keybind = super+t=text:\x14
 keybind = super+g=text:\x07
 keybind = super+u=text:\x15
 keybind = super+p=text:\x10
+keybind = super+backspace=text:\x17
 keybind =super+v=paste_from_clipboard
 keybind = alt+h=text:\x1B\x68
 keybind = alt+j=text:\x1B\x6A
