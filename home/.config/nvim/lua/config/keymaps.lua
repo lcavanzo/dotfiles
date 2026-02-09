@@ -464,18 +464,54 @@ vim.keymap.set(
 )
 
 -- Execute current file in the Tmux pane BELOW
-vim.keymap.set("n", "<leader>cp", function()
+-- vim.keymap.set("n", "<leader>r", function()
+--   vim.cmd("write")
+--
+--   -- local file = vim.fn.expand("%:p")
+--   local file = vim.fn.expand("%:t")
+--
+--   -- "-t bottom" tells tmux to send keys to the pane directly below the current one
+--   -- "C-m" is the equivalent of pressing Enter
+--   -- Sends: Ctrl+c (kill), Ctrl+l (clear screen), then python command
+--   local cmd = string.format("tmux send-keys -t bottom C-c C-l 'py %s' C-m", file)
+--
+--   vim.fn.system(cmd)
+--
+--   vim.notify("Sent to Tmux pane below!", vim.log.levels.INFO)
+-- end, { desc = "Run Code file in Tmux pane below" })
+
+-- Execute current file in the Tmux pane BELOW
+vim.keymap.set("n", "<leader>r", function()
+  -- 1. Save the file
   vim.cmd("write")
 
-  -- local file = vim.fn.expand("%:p")
-  local file = vim.fn.expand("%:t")
+  -- 2. Get file details
+  local file = vim.fn.expand("%:t") -- "main.c"
+  local no_ext = vim.fn.expand("%:t:r") -- "main" (useful for compiling)
+  local ft = vim.bo.filetype -- "python", "rust", "cpp", etc.
 
-  -- "-t bottom" tells tmux to send keys to the pane directly below the current one
-  -- "C-m" is the equivalent of pressing Enter
-  -- Sends: Ctrl+c (kill), Ctrl+l (clear screen), then python command
-  local cmd = string.format("tmux send-keys -t bottom C-c C-l 'py %s' C-m", file)
+  -- 3. Define the commands for each language
+  -- You can add any language here!
+  local commands = {
+    python = "python3 " .. file,
+    go = "go run " .. file,
+    rust = "cargo run", -- Assumes you are in a cargo project. If script: "rustc " .. file .. " && ./" .. no_ext
+    c = "gcc " .. file .. " -o " .. no_ext .. " && ./" .. no_ext,
+    cpp = "g++ " .. file .. " -o " .. no_ext .. " && ./" .. no_ext, -- "r++" usually means C++
+    javascript = "node " .. file,
+    sh = "bash " .. file,
+    lua = "lua " .. file,
+  }
 
-  vim.fn.system(cmd)
+  -- 4. Check if we know how to run this filetype
+  local cmd_str = commands[ft]
 
-  vim.notify("Sent to Tmux pane below!", vim.log.levels.INFO)
-end, { desc = "Run python file in Tmux pane below" })
+  if cmd_str then
+    -- Send to Tmux (Kill prev action -> Clear -> Run)
+    local tmux_cmd = string.format("tmux send-keys -t bottom C-c C-l '%s' C-m", cmd_str)
+    vim.fn.system(tmux_cmd)
+    vim.notify("Running " .. ft .. " file...", vim.log.levels.INFO)
+  else
+    vim.notify("No run command defined for: " .. ft, vim.log.levels.WARN)
+  end
+end, { desc = "Run current file (Smart Detect)" })
