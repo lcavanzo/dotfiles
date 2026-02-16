@@ -17,6 +17,10 @@ vim.g.lazyvim_keymaps_disabled = {
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Go to first and last Char
+vim.keymap.set("n", "H", "^")
+vim.keymap.set("n", "L", "$")
+
 -- Insert mode: Use 'jk' to quickly exit insert mode
 vim.keymap.set("i", "kj", "<ESC>", { desc = "Exit insert mode with 'kj'" })
 
