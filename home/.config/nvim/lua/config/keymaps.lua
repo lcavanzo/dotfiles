@@ -91,8 +91,19 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Scroll up/down half-page
-vim.keymap.set("n", "zj", "<C-d>zz", { noremap = true, desc = "Scroll down half-page and center" })
-vim.keymap.set("n", "zk", "<C-u>zz", { noremap = true, desc = "Scroll up half-page and center" })
+-- vim.keymap.set("n", "zj", "<C-d>zz", { noremap = true, desc = "Scroll down half-page and center" })
+-- vim.keymap.set("n", "zk", "<C-u>zz", { noremap = true, desc = "Scroll up half-page and center" })
+local neoscroll = require("neoscroll")
+
+-- Scroll down (0.5 screen)
+vim.keymap.set("n", "zj", function()
+  neoscroll.scroll(0.5, { move_cursor = true, duration = 250 })
+end, { desc = "Smooth scroll down" })
+
+-- Scroll up (-0.5 screen)
+vim.keymap.set("n", "zk", function()
+  neoscroll.scroll(-0.5, { move_cursor = true, duration = 250 })
+end, { desc = "Smooth scroll up" })
 
 -- Launch, limiting search/replace to current file
 -- https://github.com/MagicDuck/grug-far.nvim?tab=readme-ov-file#-cookbook
