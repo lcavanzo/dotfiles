@@ -81,9 +81,9 @@
             "defi"
         ],
         "body": [
-            "def __init__(self, ${1:param1} ${2:param2}):",
+            "def __init__(self, ${1:param1}):",
             "    self.${1:param1} = ${1:param1}",
-            "    ${3}"
+            "    ${2}"
         ],
         "description": "Create an __init__ method with parameters"
     },

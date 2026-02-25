@@ -4,7 +4,7 @@ return {
     keys = {
       -- snacks.scopee keymaps-----------------------------------
       {
-        "mn",
+        "[s",
         function()
           require("snacks.scope").jump({ bottom = false })
         end,
@@ -12,7 +12,7 @@ return {
       },
       -- Change this keymap
       {
-        "mm",
+        "]s",
         function()
           require("snacks.scope").jump({ bottom = true })
         end,
