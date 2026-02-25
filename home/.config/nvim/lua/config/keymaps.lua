@@ -530,3 +530,22 @@ vim.keymap.set("n", "<leader>r", function()
     vim.notify("No run command defined for: " .. ft, vim.log.levels.WARN)
   end
 end, { desc = "Run current file (Smart Detect)" })
+
+-- Open the current buffer in a floating window and jump to the top
+vim.keymap.set("n", "<leader>c.", function()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local filename = vim.fn.expand("%:t")
+
+  -- 1. Create the window and save its reference
+  local peek_win = Snacks.win({
+    buf = current_buf,
+    width = 0.6,
+    height = 0.8,
+    border = "rounded",
+    title = " Peek: " .. filename .. " ",
+    title_pos = "center",
+  })
+
+  -- 2. Move the cursor in the NEW window to Line 1, Column 0
+  vim.api.nvim_win_set_cursor(peek_win.win, { 1, 0 })
+end, { desc = "Float Current Buffer (Peek Top)" })
