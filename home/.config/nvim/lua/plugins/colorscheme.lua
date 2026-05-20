@@ -4,7 +4,11 @@ return {
     lazy = true,
     opts = {
       flavour = "macchiato",
-      transparent_background = true,
+      transparent_background = true, -- Keeps it active for stock themes
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
       integrations = {
         aerial = true,
         alpha = true,
@@ -55,6 +59,30 @@ return {
         end,
       },
     },
+    init = function()
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+          local hl_groups = {
+            "Normal",
+            "NormalNC",
+            "NormalFloat",
+            "FloatBorder",
+            "Terminal",
+            "NeoTreeNormal",
+            "NeoTreeNormalNC",
+            "LineNr",
+            "SignColumn",
+            "StatusLine",
+            "StatusLineNC",
+            "EndOfBuffer",
+          }
+          for _, group in ipairs(hl_groups) do
+            vim.api.nvim_set_hl(0, group, { bg = "none", ctermbg = "none" })
+          end
+        end,
+      })
+    end,
   },
 
   -- Configure LazyVim to load colorscheme
