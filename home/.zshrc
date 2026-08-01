@@ -206,6 +206,7 @@ source <(carapace _carapace)
 # Post-Init FZF Source
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+. "$HOME/.local/share/../bin/env"
+
 # Google Cloud SDK updates
-if [ -f '/private/tmp/google-cloud-sdk/path.zsh.inc' ]; then . '/private/tmp/google-cloud-sdk/path.zsh.inc'; fi
-if [ -f '/private/tmp/google-cloud-sdk/completion.zsh.inc' ]; then . '/private/tmp/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="$PATH:/usr/local/bin/google-cloud-sdk/bin"

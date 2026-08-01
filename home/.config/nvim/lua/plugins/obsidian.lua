@@ -11,7 +11,7 @@ return {
     workspaces = {
       {
         name = "obsidian-vault",
-        path = "/Users/lcavanzo/git/obsidian-vault",
+        path = "~/git/obsidian-vault",
       },
     },
     -- completion = {

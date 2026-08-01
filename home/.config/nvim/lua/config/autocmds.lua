@@ -67,3 +67,28 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
     end
   end,
 })
+
+local augroup = vim.api.nvim_create_augroup("ToggleRelativeNumber", { clear = true })
+
+-- Disable relative line numbers when entering Insert Mode
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = augroup,
+  desc = "Disable relative line numbers in Insert mode",
+  callback = function()
+    -- Only change it if standard numbers are already enabled for this buffer
+    if vim.opt.number:get() then
+      vim.opt.relativenumber = false
+    end
+  end,
+})
+
+-- Enable relative line numbers when leaving Insert Mode
+vim.api.nvim_create_autocmd("InsertLeave", {
+  group = augroup,
+  desc = "Enable relative line numbers in Normal mode",
+  callback = function()
+    if vim.opt.number:get() then
+      vim.opt.relativenumber = true
+    end
+  end,
+})
