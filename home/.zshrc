@@ -100,8 +100,13 @@ alias gs='git status'
 
 # Python
 alias pip='pip3'
-alias py='python3.14'
-alias python='python3.14'
+py() {
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    "$VIRTUAL_ENV/bin/python" "$@"
+  else
+    python3 "$@"
+  fi
+}
 
 # Personal & Infrastructure
 alias cat='bat'

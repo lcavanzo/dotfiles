@@ -66,6 +66,9 @@ vim.keymap.set("n", "<leader>j", "``", { desc = "Jump back between Jumplist" })
 -- The `"+` register represents the system clipboard.
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "[P]Yank to system clipboard" })
 
+-- Convert word to UPPERCASE and go to insert mode at end
+vim.keymap.set("n", "<leader>U", "viwUea", { desc = "Uppercase word and insert at end" })
+
 ----------------------------
 -- greatest remap ever
 vim.keymap.set(
