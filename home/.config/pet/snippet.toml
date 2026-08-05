@@ -339,3 +339,9 @@
   command = "kubectl port-forward $(kubectl get pods -l app=kong-dataplane<color=green>-kong -n <namespace=api-gateway> -o jsonpath='{.items[0].metadata.name}') <local_port=8100>:<pod_port=8100> -n <namespace=api-gateway>"
   Tag = ["k8s", "kubectl", "kong", "sre"]
   Output = ""
+
+[[snippets]]
+  Description = "Get unique vulnerable packages and fix versions from a Trivy JSON report"
+  command = '''jq -r '.Results[].Vulnerabilities[]? | .PkgName + ": " + .InstalledVersion + " -> " + (.FixedVersion | tostring)' <trivy_report=> | sort -u'''
+  Tag = ["trivy", "jq", "security", "sre"]
+  Output = ""
