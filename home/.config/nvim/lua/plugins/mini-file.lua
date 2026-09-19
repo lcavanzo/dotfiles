@@ -35,7 +35,7 @@ return {
     },
     windows = {
       preview = false,
-      width_focus = 30,
+      width_focus = 100,
       width_preview = 60,
     },
     options = {
@@ -52,6 +52,8 @@ return {
     {
       "<leader>e",
       function()
+        -- Ensure the preview is disabled
+        require("mini.files").config.windows.preview = false
         require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
       end,
       desc = "Open mini.files (Directory of Current File)",
@@ -59,6 +61,8 @@ return {
     {
       "<leader>E",
       function()
+        -- Enable the preview specifically for this command
+        require("mini.files").config.windows.preview = true
         require("mini.files").open(vim.uv.cwd(), true)
       end,
       desc = "Open mini.files (cwd)",

@@ -1,4 +1,4 @@
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never --side-by-side  --diff-so-fancy
+      command: delta --dark --paging=never --side-by-side  --diff-so-fancy

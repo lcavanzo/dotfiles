@@ -449,6 +449,9 @@ vim.keymap.set("n", "<leader>yP", ":let @+=@%<cr>", { desc = "Copy absolute path
 
 vim.keymap.set("n", "gV", "`[v`]", { desc = "select last paste area " })
 
+-- Use Backspace to jump to matching brackets (replaces Shift+5)
+vim.keymap.set({ "n", "x", "o" }, "<BS>", "%", { remap = true, desc = "Jump to matching bracket" })
+
 -- vim.keymap.set("i", "(", "()<Left>", { desc = "Force auto-close parentheses" })
 -- vim.keymap.set("i", "[", "[]<Left>", { desc = "Force auto-close square brackets" })
 -- vim.keymap.set("i", "{", "{}<Left>", { desc = "Force auto-close curly braces" })
