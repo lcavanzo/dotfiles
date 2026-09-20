@@ -92,3 +92,47 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     end
   end,
 })
+
+-- Quickfix/location-list live preview: jump to the entry under the cursor as
+-- you move through the list (j/k), instead of needing <CR>. Focus stays in
+-- the qf/loclist window so you can keep scrolling through results.
+local QfAutoPreviewGrp = vim.api.nvim_create_augroup("QfAutoPreview", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = QfAutoPreviewGrp,
+  pattern = "qf",
+  desc = "Auto-preview quickfix/loclist entry on cursor move",
+  callback = function(ev)
+    -- Clear any previously-attached CursorMoved autocmd for this buffer
+    -- first, so re-opening/refreshing the quickfix list doesn't stack
+    -- duplicate callbacks on the same buffer.
+    pcall(vim.api.nvim_clear_autocmds, { group = QfAutoPreviewGrp, event = "CursorMoved", buffer = ev.buf })
+
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = QfAutoPreviewGrp,
+      buffer = ev.buf,
+      callback = function()
+        local qf_win = vim.api.nvim_get_current_win()
+        local win_info = vim.fn.getwininfo(qf_win)[1]
+        local is_loclist = win_info ~= nil and win_info.loclist == 1
+        local line = vim.fn.line(".")
+
+        pcall(function()
+          if is_loclist then
+            vim.cmd("silent! " .. line .. "ll")
+          else
+            vim.cmd("silent! " .. line .. "cc")
+          end
+          -- We're now focused in the source window (cc/ll switches focus).
+          -- Center the view so the jump is visible even when the target
+          -- line was already inside the current scroll range.
+          vim.cmd("normal! zz")
+        end)
+
+        -- Return focus to the quickfix/loclist window so j/k keep working
+        if vim.api.nvim_win_is_valid(qf_win) then
+          vim.api.nvim_set_current_win(qf_win)
+        end
+      end,
+    })
+  end,
+})
