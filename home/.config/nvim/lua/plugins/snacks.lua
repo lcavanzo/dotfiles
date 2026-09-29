@@ -1,3 +1,22 @@
+-- Obsidian vault folders to show in the projects picker (<leader>fp).
+-- Notes folders have no .git/Makefile, so fd patterns can't find them;
+-- we list them explicitly instead.
+local vault = vim.fn.expand("~/git/obsidian-vault/obsidian-vault")
+local function vault_dirs(globs)
+  local dirs = {}
+  for _, g in ipairs(globs) do
+    for _, d in ipairs(vim.fn.glob(vault .. "/" .. g, false, true)) do
+      if vim.fn.isdirectory(d) == 1 then
+        table.insert(dirs, vim.fn.fnamemodify(d, ":p:h")) -- drop trailing slash
+      end
+    end
+  end
+  return dirs
+end
+local vault_projects = vault_dirs({
+  "[0-9][0-9]_*", -- 01_Daily-notes, 02_Job, ..., 10_Homelab
+})
+
 return {
   {
     "snacks.nvim",
@@ -215,6 +234,19 @@ return {
       ------------------------------------------------------------
     },
     opts = {
+      picker = {
+        sources = {
+          -- <leader>fp: by default only recent projects + ~/dev and ~/projects are listed
+          projects = {
+            dev = { "~/git", "~/git/SLB" }, -- scan these dirs for projects (SLB repos sit one level deeper)
+            max_depth = 2, -- how deep to look inside each dev dir
+            -- a dir counts as a project if it contains one of these
+            patterns = { ".git", "package.json", "Makefile", "go.mod", "pyproject.toml", "Chart.yaml", "main.tf" },
+            recent = true, -- still include recently used projects
+            projects = vault_projects, -- always-listed dirs, no marker needed
+          },
+        },
+      },
       zen = {
         enabled = true,
         -- win = {

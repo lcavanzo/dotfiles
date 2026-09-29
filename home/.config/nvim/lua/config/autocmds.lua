@@ -136,3 +136,16 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
+
+-- Never auto-format files under the work repo (LazyVim honors vim.b.autoformat)
+local no_format_dir = vim.fn.expand("~/git/slb")
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufEnter" }, {
+  group = vim.api.nvim_create_augroup("NoFormatWorkDir", { clear = true }),
+  desc = "Disable autoformat for files under the work directory",
+  callback = function(ev)
+    local path = vim.api.nvim_buf_get_name(ev.buf)
+    if path ~= "" and vim.startswith(path, no_format_dir .. "/") then
+      vim.b[ev.buf].autoformat = false
+    end
+  end,
+})
