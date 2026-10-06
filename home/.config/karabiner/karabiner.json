@@ -827,66 +827,6 @@
                         ]
                     },
                     {
-                        "description": "Home => Cmd+Left arrow (Move cursor to beginning of line)",
-                        "enabled": false,
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.macports\\.X11$",
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^co\\.zeit\\.hyper$",
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                                            "^com\\.microsoft\\.rdc\\.macos$",
-                                            "^tv\\.parsec\\.www$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": { "key_code": "home" },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow",
-                                        "modifiers": ["command"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "End => Cmd+Right arrow (Move cursor to end of line)",
-                        "enabled": false,
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.macports\\.X11$",
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^co\\.zeit\\.hyper$",
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                                            "^com\\.microsoft\\.rdc\\.macos$",
-                                            "^tv\\.parsec\\.www$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": { "key_code": "end" },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow",
-                                        "modifiers": ["command"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Ctrl+T => Cmd+T (New tab)",
                         "manipulators": [
                             {
@@ -1241,20 +1181,20 @@
                         ]
                     },
                     {
-                        "description": "Change Command+Backward-Delete and Option+Backward-Delete",
+                        "description": "Defy: Left Command + Backspace to Option + Backspace (Delete one word)",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "delete_or_backspace",
                                     "modifiers": {
-                                        "mandatory": ["command"],
+                                        "mandatory": ["left_command"],
                                         "optional": ["any"]
                                     }
                                 },
                                 "to": [
                                     {
                                         "key_code": "delete_or_backspace",
-                                        "modifiers": ["option"]
+                                        "modifiers": ["left_option"]
                                     }
                                 ],
                                 "type": "basic"
@@ -1314,16 +1254,6 @@
             },
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": { "key_code": "caps_lock" },
-                    "to": [{ "key_code": "left_command" }]
-                },
-                {
-                    "from": { "key_code": "left_command" },
-                    "to": [{ "key_code": "right_control" }]
-                }
-            ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         }
     ]
