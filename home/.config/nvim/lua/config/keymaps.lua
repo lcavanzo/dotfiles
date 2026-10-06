@@ -80,6 +80,9 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over selection withou
 -- Delete into black hole register (doesn't touch clipboard)
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without overwriting clipboard" })
 
+-- delete single character without copying into register
+vim.keymap.set("n", "x", '"_x', opts)
+
 -- Center view and open folds when jumping between search results
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -155,12 +158,50 @@ vim.keymap.set("i", "<C-BS>", "<C-w>", { desc = "Delete word backward" })
 -- guarded behind `is_mac` so they're inert (rather than silently erroring)
 -- when this config runs on Linux.
 
+-- Image under the cursor, as a path relative to the current file's folder
+-- (what the handlers below expect). Understands both link styles used in the
+-- vault: markdown `![alt](path)` (URL-encoded paths are decoded) and Obsidian
+-- wikilinks `![[name.avif|alt]]` (looked up in 99_Assets, then the whole vault).
+local vault_root = vim.fn.expand("~/git/obsidian-vault/obsidian-vault")
+
+local function relative_to_current_dir(target)
+  local from = vim.split(vim.fn.expand("%:p:h"), "/", { plain = true, trimempty = true })
+  local to = vim.split(target, "/", { plain = true, trimempty = true })
+  local common = 0
+  while common < #from and common < #to and from[common + 1] == to[common + 1] do
+    common = common + 1
+  end
+  local parts = {}
+  for _ = common + 1, #from do
+    table.insert(parts, "..")
+  end
+  for i = common + 1, #to do
+    table.insert(parts, to[i])
+  end
+  return table.concat(parts, "/")
+end
+
+local function image_ref_under_cursor()
+  local line = vim.api.nvim_get_current_line()
+  local path = line:match("%[.-%]%((.-)%)")
+  if path then
+    return (path:gsub("%%(%x%x)", function(hex)
+      return string.char(tonumber(hex, 16))
+    end))
+  end
+  local name = line:match("!%[%[([^%]|#]+)")
+  if not name then
+    return nil
+  end
+  local base = vim.fs.basename(name)
+  local found = vim.fs.find(base, { path = vault_root .. "/99_Assets", type = "file", limit = 1 })[1]
+    or vim.fs.find(base, { path = vault_root, type = "file", limit = 1 })[1]
+  return found and relative_to_current_dir(found) or nil
+end
+
 if is_mac then
   local function get_image_path()
-    local line = vim.api.nvim_get_current_line()
-    local image_pattern = "%[.-%]%((.-)%)"
-    local _, _, image_path = string.find(line, image_pattern)
-    return image_path
+    return image_ref_under_cursor()
   end
 
   -- Open image under cursor in Preview
@@ -256,10 +297,7 @@ else
   -- Linux equivalents: swap `open` for `xdg-open`, and use `gio trash` (part
   -- of glib2, present on virtually every desktop distro) instead of `trash`.
   local function get_image_path()
-    local line = vim.api.nvim_get_current_line()
-    local image_pattern = "%[.-%]%((.-)%)"
-    local _, _, image_path = string.find(line, image_pattern)
-    return image_path
+    return image_ref_under_cursor()
   end
 
   vim.keymap.set("n", "<leader>io", function()
@@ -315,8 +353,7 @@ end
 -- installed build and adjust `vim.ui.img.show(...)` below if it's changed.
 if vim.ui.img then
   vim.keymap.set("n", "<leader>iv", function()
-    local line = vim.api.nvim_get_current_line()
-    local _, _, image_path = string.find(line, "%[.-%]%((.-)%)")
+    local image_path = image_ref_under_cursor()
     if not image_path then
       print("No image found under the cursor")
       return

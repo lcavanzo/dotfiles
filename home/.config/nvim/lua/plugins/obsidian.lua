@@ -299,6 +299,8 @@ return {
     { "<leader>oy", "<cmd>Obsidian yesterday<CR>", desc = "Obsidian Daily Note (yesterday)" },
     { "<leader>oD", "<cmd>Obsidian dailies<CR>", desc = "Obsidian Daily Notes (list)" },
     { "<leader>oL", quick_capture, desc = "Obsidian Quick Log (append to today)" },
+    -- Paste an image from the clipboard (img-clip.nvim): saved as AVIF in 99_Assets/attachments
+    { "<leader>op", "<cmd>PasteImage<CR>", desc = "Obsidian Paste Image (AVIF, to attachments)" },
     -- New note from a template, placed in its context folder
     { "<leader>oT", "<cmd>Obsidian new_from_template<CR>", desc = "Obsidian New From Template (pick)" },
     { "<leader>oNw", weekly, desc = "Obsidian New: Weekly Review" },

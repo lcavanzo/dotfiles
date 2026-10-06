@@ -29,7 +29,18 @@ return {
 
       -- I want to save the images in a directory named after the current file,
       -- but I want the name of the dir to end with `-img`
+      -- Notes inside the Obsidian vault: every image goes to ONE folder,
+      -- 99_Assets/attachments (the path is relative to the note, so the link
+      -- works in Neovim and in the Obsidian app). Notes anywhere else keep
+      -- the old behaviour: a "<note>-img" folder next to the file.
       dir_path = function()
+        local vault = vim.fn.expand("~/git/obsidian-vault/obsidian-vault")
+        local dir = vim.fn.expand("%:p:h")
+        if dir == vault or vim.startswith(dir, vault .. "/") then
+          local rel = dir:sub(#vault + 2)
+          local depth = rel == "" and 0 or select(2, rel:gsub("/", "")) + 1
+          return string.rep("../", depth) .. "99_Assets/attachments"
+        end
         return vim.fn.expand("%:t:r") .. "-img"
       end,
 
