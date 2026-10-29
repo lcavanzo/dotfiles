@@ -24,6 +24,12 @@ local contexts = {
   meeting = { dir = "02_Job/SLB/meetings", id = dated },
   til = { dir = "03_Study/til", id = dated },
   newsletter = { dir = "03_Study/newsletters", id = dated },
+  english = {
+    dir = "03_Study/english",
+    id = function(title)
+      return title
+    end,
+  },
   weekly = {
     dir = "01_Daily-notes/weekly",
     id = function(title)
@@ -85,6 +91,17 @@ local function weekly()
     vim.cmd.edit(path)
   else
     vim.cmd("Obsidian new_from_template " .. id .. " weekly")
+  end
+end
+
+-- One English note per day: 03_Study/english/YYYY-MM-DD.md (opens it if it exists)
+local function english()
+  local id = os.date("%Y-%m-%d")
+  local path = vim.fs.joinpath(vault, contexts.english.dir, id .. ".md")
+  if vim.uv.fs_stat(path) then
+    vim.cmd.edit(path)
+  else
+    vim.cmd("Obsidian new_from_template " .. id .. " english")
   end
 end
 
@@ -310,6 +327,7 @@ return {
     { "<leader>oNm", new_from("meeting", "Meeting: "), desc = "Obsidian New: Meeting" },
     { "<leader>oNt", new_from("til", "Today I learned: "), desc = "Obsidian New: TIL" },
     { "<leader>oNn", new_from("newsletter", "Newsletter: "), desc = "Obsidian New: Newsletter" },
+    { "<leader>oNe", english, desc = "Obsidian New: English (today's words)" },
     { "<leader>oNb", brag, desc = "Obsidian New: Brag Log (this month)" },
     -- Tasks
     { "<leader>oa", open_tasks, desc = "Obsidian Open Tasks (pick scope)" },

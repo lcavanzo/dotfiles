@@ -215,3 +215,24 @@ source <(carapace _carapace)
 
 # Google Cloud SDK updates
 export PATH="$PATH:/usr/local/bin/google-cloud-sdk/bin"
+
+# test
+# per-tmux-session kube context
+if [[ -n $TMUX ]] && (( $+commands[kubectl] )); then
+  () {
+    local key=$(tmux display-message -p '#S' | sed -E 's/^[0-9]+-//; s/[^A-Za-z0-9_.-]/_/g')
+    local f=$HOME/.kube/tmux/$key
+    if [[ ! -f $f ]]; then
+      mkdir -p $HOME/.kube/tmux
+      printf 'apiVersion: v1\nkind: Config\ncurrent-context: "%s"\n' \
+        "$(KUBECONFIG=$HOME/.kube/config kubectl config current-context 2>/dev/null)" > $f
+    fi
+    export KUBECONFIG=$f:$HOME/.kube/config
+  }
+fi
+
+# kctx [context]: switch this session's context (fzf picker if no argument)
+kctx() {
+  local c=${1:-$(kubectl config get-contexts -o name | fzf)}
+  [[ -n $c ]] && kubectl config use-context "$c"
+}
